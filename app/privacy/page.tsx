@@ -23,96 +23,47 @@ export default function PrivacyPage() {
         <h1 className="text-4xl font-black text-gray-900 mb-3">Privacy Policy</h1>
         <p className="text-sm text-gray-400 mb-12">Last updated: April 28, 2026</p>
 
-        <div className="prose prose-gray max-w-none space-y-8 text-gray-600 leading-relaxed">
+        <div className="space-y-6 text-gray-600 leading-relaxed text-base">
+          <p>At Sumer Renovations LLC, we take your privacy seriously.</p>
 
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">1. Information We Collect</h2>
+          <p>
+            When you visit our website or reach out to us, we may collect basic information such as your name, email, phone number, or details about your project. This helps us respond to you, understand your needs, and provide better service.
+          </p>
+
+          <p>
+            We may also collect general website data like browser type or how you use our site, just to improve performance and user experience.
+          </p>
+
+          <p>
+            We do not sell or share your personal information with anyone. The only time your information may be shared is with trusted tools we use to run our business, such as scheduling services or payment providers.
+          </p>
+
+          <p>
+            We do our best to keep your information secure. That said, no system is 100% secure, so we always recommend being mindful when sharing sensitive information online.
+          </p>
+
+          <p>
+            If you ever want us to update or delete your information, just reach out and we will take care of it.
+          </p>
+
+          <p>We may update this policy from time to time, and any changes will be posted here.</p>
+
+          <div className="mt-8 p-5 rounded-2xl bg-gray-50 border border-gray-100 space-y-1.5">
+            <p className="font-semibold text-gray-800">Sumer Renovations LLC</p>
+            <p>Portland, OR</p>
             <p>
-              Sumer Renovations LLC ("we," "our," or "us") collects information you voluntarily provide when you contact us, request a quote, or use our website. This may include your name, email address, phone number, home address, and details about your renovation project.
+              Phone:{' '}
+              <a href="tel:+19717076604" className="font-medium" style={{ color: '#a0742a' }}>
+                (971) 707-6604
+              </a>
             </p>
-            <p className="mt-3">
-              We also automatically collect certain technical information when you visit our site, including your IP address, browser type, pages visited, and time spent on pages, through standard web analytics tools.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">2. How We Use Your Information</h2>
-            <p>We use the information we collect to:</p>
-            <ul className="list-disc pl-5 mt-2 space-y-1.5">
-              <li>Respond to your inquiries and provide quotes</li>
-              <li>Schedule consultations and project appointments</li>
-              <li>Communicate updates about your renovation project</li>
-              <li>Send occasional news, offers, or renovation tips (with your consent)</li>
-              <li>Improve our website and services</li>
-              <li>Comply with legal obligations</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">3. Sharing Your Information</h2>
             <p>
-              We do not sell, trade, or rent your personal information to third parties. We may share your information with trusted subcontractors or service providers who assist us in operating our business, provided they agree to keep your information confidential.
+              Email:{' '}
+              <a href="mailto:sumerrenovations@gmail.com" className="font-medium" style={{ color: '#a0742a' }}>
+                sumerrenovations@gmail.com
+              </a>
             </p>
-            <p className="mt-3">
-              We may disclose your information if required by law or to protect the rights, property, or safety of Sumer Renovations LLC, our clients, or others.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">4. Cookies</h2>
-            <p>
-              Our website may use cookies to enhance your browsing experience. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, some portions of our website may not function properly without cookies.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">5. Data Security</h2>
-            <p>
-              We implement industry-standard security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">6. Third-Party Links</h2>
-            <p>
-              Our website may contain links to third-party sites (such as Calendly or Google Maps). We are not responsible for the privacy practices of those sites and encourage you to review their privacy policies.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">7. Your Rights</h2>
-            <p>
-              You have the right to request access to, correction of, or deletion of your personal information at any time. To exercise these rights, please contact us at the information below.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">8. Changes to This Policy</h2>
-            <p>
-              We reserve the right to update this Privacy Policy at any time. Changes will be posted on this page with an updated effective date. Continued use of our website after changes constitutes your acceptance of the revised policy.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-gray-800 mb-3">9. Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us:</p>
-            <div className="mt-3 p-5 rounded-2xl bg-gray-50 border border-gray-100 space-y-1.5">
-              <p className="font-semibold text-gray-800">Sumer Renovations LLC</p>
-              <p>Portland, OR</p>
-              <p>
-                Phone:{' '}
-                <a href="tel:+19717076604" className="font-medium" style={{ color: '#a0742a' }}>
-                  (971) 707-6604
-                </a>
-              </p>
-              <p>
-                Email:{' '}
-                <a href="mailto:info@sumerrenovations.com" className="font-medium" style={{ color: '#a0742a' }}>
-                  info@sumerrenovations.com
-                </a>
-              </p>
-            </div>
-          </section>
+          </div>
         </div>
       </div>
 

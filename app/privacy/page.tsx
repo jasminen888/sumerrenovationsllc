@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Privacy Policy | Sumer Renovations LLC',
@@ -64,7 +66,9 @@ const sections = [
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen" style={{ background: '#f8f7f4' }}>
+    <>
+      <Header />
+      <main className="min-h-screen pt-20" style={{ background: '#f8f7f4' }}>
 
       {/* Hero */}
       <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #040d1a 0%, #0a1628 60%, #0f2136 100%)' }}>
@@ -76,13 +80,6 @@ export default function PrivacyPage() {
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl" style={{ background: 'radial-gradient(circle, #c9a84c, transparent 70%)' }} />
 
         <div className="relative max-w-3xl mx-auto px-6 pt-10 pb-16">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium mb-10 transition-colors" style={{ color: '#c9a84c' }}>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Home
-          </Link>
-
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-5 border" style={{ background: 'rgba(201,168,76,0.1)', borderColor: 'rgba(201,168,76,0.3)', color: '#c9a84c' }}>
             Legal
           </div>
@@ -152,16 +149,8 @@ export default function PrivacyPage() {
         </div>
       </div>
 
-      {/* Footer strip */}
-      <div className="border-t py-6 text-center text-sm text-gray-400" style={{ borderColor: '#ece8df' }}>
-        <div className="flex justify-center gap-6">
-          <Link href="/privacy" className="font-semibold" style={{ color: '#a0742a' }}>Privacy</Link>
-          <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
-          <Link href="/sitemap" className="hover:text-gray-600 transition-colors">Sitemap</Link>
-          <Link href="/" className="hover:text-gray-600 transition-colors">Home</Link>
-        </div>
-        <p className="mt-3">&copy; 2026 Sumer Renovations LLC. All Rights Reserved.</p>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

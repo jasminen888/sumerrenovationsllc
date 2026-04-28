@@ -4,23 +4,23 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/#home' },
+  { name: 'About', href: '/#about' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 const serviceItems = [
-  { name: 'Full Home Renovation', href: '#services', icon: '🏠', desc: 'Complete top-to-bottom transformations' },
-  { name: 'Kitchen Remodeling', href: '#services', icon: '🍳', desc: 'Modern kitchens built to impress' },
-  { name: 'Bathroom Remodeling', href: '#services', icon: '🚿', desc: 'Spa-quality finishes & fixtures' },
-  { name: 'Interior Renovation', href: '#services', icon: '🛋️', desc: 'Open-concept layouts & custom millwork' },
-  { name: 'Exterior Renovation', href: '#services', icon: '🏡', desc: 'Curb appeal that turns heads' },
-  { name: 'Decks & Outdoor Living', href: '#services', icon: '🌿', desc: 'Outdoor spaces for every season' },
-  { name: 'Roofing & Gutters', href: '#services', icon: '🔧', desc: 'Durable protection for your home' },
-  { name: 'Landscaping', href: '#services', icon: '🌳', desc: 'Lush, low-maintenance designs' },
-  { name: 'Home Additions & ADU', href: '#services', icon: '📐', desc: 'Add square footage & value' },
-  { name: 'General Contractor Services', href: '#services', icon: '🏗️', desc: 'Full-service project management' },
+  { name: 'Full Home Renovation', href: '/#services', icon: '🏠', desc: 'Complete top-to-bottom transformations' },
+  { name: 'Kitchen Remodeling', href: '/#services', icon: '🍳', desc: 'Modern kitchens built to impress' },
+  { name: 'Bathroom Remodeling', href: '/#services', icon: '🚿', desc: 'Spa-quality finishes & fixtures' },
+  { name: 'Interior Renovation', href: '/#services', icon: '🛋️', desc: 'Open-concept layouts & custom millwork' },
+  { name: 'Exterior Renovation', href: '/#services', icon: '🏡', desc: 'Curb appeal that turns heads' },
+  { name: 'Decks & Outdoor Living', href: '/#services', icon: '🌿', desc: 'Outdoor spaces for every season' },
+  { name: 'Roofing & Gutters', href: '/#services', icon: '🔧', desc: 'Durable protection for your home' },
+  { name: 'Landscaping', href: '/#services', icon: '🌳', desc: 'Lush, low-maintenance designs' },
+  { name: 'Home Additions & ADU', href: '/#services', icon: '📐', desc: 'Add square footage & value' },
+  { name: 'General Contractor Services', href: '/#services', icon: '🏗️', desc: 'Full-service project management' },
 ];
 
 export default function Header() {

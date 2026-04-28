@@ -70,10 +70,22 @@ export default function Header() {
   const navigate = useCallback((href: string) => {
     setServicesOpen(false);
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+    // Normalize to a plain hash like '#section'
+    const hash = href.startsWith('/#') ? href.slice(1) : href.startsWith('#') ? href : null;
+    if (hash) {
+      if (window.location.pathname === '/') {
+        // Already on home page — smooth scroll to section
+        const el = document.querySelector(hash);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      } else {
+        // On a sub-page — navigate to home with the hash
+        window.location.href = '/' + hash;
+      }
+    } else {
+      window.location.href = href;
     }
   }, []);
 

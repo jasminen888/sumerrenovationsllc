@@ -84,39 +84,125 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section id="about" className="py-24 bg-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-gold-50/50 to-transparent pointer-events-none" />
+    <section
+      id="about"
+      className="relative py-28 overflow-hidden"
+      style={{ background: 'linear-gradient(160deg, #040d1a 0%, #0a1628 50%, #040d1a 100%)' }}
+    >
+      {/* ── Background ambient glows ── */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {/* left gold orb */}
+        <div style={{
+          position: 'absolute', top: '15%', left: '-5%',
+          width: 560, height: 560, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(201,168,76,0.13) 0%, transparent 70%)',
+          filter: 'blur(30px)',
+          animation: 'floatOrb 8s ease-in-out infinite',
+        }} />
+        {/* right subtle orb */}
+        <div style={{
+          position: 'absolute', bottom: '5%', right: '-8%',
+          width: 480, height: 480, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+          animation: 'floatOrb 11s ease-in-out infinite reverse',
+        }} />
+        {/* center depth */}
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%,-50%)',
+          width: 900, height: 900, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(10,22,40,0.7) 0%, transparent 65%)',
+        }} />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* ── Subtle grid ── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(201,168,76,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Text */}
+
+          {/* ── Left: Copy + Stats ── */}
           <div>
-            <div className="inline-flex items-center gap-2 bg-gold-50 border border-gold-200 rounded-full px-4 py-1.5 mb-4">
-              <span className="w-1.5 h-1.5 bg-gold-500 rounded-full" />
-              <span className="text-gold-700 text-sm font-medium">Why Choose Us</span>
+            {/* pill tag */}
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.1)', backdropFilter: 'blur(8px)' }}>
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#c9a84c' }} />
+              <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: '#c9a84c' }}>Why Choose Us</span>
             </div>
-            <h2 className="section-title mb-6">
-              The Sumer Renovations{' '}
-              <span className="text-gold-500">Difference</span>
+
+            <h2 className="font-black text-white leading-[1.08] mb-8" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)' }}>
+              The Sumer<br />
+              Renovations{' '}
+              <span style={{
+                background: 'linear-gradient(135deg, #c9a84c 0%, #f5d06f 50%, #a0742a 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
+                Difference
+              </span>
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed mb-6">
+
+            <p className="text-lg leading-relaxed mb-4" style={{ color: 'rgba(200,214,230,0.75)' }}>
               With years of experience transforming homes across the Portland metro area, we&apos;ve
-              built our reputation on trust, quality, and an unwavering commitment to our clients.
+              built our reputation on trust, quality, and unwavering commitment.
             </p>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Every project is handled with the same level of professionalism and care, whether
-              it&apos;s a quick bathroom refresh or a full home renovation.
+            <p className="leading-relaxed mb-10" style={{ color: 'rgba(180,200,220,0.55)' }}>
+              Every project is handled with the same professionalism — whether a quick bathroom
+              refresh or a full home renovation.
             </p>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-3 mb-10">
+              {[
+                { num: '500+', label: 'Projects Completed' },
+                { num: '10+',  label: 'Years Experience' },
+                { num: '98%',  label: 'Client Satisfaction' },
+                { num: '5★',   label: 'Average Rating' },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="relative overflow-hidden rounded-2xl p-4"
+                  style={{
+                    background: 'rgba(201,168,76,0.07)',
+                    border: '1px solid rgba(201,168,76,0.22)',
+                    backdropFilter: 'blur(12px)',
+                  }}
+                >
+                  {/* inner shine */}
+                  <div className="pointer-events-none absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.5), transparent)' }} />
+                  <div className="text-3xl font-black mb-0.5" style={{
+                    background: 'linear-gradient(135deg, #f5d06f, #c9a84c)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}>{s.num}</div>
+                  <div className="text-sm font-medium" style={{ color: 'rgba(200,214,230,0.65)' }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
 
             {/* Trust badges */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               {['Licensed', 'Bonded', 'Insured', 'Local Business'].map((badge) => (
                 <span
                   key={badge}
-                  className="inline-flex items-center gap-1.5 bg-charcoal text-white text-sm font-medium px-4 py-1.5 rounded-full"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full"
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid rgba(255,255,255,0.13)',
+                    color: 'rgba(240,248,255,0.88)',
+                    backdropFilter: 'blur(8px)',
+                  }}
                 >
-                  <svg className="w-3.5 h-3.5 text-gold-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#c9a84c' }} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   {badge}
@@ -125,22 +211,61 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Right: Feature grid */}
+          {/* ── Right: Feature cards ── */}
           <div className="grid grid-cols-2 gap-4">
-            {features.map((feature) => (
+            {features.slice(0, 6).map((feature, i) => (
               <div
                 key={feature.title}
-                className="group bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-gold-200 hover:-translate-y-2 transition-all duration-300"
+                className="wcu-card group relative overflow-hidden rounded-2xl p-5 cursor-default"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(201,168,76,0.15)',
+                  backdropFilter: 'blur(18px)',
+                  WebkitBackdropFilter: 'blur(18px)',
+                }}
               >
-                <div className="w-12 h-12 bg-gold-50 text-gold-500 rounded-xl flex items-center justify-center mb-3 group-hover:bg-gold-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                {/* top shine line */}
+                <div className="pointer-events-none absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent)' }} />
+
+                {/* hover radial glow */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 rounded-2xl"
+                  style={{
+                    background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.16) 0%, transparent 70%)',
+                    transition: 'opacity 0.35s ease',
+                  }}
+                />
+
+                {/* hover gold top border accent */}
+                <div
+                  className="pointer-events-none absolute top-0 left-8 right-8 h-[2px] opacity-0 group-hover:opacity-100 rounded-full"
+                  style={{
+                    background: 'linear-gradient(to right, transparent, #c9a84c, transparent)',
+                    transition: 'opacity 0.3s ease',
+                  }}
+                />
+
+                {/* Icon */}
+                <div
+                  className="relative w-12 h-12 rounded-xl mb-4 flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(201,168,76,0.22) 0%, rgba(160,116,42,0.12) 100%)',
+                    border: '1px solid rgba(201,168,76,0.32)',
+                    color: '#c9a84c',
+                    transition: 'box-shadow 0.3s ease',
+                    boxShadow: '0 0 0 0 rgba(201,168,76,0)',
+                  }}
+                >
                   {feature.icon}
                 </div>
-                <h3 className="font-semibold text-charcoal text-sm mb-1">{feature.title}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed mb-2">{feature.description}</p>
-                <span className="text-xs font-semibold text-gold-600">{feature.proof}</span>
+
+                <h3 className="font-bold text-white text-sm mb-2 leading-snug">{feature.title}</h3>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(180,200,220,0.6)' }}>{feature.description}</p>
+                <span className="text-xs font-bold tracking-wide" style={{ color: '#c9a84c' }}>{feature.proof}</span>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

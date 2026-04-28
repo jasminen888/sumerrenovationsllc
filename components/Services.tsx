@@ -172,7 +172,16 @@ export default function Services() {
         {/* Bottom CTA */}
         <div className="text-center mt-12">
           <p className="text-gray-500 mb-4">Don&apos;t see what you&apos;re looking for? We handle custom projects too.</p>
-          <button onClick={() => scrollTo('#contact')} className="btn-primary">
+          <button
+            onClick={() => {
+              const el = document.querySelector('#contact');
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - 180;
+                window.scrollTo({ top, behavior: 'smooth' });
+              }
+            }}
+            className="btn-primary"
+          >
             Discuss Your Project
           </button>
         </div>

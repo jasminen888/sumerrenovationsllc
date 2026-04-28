@@ -136,7 +136,7 @@ export default function Contact() {
   };
 
   const inputClass = (field: keyof FormData, withIcon = false) =>
-    `w-full ${withIcon ? 'pl-11' : 'px-4'} pr-4 py-3 rounded-xl border text-sm outline-none transition-all duration-200 font-medium bg-gray-50 placeholder:text-gray-400 ${
+    `w-full ${withIcon ? 'pl-11' : 'px-4'} pr-4 py-3 rounded-xl border text-base outline-none transition-all duration-200 font-medium bg-gray-50 placeholder:text-gray-400 ${
       errors[field]
         ? 'border-red-400 bg-red-50/60 focus:ring-2 focus:ring-red-200 text-red-800'
         : 'border-gray-200 text-charcoal focus:border-gold-400 focus:ring-2 focus:ring-gold-100 focus:bg-white'
@@ -254,13 +254,13 @@ export default function Contact() {
                   <form onSubmit={handleSubmit} noValidate>
                     <div className="mb-6">
                       <h3 className="font-serif text-xl font-bold text-charcoal">Send Us a Message</h3>
-                      <p className="text-gray-400 text-sm mt-1">Fill out the form below and we&apos;ll be in touch shortly.</p>
+                      <p className="text-gray-400 text-base mt-1">Fill out the form below and we&apos;ll be in touch shortly.</p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                       {/* Full Name */}
                       <div className="sm:col-span-2">
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="fullName">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="fullName">
                           Full Name <span className="text-red-400">*</span>
                         </label>
                         <div className="relative">
@@ -282,7 +282,7 @@ export default function Contact() {
 
                       {/* Email */}
                       <div>
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="email">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="email">
                           Email <span className="text-red-400">*</span>
                         </label>
                         <div className="relative">
@@ -304,7 +304,7 @@ export default function Contact() {
 
                       {/* Phone */}
                       <div>
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="phone">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="phone">
                           Phone <span className="text-red-400">*</span>
                         </label>
                         <div className="relative">
@@ -326,7 +326,7 @@ export default function Contact() {
 
                       {/* Service */}
                       <div>
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="service">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="service">
                           Service Needed <span className="text-red-400">*</span>
                         </label>
                         <select
@@ -342,7 +342,7 @@ export default function Contact() {
 
                       {/* Budget */}
                       <div>
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="budget">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="budget">
                           Project Budget
                         </label>
                         <select
@@ -357,7 +357,7 @@ export default function Contact() {
 
                       {/* Contact Method — pill buttons */}
                       <div className="sm:col-span-2">
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-2">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-2">
                           Preferred Contact Method
                         </label>
                         <div className="flex flex-wrap gap-2">
@@ -366,7 +366,7 @@ export default function Contact() {
                               key={m}
                               type="button"
                               onClick={() => setForm((prev) => ({ ...prev, contactMethod: m }))}
-                              className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${
+                              className={`px-4 py-2 rounded-full text-base font-medium border transition-all duration-200 ${
                                 form.contactMethod === m
                                   ? 'text-white border-transparent shadow-md'
                                   : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gold-400 hover:text-gold-600 hover:bg-gold-50'
@@ -381,7 +381,7 @@ export default function Contact() {
 
                       {/* Message */}
                       <div className="sm:col-span-2">
-                        <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="message">
+                        <label className="block text-sm font-semibold tracking-widest uppercase text-gray-500 mb-1.5" htmlFor="message">
                           Project Details <span className="text-red-400">*</span>
                         </label>
                         <textarea

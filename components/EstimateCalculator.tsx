@@ -43,12 +43,6 @@ export default function EstimateCalculator() {
 
   return (
     <section id="estimate" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a1628 0%, #0f2136 60%, #0a1628 100%)' }}>
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #c9a84c, transparent 70%)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-8" style={{ background: 'radial-gradient(circle, #f5d06f, transparent 70%)' }} />
-      </div>
-
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">

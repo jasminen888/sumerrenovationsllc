@@ -2,12 +2,10 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import BadgesBar from '@/components/BadgesBar';
 import Projects from '@/components/Projects';
 import CtaBanner from '@/components/CtaBanner';
 import EstimateCalculator from '@/components/EstimateCalculator';
 import Testimonials from '@/components/Testimonials';
-import FAQ from '@/components/FAQ';
 import ServiceAreas from '@/components/ServiceAreas';
 import Blog from '@/components/Blog';
 import Schedule from '@/components/Schedule';
@@ -17,7 +15,6 @@ import Chatbot from '@/components/Chatbot';
 import MobileActionBar from '@/components/MobileActionBar';
 import StickyCta from '@/components/StickyCta';
 import CountdownBanner from '@/components/CountdownBanner';
-import ExitIntentPopup from '@/components/ExitIntentPopup';
 import FloatingCallButton from '@/components/FloatingCallButton';
 import ScrollRevealProvider from '@/components/ScrollRevealProvider';
 
@@ -41,9 +38,6 @@ export default function HomePage() {
         {/* 3. Why Choose Us / About */}
         <WhyChooseUs />
 
-        {/* 4. Partner & credential badges */}
-        <BadgesBar />
-
         {/* 5. Projects / Portfolio */}
         <Projects />
 
@@ -56,10 +50,7 @@ export default function HomePage() {
         {/* 8. Testimonials */}
         <Testimonials />
 
-        {/* 9. FAQ accordion */}
-        <FAQ />
-
-        {/* 10. Service Areas + Map */}
+        {/* 9. Service Areas + Map */}
         <ServiceAreas />
 
         {/* 11. Renovation Blog */}
@@ -87,8 +78,6 @@ export default function HomePage() {
       {/* Mobile floating call button */}
       <FloatingCallButton />
 
-      {/* Exit-intent popup (desktop) */}
-      <ExitIntentPopup />
 
       {/* Global scroll-reveal IntersectionObserver */}
       <ScrollRevealProvider />

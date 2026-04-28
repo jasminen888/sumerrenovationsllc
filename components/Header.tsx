@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -10,16 +11,16 @@ const navLinks = [
 ];
 
 const serviceItems = [
-  { name: 'Full Home Renovation', href: '#services' },
-  { name: 'Kitchen Remodeling', href: '#services' },
-  { name: 'Bathroom Remodeling', href: '#services' },
-  { name: 'Interior Renovation', href: '#services' },
-  { name: 'Exterior Renovation', href: '#services' },
-  { name: 'Decks & Outdoor Living', href: '#services' },
-  { name: 'Roofing & Gutters', href: '#services' },
-  { name: 'Landscaping', href: '#services' },
-  { name: 'Home Additions & ADU', href: '#services' },
-  { name: 'General Contractor Services', href: '#services' },
+  { name: 'Full Home Renovation', href: '#services', icon: '🏠', desc: 'Complete top-to-bottom transformations' },
+  { name: 'Kitchen Remodeling', href: '#services', icon: '🍳', desc: 'Modern kitchens built to impress' },
+  { name: 'Bathroom Remodeling', href: '#services', icon: '🚿', desc: 'Spa-quality finishes & fixtures' },
+  { name: 'Interior Renovation', href: '#services', icon: '🛋️', desc: 'Open-concept layouts & custom millwork' },
+  { name: 'Exterior Renovation', href: '#services', icon: '🏡', desc: 'Curb appeal that turns heads' },
+  { name: 'Decks & Outdoor Living', href: '#services', icon: '🌿', desc: 'Outdoor spaces for every season' },
+  { name: 'Roofing & Gutters', href: '#services', icon: '🔧', desc: 'Durable protection for your home' },
+  { name: 'Landscaping', href: '#services', icon: '🌳', desc: 'Lush, low-maintenance designs' },
+  { name: 'Home Additions & ADU', href: '#services', icon: '📐', desc: 'Add square footage & value' },
+  { name: 'General Contractor Services', href: '#services', icon: '🏗️', desc: 'Full-service project management' },
 ];
 
 export default function Header() {
@@ -79,54 +80,45 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100' : 'bg-black/20 backdrop-blur-md'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 shadow-sm border-b border-[#e8d9c0]`}
+      style={{ background: 'linear-gradient(to right, #fdf6e8, #ffffff, #fdf6e8)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-end justify-between h-44">
 
           {/* ── Logo ── */}
           <button
             onClick={() => navigate('#home')}
-            className="flex items-center gap-2.5 flex-shrink-0"
+            className="flex items-center gap-2.5 flex-shrink-0 pb-1"
             aria-label="Sumer Renovations LLC — Home"
           >
-            <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-lg font-serif">S</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className={`font-serif font-bold text-lg leading-tight transition-colors duration-300 ${scrolled ? 'text-charcoal' : 'text-white'}`}>
-                Sumer Renovations
-              </span>
-              <span className={`text-[10px] font-semibold tracking-[0.25em] uppercase transition-colors duration-300 ${scrolled ? 'text-gold-500' : 'text-gold-300'}`}>
-                LLC
-              </span>
-            </div>
+            <Image
+              src="/sumerrenovations_logo.png"
+              alt="Sumer Renovations LLC"
+              width={170}
+              height={170}
+              className="object-contain"
+              priority
+            />
           </button>
 
           {/* ── Desktop Nav ── */}
-          <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-0.5 self-center font-[family-name:var(--font-roboto-serif)]" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => navigate(link.href)}
-                className={`group/nav relative px-4 py-2.5 rounded-lg text-base font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
-                  scrolled
-                    ? 'text-charcoal hover:text-gold-600 hover:bg-gold-50/60'
-                    : 'text-white/90 hover:text-gold-300 hover:bg-white/10'
-                }`}
+                className="group/nav relative px-5 py-3 rounded-xl text-[18px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap text-gray-800 hover:text-[#c9a84c]"
               >
-                <span className="relative">
-                  {link.name}
-                  <span className={`absolute -bottom-0.5 left-0 h-0.5 w-0 group-hover/nav:w-full transition-all duration-300 rounded-full ${
-                    scrolled ? 'bg-gold-500' : 'bg-gold-400'
-                  }`} />
-                </span>
+                <span className="relative z-10">{link.name}</span>
+                {/* animated gold underline */}
+                <span className="absolute bottom-1.5 left-5 right-5 h-[2px] rounded-full bg-gradient-to-r from-[#c9a84c] to-[#f5d06f] scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300 origin-left" />
+                {/* soft hover bg */}
+                <span className="absolute inset-0 rounded-xl bg-[#c9a84c]/0 group-hover/nav:bg-[#c9a84c]/8 transition-colors duration-200" />
               </button>
             ))}
 
-            {/* Services dropdown trigger */}
+            {/* Services mega menu trigger */}
             <div className="relative">
               <button
                 onMouseEnter={openServices}
@@ -134,66 +126,107 @@ export default function Header() {
                 onClick={() => setServicesOpen((v) => !v)}
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
-                className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-base font-semibold tracking-wide transition-all duration-200 ${
-                  scrolled
-                    ? servicesOpen
-                      ? 'text-gold-600 bg-gold-50/60'
-                      : 'text-charcoal hover:text-gold-600 hover:bg-gold-50/60'
-                    : servicesOpen
-                      ? 'text-gold-300 bg-white/10'
-                      : 'text-white/90 hover:text-gold-300 hover:bg-white/10'
+                className={`group/svc relative flex items-center gap-1.5 px-5 py-3 rounded-xl text-[18px] font-bold tracking-wide transition-all duration-200 ${
+                  servicesOpen ? 'text-[#c9a84c]' : 'text-gray-800 hover:text-[#c9a84c]'
                 }`}
               >
-                Services
-                <svg className={`w-4 h-4 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
+                <span className="relative z-10">Services</span>
+                <svg className={`w-4 h-4 transition-transform duration-300 relative z-10 ${servicesOpen ? 'rotate-180 text-[#c9a84c]' : ''}`}
                   fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
+                <span className={`absolute bottom-1.5 left-5 right-5 h-[2px] rounded-full bg-gradient-to-r from-[#c9a84c] to-[#f5d06f] transition-transform duration-300 origin-left ${
+                  servicesOpen ? 'scale-x-100' : 'scale-x-0 group-hover/svc:scale-x-100'
+                }`} />
+                <span className={`absolute inset-0 rounded-xl transition-colors duration-200 ${
+                  servicesOpen ? 'bg-[#c9a84c]/8' : 'bg-[#c9a84c]/0 group-hover/svc:bg-[#c9a84c]/8'
+                }`} />
               </button>
 
-              {/* Dropdown panel */}
+              {/* ── Mega Menu Panel ── */}
               <div
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesDelayed}
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-200 origin-top ${
-                  servicesOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[720px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.18)] border border-gray-100/80 overflow-hidden transition-all duration-250 origin-top z-[60] ${
+                  servicesOpen ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-[0.97] -translate-y-2 pointer-events-none'
                 }`}
               >
-                <div className="p-2">
-                  {serviceItems.map((item) => (
+                {/* top gold accent bar */}
+                <div className="h-[3px] bg-gradient-to-r from-[#a0742a] via-[#c9a84c] to-[#f5d06f]" />
+
+                <div className="flex">
+                  {/* Left: 2-column service grid */}
+                  <div className="flex-1 p-4 grid grid-cols-2 gap-1">
+                    {serviceItems.map((item) => (
+                      <button
+                        key={item.name}
+                        onClick={() => navigate(item.href)}
+                        className="group/item text-left flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-gradient-to-br hover:from-[#c9a84c]/8 hover:to-[#f5d06f]/5 transition-all duration-150 border border-transparent hover:border-[#c9a84c]/20"
+                      >
+                        <span className="text-xl leading-none mt-0.5 group-hover/item:scale-110 transition-transform duration-150">{item.icon}</span>
+                        <span className="flex flex-col">
+                          <span className="text-[14.5px] font-bold text-gray-800 group-hover/item:text-[#c9a84c] transition-colors duration-150 leading-tight">{item.name}</span>
+                          <span className="text-[12.5px] text-gray-400 mt-0.5 leading-tight">{item.desc}</span>
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Right: Feature card */}
+                  <div className="w-52 bg-gradient-to-b from-[#0a1628] to-[#0f2136] flex flex-col items-center justify-center p-5 gap-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#c9a84c] to-[#a0742a] flex items-center justify-center shadow-lg">
+                      <span className="text-2xl">📅</span>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white font-bold text-sm leading-snug">Free Consultation</p>
+                      <p className="text-gray-400 text-[12px] mt-1 leading-snug">Talk to an expert about your project</p>
+                    </div>
                     <button
-                      key={item.name}
-                      onClick={() => navigate(item.href)}
-                      className="w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-charcoal hover:text-gold-600 hover:bg-gold-50 transition-all duration-150 group/item"
+                      onClick={() => navigate('#schedule')}
+                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#a0742a] text-white text-[13px] font-bold tracking-wide hover:shadow-[0_4px_20px_rgba(201,168,76,0.4)] hover:-translate-y-0.5 transition-all duration-200"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-gold-400 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" />
-                      {item.name}
+                      Book Appointment
                     </button>
-                  ))}
+                    <button
+                      onClick={() => navigate('#contact')}
+                      className="w-full py-2 rounded-xl border border-white/20 text-white/80 text-[13px] font-semibold hover:bg-white/10 hover:text-white transition-all duration-200"
+                    >
+                      Get a Free Quote
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </nav>
 
           {/* ── Right CTA + hamburger ── */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => navigate('#contact')}
-              className={`hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-200 ${
-                scrolled
-                  ? 'bg-gold-500 hover:bg-gold-600 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5'
-                  : 'bg-white/15 hover:bg-gold-500 text-white border border-white/30 hover:border-gold-500 hover:shadow-md hover:-translate-y-0.5'
-              }`}
-            >
-              Get a Free Quote
-            </button>
+          <div className="flex items-center gap-3 self-center">
+            {/* Animated running-border CTA */}
+            <div className="hidden md:inline-flex relative p-[2px] rounded-xl overflow-hidden shadow-md">
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  width: '400%',
+                  aspectRatio: '1 / 1',
+                  top: '50%',
+                  left: '50%',
+                  background: 'conic-gradient(from 0deg, transparent 0deg, #f5d06f 55deg, #fff8c0 80deg, #c9a84c 105deg, transparent 140deg)',
+                  animation: 'borderSpin 1.8s linear infinite',
+                }}
+              />
+              <button
+                onClick={() => navigate('#contact')}
+                className="relative z-10 inline-flex items-center gap-2 px-6 py-2.5 rounded-[10px] text-[16px] font-bold tracking-wide transition-all duration-200 bg-gradient-to-r from-[#c9a84c] to-[#a0742a] hover:from-[#a0742a] hover:to-[#c9a84c] text-white hover:shadow-[0_6px_24px_rgba(201,168,76,0.4)] hover:-translate-y-0.5"
+              >
+                Get a Free Quote
+              </button>
+            </div>
 
             {/* Hamburger */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className={`lg:hidden p-2 rounded-lg transition-colors duration-200 ${
-                scrolled ? 'text-charcoal hover:bg-gray-100' : 'text-white hover:bg-white/10'
-              }`}
+              className="lg:hidden p-2 rounded-lg transition-colors duration-200 text-charcoal hover:bg-gray-100"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
@@ -206,6 +239,21 @@ export default function Header() {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* ── Animated gold shimmer line ── */}
+      <div
+        aria-hidden="true"
+        className="relative h-[3px] overflow-hidden"
+        style={{ background: 'linear-gradient(to right, #7a5810, #a0742a 20%, #c9a84c 40%, #f5d06f 50%, #c9a84c 60%, #a0742a 80%, #7a5810)' }}
+      >
+        <div
+          className="absolute inset-y-0 w-[30%]"
+          style={{
+            background: 'linear-gradient(to right, transparent, rgba(255,252,210,0.9) 50%, transparent)',
+            animation: 'goldRun 2s linear infinite',
+          }}
+        />
       </div>
 
       {/* ── Mobile Menu ── */}

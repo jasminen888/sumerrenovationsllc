@@ -4,6 +4,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes goldRun {
+  0%   { transform: translateX(-200%); }
+  100% { transform: translateX(500%); }
+}
+
+@keyframes borderSpin {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-24px) scale(1.04); }
+}
+
+.wcu-card {
+  transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s ease;
+}
+.wcu-card:hover {
+  transform: perspective(900px) rotateX(-3deg) rotateY(5deg) translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.55), 0 0 50px rgba(201,168,76,0.22);
+}
+
 :root {
   --font-poppins: 'Poppins', system-ui, sans-serif;
   --font-playfair: 'Playfair Display', Georgia, serif;

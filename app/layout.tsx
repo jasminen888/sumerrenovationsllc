@@ -1,5 +1,12 @@
 import type { Metadata } from 'next';
+import { Roboto_Serif } from 'next/font/google';
 import './globals.css';
+
+const robotoSerif = Roboto_Serif({
+  subsets: ['latin'],
+  variable: '--font-roboto-serif',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Sumer Renovations LLC | Home Renovation & Remodeling Services in Portland, OR',
@@ -101,7 +108,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body className={robotoSerif.variable}>{children}</body>
     </html>
   );
 }

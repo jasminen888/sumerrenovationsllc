@@ -18,7 +18,7 @@ export default function MobileActionBar() {
       {/* gold shimmer top edge */}
       <div className="h-[2px]" style={{ background: 'linear-gradient(to right, transparent, #c9a84c 30%, #f5d06f 50%, #c9a84c 70%, transparent)' }} />
 
-      <div className="flex justify-around items-center px-2 py-3 pb-safe">
+      <div className="flex justify-around items-center px-2 py-3" style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
 
         {/* Call Us */}
         <a

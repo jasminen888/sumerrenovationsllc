@@ -84,7 +84,7 @@ export default function Header() {
       style={{ background: 'linear-gradient(to right, #fdf6e8, #ffffff, #fdf6e8)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between h-44">
+        <div className="flex items-end justify-between h-44 relative">
 
           {/* ── Logo ── */}
           <button
@@ -200,7 +200,7 @@ export default function Header() {
           </nav>
 
           {/* ── Right CTA + hamburger ── */}
-          <div className="flex items-center gap-3 self-center">
+          <div className="flex items-center gap-3 absolute left-1/2 -translate-x-1/2 bottom-4 md:static md:translate-x-0 md:bottom-auto md:self-center">
             {/* Animated running-border CTA */}
             <div className="hidden md:inline-flex relative p-[2px] rounded-xl overflow-hidden shadow-md">
               <div

@@ -15,7 +15,6 @@ import Chatbot from '@/components/Chatbot';
 import MobileActionBar from '@/components/MobileActionBar';
 import StickyCta from '@/components/StickyCta';
 import CountdownBanner from '@/components/CountdownBanner';
-import FloatingCallButton from '@/components/FloatingCallButton';
 import ScrollRevealProvider from '@/components/ScrollRevealProvider';
 
 export default function HomePage() {
@@ -74,10 +73,6 @@ export default function HomePage() {
 
       {/* Sticky desktop CTA bar (appears after scrolling past hero) */}
       <StickyCta />
-
-      {/* Mobile floating call button */}
-      <FloatingCallButton />
-
 
       {/* Global scroll-reveal IntersectionObserver */}
       <ScrollRevealProvider />

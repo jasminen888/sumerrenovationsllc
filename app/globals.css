@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-poppins: 'Poppins', system-ui, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-lg text-black bg-white antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+
+  * {
+    @apply box-border;
+  }
+}
+
+@layer components {
+  /* ── Shared 3D foundation ──────────────────────────── */
+  .btn-primary,
+  .btn-outline,
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 text-base font-semibold tracking-wide px-7 py-3.5 rounded-full;
+    position: relative;
+    transform: translateY(-2px);
+    transition: transform 0.14s ease, box-shadow 0.14s ease,
+                background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    will-change: transform;
+  }
+
+  /* ── Primary — gold fill ─────────────────────────── */
+  .btn-primary {
+    @apply bg-gold-500 text-white;
+    box-shadow: 0 6px 0 #7a5c18, 0 10px 24px rgba(201,168,76,0.38);
+  }
+  .btn-primary:hover {
+    @apply bg-gold-600;
+    transform: translateY(-4px);
+    box-shadow: 0 9px 0 #7a5c18, 0 15px 32px rgba(201,168,76,0.5);
+  }
+  .btn-primary:active {
+    transition: none;
+    animation: btnFlipToGold 0.42s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* ── Outline — transparent with gold border ──────── */
+  .btn-outline {
+    @apply border-2 border-gold-500 text-gold-500;
+    background-color: transparent;
+    box-shadow: 0 5px 0 #7a5c18, 0 8px 18px rgba(201,168,76,0.22);
+  }
+  .btn-outline:hover {
+    @apply bg-gold-500 text-white border-gold-500;
+    transform: translateY(-4px);
+    box-shadow: 0 9px 0 #7a5c18, 0 13px 28px rgba(201,168,76,0.44);
+  }
+  .btn-outline:active {
+    transition: none;
+    animation: btnFlipToGold 0.42s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* ── Dark — charcoal fill ────────────────────────── */
+  .btn-dark {
+    @apply bg-charcoal text-white;
+    box-shadow: 0 6px 0 #080d1a, 0 10px 22px rgba(0,0,0,0.4);
+  }
+  .btn-dark:hover {
+    @apply bg-charcoal-700;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #080d1a, 0 13px 28px rgba(0,0,0,0.48);
+  }
+  .btn-dark:active {
+    transition: none;
+    animation: btnFlipToGold 0.42s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed font-light;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2;
+  }
+}
+
+/* 3D flip-to-gold animation — triggered on :active */
+@keyframes btnFlipToGold {
+  0%   {
+    transform: perspective(500px) translateY(4px) rotateX(0deg);
+    box-shadow: 0 2px 0 #7a5c18, 0 4px 10px rgba(0,0,0,0.25);
+  }
+  35%  {
+    transform: perspective(500px) translateY(2px) rotateX(90deg);
+    background-color: #f5d060;
+    color: #7a5c18;
+    border-color: #f5d060;
+  }
+  65%  {
+    transform: perspective(500px) translateY(-3px) rotateX(-14deg);
+    background-color: #f5d060;
+    color: #fff;
+    border-color: #f5d060;
+  }
+  82%  {
+    transform: perspective(500px) translateY(-4px) rotateX(5deg);
+    background-color: #e8c050;
+  }
+  100% {
+    transform: perspective(500px) translateY(-2px) rotateX(0deg);
+    background-color: #c9a84c;
+    color: #fff;
+    border-color: #c9a84c;
+    box-shadow: 0 6px 0 #7a5c18, 0 10px 24px rgba(201,168,76,0.42);
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    color: #c9a84c;
+  }
+
+  .bg-gold {
+    background-color: #c9a84c;
+  }
+
+  .border-gold {
+    border-color: #c9a84c;
+  }
+
+  .gold-underline {
+    @apply relative;
+  }
+
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-16 h-1 bg-gold-500 rounded-full;
+  }
+}
+
+/* Hero slide text animation */
+
+/* Word wipe-up reveal — outer clips, inner slides */
+@keyframes textSlideUp {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Badge entrance from left */
+@keyframes badgeSlideIn {
+  from {
+    transform: translateX(-32px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Generic fade + slide up for supporting text */
+@keyframes fadeUp {
+  from {
+    transform: translateY(22px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Continuous shimmer sweep on gold headline words */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Outer wrapper clips the word as it rises */
+.headline-word-outer {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-right: 0.3em;
+  line-height: 1.15;
+}
+
+/* Inner word slides up inside the clip */
+.headline-word {
+  display: inline-block;
+  animation: textSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Gold words: slide-up + continuous shimmer */
+.headline-word-gold {
+  display: inline-block;
+  animation: textSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both,
+             goldShimmer 3.5s linear 0.8s infinite;
+  background: linear-gradient(90deg, #c9a84c 0%, #f5d898 35%, #e8c060 55%, #c9a84c 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Badge slide from left */
+.hero-badge {
+  animation: badgeSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Supporting elements fade up */
+.hero-item {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 3D Robot chatbot button */
+.robot-btn-3d {
+  background: radial-gradient(circle at 38% 32%, #5a6a7e, #1e2733);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.55),
+    0 4px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.35);
+}
+.robot-btn-3d:hover {
+  box-shadow:
+    0 14px 36px rgba(201, 168, 76, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.28);
+}
+.robot-btn-open {
+  background: radial-gradient(circle at 38% 32%, #c9a84c, #8a6a20) !important;
+  box-shadow:
+    0 6px 20px rgba(201, 168, 76, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a84c;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8952f;
+}
+
+/* Calendly embed overrides */
+.calendly-inline-widget {
+  min-height: 900px;
+  width: 100%;
+}
+
+/* Chat window scrollbar */
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+/* ── Scroll-reveal animations ─────────────────────────────── */
+/* Apply .reveal to any section or element you want to animate in.
+   The IntersectionObserver in ScrollRevealProvider adds .in-view when visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children inside a .reveal-stagger parent */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  will-change: opacity, transform;
+}
+.reveal-stagger.in-view > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0ms; }
+.reveal-stagger.in-view > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 80ms; }
+.reveal-stagger.in-view > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 160ms; }
+.reveal-stagger.in-view > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 240ms; }
+.reveal-stagger.in-view > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 320ms; }
+.reveal-stagger.in-view > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 400ms; }
+.reveal-stagger.in-view > *:nth-child(7)  { opacity: 1; transform: none; transition-delay: 480ms; }
+.reveal-stagger.in-view > *:nth-child(8)  { opacity: 1; transform: none; transition-delay: 560ms; }
+
+/* Slide-in from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-left.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slide-in from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-right.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scale-up (cards popping in) */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal-scale.in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* line-clamp utilities (for Blog cards) */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

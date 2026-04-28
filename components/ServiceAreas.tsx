@@ -12,10 +12,10 @@ const cities = [
 ];
 
 export default function ServiceAreas() {
-  const scrollToContact = () => {
-    const el = document.querySelector('#contact');
+  const scrollToSchedule = () => {
+    const el = document.querySelector('#schedule');
     if (el) {
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 180, behavior: 'smooth' });
     }
   };
 
@@ -78,9 +78,9 @@ export default function ServiceAreas() {
                 <span className="text-gold-400 font-medium">Contact us today.</span>
               </p>
               <button
-                onClick={scrollToContact}
+                onClick={scrollToSchedule}
                 className="btn-primary w-full justify-center"
-                aria-label="Check service availability"
+                aria-label="Book a free appointment"
               >
                 Check Availability
               </button>

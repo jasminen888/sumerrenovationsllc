@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 // ─── Wave terrain plexus canvas ───────────────────────────────────────────────
 
@@ -483,9 +484,9 @@ export default function Footer() {
             Licensed &bull; Bonded &bull; Insured &bull; Portland, OR
           </p>
           <div className="flex gap-4 text-xs text-white/70">
-            <button onClick={() => scrollTo('#home')} className="hover:text-gold-400 transition-colors">Privacy</button>
-            <button onClick={() => scrollTo('#home')} className="hover:text-gold-400 transition-colors">Terms</button>
-            <button onClick={() => scrollTo('#contact')} className="hover:text-gold-400 transition-colors">Sitemap</button>
+            <Link href="/privacy" className="hover:text-gold-400 transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-gold-400 transition-colors">Terms</Link>
+            <Link href="/sitemap" className="hover:text-gold-400 transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>

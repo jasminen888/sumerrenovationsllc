@@ -285,10 +285,20 @@ export default function Hero() {
   }, [paused, next]);
 
   const scrollTo = (id: string) => {
+    const attempt = () => {
+      const el = document.querySelector(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    };
+    // Try immediately; if the element isn't mounted yet, retry after a short delay
     const el = document.querySelector(id);
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      setTimeout(attempt, 300);
     }
   };
 

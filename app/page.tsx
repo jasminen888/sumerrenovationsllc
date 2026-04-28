@@ -1,21 +1,24 @@
+import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import Projects from '@/components/Projects';
-import CtaBanner from '@/components/CtaBanner';
-import EstimateCalculator from '@/components/EstimateCalculator';
-import Testimonials from '@/components/Testimonials';
-import ServiceAreas from '@/components/ServiceAreas';
-import Blog from '@/components/Blog';
-import Schedule from '@/components/Schedule';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import Chatbot from '@/components/Chatbot';
-import MobileActionBar from '@/components/MobileActionBar';
-import StickyCta from '@/components/StickyCta';
-import CountdownBanner from '@/components/CountdownBanner';
-import ScrollRevealProvider from '@/components/ScrollRevealProvider';
+
+// Lazy-load below-the-fold components for faster initial load
+const Projects = dynamic(() => import('@/components/Projects'));
+const CtaBanner = dynamic(() => import('@/components/CtaBanner'));
+const EstimateCalculator = dynamic(() => import('@/components/EstimateCalculator'));
+const Testimonials = dynamic(() => import('@/components/Testimonials'));
+const ServiceAreas = dynamic(() => import('@/components/ServiceAreas'));
+const Blog = dynamic(() => import('@/components/Blog'));
+const Schedule = dynamic(() => import('@/components/Schedule'));
+const Contact = dynamic(() => import('@/components/Contact'));
+const Footer = dynamic(() => import('@/components/Footer'));
+const Chatbot = dynamic(() => import('@/components/Chatbot'), { ssr: false });
+const MobileActionBar = dynamic(() => import('@/components/MobileActionBar'), { ssr: false });
+const StickyCta = dynamic(() => import('@/components/StickyCta'), { ssr: false });
+const CountdownBanner = dynamic(() => import('@/components/CountdownBanner'));
+const ScrollRevealProvider = dynamic(() => import('@/components/ScrollRevealProvider'));
 
 export default function HomePage() {
   return (

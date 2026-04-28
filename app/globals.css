@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,11 +23,6 @@
 .wcu-card:hover {
   transform: perspective(900px) rotateX(-3deg) rotateY(5deg) translateY(-10px);
   box-shadow: 0 30px 60px rgba(0,0,0,0.55), 0 0 50px rgba(201,168,76,0.22);
-}
-
-:root {
-  --font-poppins: 'Poppins', system-ui, sans-serif;
-  --font-playfair: 'Playfair Display', Georgia, serif;
 }
 
 @layer base {

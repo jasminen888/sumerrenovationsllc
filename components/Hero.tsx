@@ -359,7 +359,7 @@ export default function Hero() {
             className="object-cover"
             priority={i === 0}
             sizes="100vw"
-            quality={100}
+            quality={85}
           />
         </div>
       ))}

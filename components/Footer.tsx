@@ -495,8 +495,8 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="relative z-10 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/80 text-sm text-center sm:text-left">
-            &copy; 2026 Sumer Home Renovation LLC. All Rights Reserved.
+          <p className="text-white/80 text-sm font-bold text-center sm:text-left">
+            &copy; 2026 Sumer Renovation LLC. All Rights Reserved.
           </p>
           <p className="text-white/70 text-sm font-bold text-center">
             Licensed &bull; Bonded &bull; Insured &bull; Portland, OR

@@ -360,7 +360,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full aspect-[16/9] min-h-[480px] max-h-[100dvh] flex items-center justify-center overflow-hidden"
+      className="relative w-full aspect-[16/9] min-h-[70vh] sm:min-h-[480px] max-h-[100dvh] flex items-center justify-center overflow-hidden"
       aria-label="Hero slideshow"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -391,6 +391,8 @@ export default function Hero() {
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/15" />
+      {/* Extra mobile overlay for readability */}
+      <div className="absolute inset-0 bg-black/30 sm:hidden" />
 
       {/* Gold accent line */}
       <div className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-gold-gradient rounded-r-full opacity-80" />
@@ -426,22 +428,22 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className={`font-serif font-bold leading-snug mb-4 ${
+          <h1 className={`font-serif font-bold leading-tight mb-4 ${
             (slide as typeof slide & { smallHeadline?: boolean }).smallHeadline
               ? 'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl'
-              : 'text-3xl sm:text-4xl lg:text-5xl xl:text-6xl'
+              : 'text-3xl sm:text-4xl md:text-5xl xl:text-6xl'
           }`}>
             {highlightedHeadline}
           </h1>
 
           {/* Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mt-4 mb-6 max-w-xl font-light hero-item" style={{ animationDelay: '240ms' }}>
+          <p className="hidden md:block text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mt-4 mb-6 max-w-xl font-light hero-item" style={{ animationDelay: '240ms' }}>
             {DESCRIPTION}
           </p>
 
           {/* Stats bar — only on first slide */}
           {active === 0 && !animating && (
-            <div className="flex flex-wrap gap-6 mb-10 hero-item" style={{ animationDelay: '360ms' }}>
+            <div className="hidden md:flex flex-wrap gap-6 mb-10 hero-item" style={{ animationDelay: '360ms' }}>
               {[
                 { value: '500+', label: 'Projects Completed' },
                 { value: '10+', label: 'Years Experience' },
@@ -504,7 +506,7 @@ export default function Hero() {
       </button>
 
       {/* Trust bar overlaid at the bottom of the hero */}
-      <div className="absolute bottom-0 left-0 right-0 z-20">
+      <div className="hidden md:block absolute bottom-0 left-0 right-0 z-20">
         <TrustBar />
       </div>
     </section>

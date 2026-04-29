@@ -133,6 +133,7 @@ export default function Contact() {
     setSubmitted(true);
     setSubmitting(false);
     setForm(initialForm);
+    setErrors({});
   };
 
   const inputClass = (field: keyof FormData, withIcon = false) =>
@@ -246,7 +247,7 @@ export default function Contact() {
                     <p className="text-gray-500 mb-6 max-w-sm mx-auto">
                       Thank you for reaching out! We&apos;ll get back to you within 24 hours to discuss your project.
                     </p>
-                    <button onClick={() => setSubmitted(false)} className="btn-outline">
+                    <button onClick={() => { setSubmitted(false); setErrors({}); setForm(initialForm); }} className="btn-outline">
                       Send Another Message
                     </button>
                   </div>

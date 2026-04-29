@@ -53,7 +53,7 @@ const slides = [
   },
 ];
 
-const INTERVAL_MS = 5000;
+const INTERVAL_MS = 3000;
 
 const GOLD_WORDS = new Set(['Transform', 'Modern', 'Beautiful', 'Luxury', 'Complete', 'Elegant', 'Stunning']);
 
@@ -238,7 +238,7 @@ export default function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="hidden md:block text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mt-4 mb-6 max-w-xl font-light hero-item" style={{ animationDelay: '240ms' }}>
+          <p className="block text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mt-4 mb-6 max-w-xl font-light hero-item" style={{ animationDelay: '240ms' }}>
             {DESCRIPTION}
           </p>
 

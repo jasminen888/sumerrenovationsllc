@@ -72,9 +72,11 @@ export default function HouseCanvas() {
     // ── Floating plexus particles (50, varied) ──────────────────────────────
     type Particle = {
       x: number; y: number; vx: number; vy: number;
-      r: number; ph: number; speed: number;
+      r: number; ph: number; speed: number; color: string; glow: string;
       trail: { x: number; y: number }[];
     };
+    const P_COLORS = ['#f5d06f', '#e8f4ff', '#7eb8f7'];
+    const P_GLOWS  = ['#f5d06f', '#c8e6ff', '#4a9eff'];
     const particles: Particle[] = Array.from({ length: 50 }, (_, i) => {
       const speed = rng(0.12, 0.55);
       const angle = rng(0, Math.PI * 2);
@@ -86,6 +88,8 @@ export default function HouseCanvas() {
         r: rng(0.5, 2.0),
         ph: (i / 50) * Math.PI * 2,
         speed,
+        color: P_COLORS[i % 3],
+        glow:  P_GLOWS[i % 3],
         trail: [],
       };
     });
@@ -96,20 +100,20 @@ export default function HouseCanvas() {
       edgeIdx: i,
       t: rng(0, 1),
       speed: rng(0.00045, 0.00085),
-      color: Math.random() > 0.4 ? '#f5d06f' : '#ffffff',
+      color: (['#f5d06f', '#ffffff', '#7eb8f7', '#4a9eff'] as string[])[Math.floor(Math.random() * 4)],
     }));
 
     // ── Ripple rings ────────────────────────────────────────────────────────
-    type Ripple = { nodeIdx: number; r: number; maxR: number; alpha: number };
+    type Ripple = { nodeIdx: number; r: number; maxR: number; alpha: number; color: string; glow: string };
     const ripples: Ripple[] = [];
     let nextRippleAt = 800;
 
     // ── Orbiting sparks (around apex node 0 and chimney apex) ───────────────
-    type Spark = { nodeIdx: number; angle: number; orbitR: number; speed: number; r: number };
+    type Spark = { nodeIdx: number; angle: number; orbitR: number; speed: number; r: number; color: string; glow: string };
     const sparks: Spark[] = [
-      { nodeIdx: 0,  angle: 0,           orbitR: 18 * sc, speed: 0.0014, r: 1.8 },
-      { nodeIdx: 0,  angle: Math.PI,     orbitR: 18 * sc, speed: 0.0014, r: 1.2 },
-      { nodeIdx: 15, angle: Math.PI / 2, orbitR: 12 * sc, speed: 0.0022, r: 1.4 },
+      { nodeIdx: 0,  angle: 0,           orbitR: 18 * sc, speed: 0.0014, r: 1.8, color: '#fffde7', glow: '#f5d06f' },
+      { nodeIdx: 0,  angle: Math.PI,     orbitR: 18 * sc, speed: 0.0014, r: 1.2, color: '#7eb8f7', glow: '#4a9eff' },
+      { nodeIdx: 15, angle: Math.PI / 2, orbitR: 12 * sc, speed: 0.0022, r: 1.4, color: '#e8f4ff', glow: '#7eb8f7' },
     ];
 
     const ALL_DONE = H_EDGES.length * 55 + 500;
@@ -242,7 +246,9 @@ export default function HouseCanvas() {
       // ── 4. Ripple rings ──────────────────────────────────────────────────
       if (fullyDrawn && e > nextRippleAt) {
         const nodeIdx = Math.floor(Math.random() * S.length);
-        ripples.push({ nodeIdx, r: 0, maxR: (14 + Math.random() * 18) * sc, alpha: 0.7 });
+        const RING_PALETTES = [['#f5d06f','#c9a84c'],['#7eb8f7','#4a9eff'],['#e8f4ff','#7eb8f7']];
+        const rpc = RING_PALETTES[nodeIdx % 3];
+        ripples.push({ nodeIdx, r: 0, maxR: (14 + Math.random() * 18) * sc, alpha: 0.7, color: rpc[0], glow: rpc[1] });
         nextRippleAt = e + rng(600, 1400);
       }
       for (let i = ripples.length - 1; i >= 0; i--) {
@@ -253,9 +259,9 @@ export default function HouseCanvas() {
         const n = S[rp.nodeIdx];
         ctx.save();
         ctx.globalAlpha = rp.alpha;
-        ctx.strokeStyle = '#f5d06f';
+        ctx.strokeStyle = rp.color;
         ctx.lineWidth = 1.2;
-        ctx.shadowColor = '#c9a84c';
+        ctx.shadowColor = rp.glow;
         ctx.shadowBlur = 12;
         ctx.beginPath();
         ctx.arc(n.x, n.y, rp.r, 0, Math.PI * 2);
@@ -273,11 +279,11 @@ export default function HouseCanvas() {
           const sparkAlpha = 0.55 + 0.45 * Math.sin(e * 0.003 + sp.angle);
           ctx.save();
           ctx.globalAlpha = sparkAlpha;
-          ctx.shadowColor = '#f5d06f';
+          ctx.shadowColor = sp.glow;
           ctx.shadowBlur = 14;
           ctx.beginPath();
           ctx.arc(sx, sy, sp.r, 0, Math.PI * 2);
-          ctx.fillStyle = '#fffde7';
+          ctx.fillStyle = sp.color;
           ctx.fill();
           ctx.restore();
         }
@@ -303,7 +309,7 @@ export default function HouseCanvas() {
               const frac = ti / p.trail.length;
               ctx.save();
               ctx.globalAlpha = pFade * frac * 0.35;
-              ctx.strokeStyle = '#f5d06f';
+              ctx.strokeStyle = p.color;
               ctx.lineWidth = p.r * frac * 0.8;
               ctx.beginPath();
               ctx.moveTo(ta.x, ta.y);
@@ -323,7 +329,7 @@ export default function HouseCanvas() {
               const frac = 1 - Math.sqrt(dSq) / CONN;
               ctx.save();
               ctx.globalAlpha = pFade * frac * 0.22;
-              ctx.strokeStyle = '#c9a84c';
+              ctx.strokeStyle = p.color;
               ctx.lineWidth = 0.6;
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
@@ -344,7 +350,7 @@ export default function HouseCanvas() {
             if (dSq < lim) {
               ctx.save();
               ctx.globalAlpha = pFade * (1 - Math.sqrt(dSq) / Math.sqrt(lim)) * 0.14;
-              ctx.strokeStyle = 'rgba(255,248,220,0.9)';
+              ctx.strokeStyle = 'rgba(200,225,255,0.9)';
               ctx.lineWidth = 0.4;
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
@@ -360,11 +366,11 @@ export default function HouseCanvas() {
           const pulse = 0.5 + 0.5 * Math.sin(e * 0.0025 + p.ph);
           ctx.save();
           ctx.globalAlpha = pFade * (0.5 + 0.5 * pulse);
-          ctx.shadowColor = p.speed > 0.35 ? '#f5d06f' : '#fffde7';
+          ctx.shadowColor = p.glow;
           ctx.shadowBlur = p.speed > 0.35 ? 12 : 6;
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * (0.7 + 0.3 * pulse), 0, Math.PI * 2);
-          ctx.fillStyle = p.speed > 0.35 ? 'rgba(245,208,111,0.95)' : 'rgba(255,248,220,0.9)';
+          ctx.fillStyle = p.color;
           ctx.fill();
           ctx.restore();
         }

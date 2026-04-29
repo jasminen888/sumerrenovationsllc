@@ -38,14 +38,14 @@ const H_NODES: [number, number][] = [
 ];
 
 const H_EDGES: [number, number][] = [
-  [3, 4], [3, 5], [4, 6], [5, 6],                                  // chimney box
-  [5, 0], [6, 0],                                                   // chimney → apex
-  [0, 1], [0, 2],                                                   // roof slopes
-  [1, 7], [2, 8],                                                   // eave → wall corners
-  [7, 8], [7, 9], [8, 10], [9, 10],                                 // walls
-  [11, 15], [15, 12], [11, 13], [12, 14], [13, 14],                 // door + arch
-  [16, 17], [16, 18], [17, 19], [18, 19], [20, 21], [22, 23],       // left window
-  [24, 25], [24, 26], [25, 27], [26, 27], [28, 29], [30, 31],       // right window
+  [3, 4], [3, 5], [4, 6], [5, 6],
+  [5, 0], [6, 0],
+  [0, 1], [0, 2],
+  [1, 7], [2, 8],
+  [7, 8], [7, 9], [8, 10], [9, 10],
+  [11, 15], [15, 12], [11, 13], [12, 14], [13, 14],
+  [16, 17], [16, 18], [17, 19], [18, 19], [20, 21], [22, 23],
+  [24, 25], [24, 26], [25, 27], [26, 27], [28, 29], [30, 31],
 ];
 
 export default function HouseCanvas() {
@@ -65,42 +65,81 @@ export default function HouseCanvas() {
     const ox = (CW - 300 * sc) / 2;
     const oy = (CH - 340 * sc) / 2 + 8;
 
-    // Scaled structural node positions
     const S = H_NODES.map(([x, y]) => ({ x: ox + x * sc, y: oy + y * sc }));
 
-    // Floating plexus particles
-    type Particle = { x: number; y: number; vx: number; vy: number; r: number; ph: number };
     const rng = (a: number, b: number) => a + Math.random() * (b - a);
-    const particles: Particle[] = Array.from({ length: 22 }, (_, i) => ({
-      x: ox + rng(20, 280) * sc,
-      y: oy + rng(10, 320) * sc,
-      vx: (Math.random() - 0.5) * 0.22,
-      vy: (Math.random() - 0.5) * 0.22,
-      r: rng(0.7, 1.6),
-      ph: (i / 22) * Math.PI * 2,
+
+    // ── Floating plexus particles (50, varied) ──────────────────────────────
+    type Particle = {
+      x: number; y: number; vx: number; vy: number;
+      r: number; ph: number; speed: number;
+      trail: { x: number; y: number }[];
+    };
+    const particles: Particle[] = Array.from({ length: 50 }, (_, i) => {
+      const speed = rng(0.12, 0.55);
+      const angle = rng(0, Math.PI * 2);
+      return {
+        x: ox + rng(0, 300) * sc,
+        y: oy + rng(0, 340) * sc,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        r: rng(0.5, 2.0),
+        ph: (i / 50) * Math.PI * 2,
+        speed,
+        trail: [],
+      };
+    });
+
+    // ── Energy pulses — one per edge, staggered ─────────────────────────────
+    type Pulse = { edgeIdx: number; t: number; speed: number; color: string };
+    const pulses: Pulse[] = H_EDGES.map((_, i) => ({
+      edgeIdx: i,
+      t: rng(0, 1),
+      speed: rng(0.00045, 0.00085),
+      color: Math.random() > 0.4 ? '#f5d06f' : '#ffffff',
     }));
 
-    const CONN = 54 * sc;
-    const CONN_SQ = CONN * CONN;
+    // ── Ripple rings ────────────────────────────────────────────────────────
+    type Ripple = { nodeIdx: number; r: number; maxR: number; alpha: number };
+    const ripples: Ripple[] = [];
+    let nextRippleAt = 800;
+
+    // ── Orbiting sparks (around apex node 0 and chimney apex) ───────────────
+    type Spark = { nodeIdx: number; angle: number; orbitR: number; speed: number; r: number };
+    const sparks: Spark[] = [
+      { nodeIdx: 0,  angle: 0,           orbitR: 18 * sc, speed: 0.0014, r: 1.8 },
+      { nodeIdx: 0,  angle: Math.PI,     orbitR: 18 * sc, speed: 0.0014, r: 1.2 },
+      { nodeIdx: 15, angle: Math.PI / 2, orbitR: 12 * sc, speed: 0.0022, r: 1.4 },
+    ];
+
     const ALL_DONE = H_EDGES.length * 55 + 500;
+    const CONN = 60 * sc;
+    const CONN_SQ = CONN * CONN;
+    const TRAIL_LEN = 8;
 
     function frame(ts: number) {
       if (!t0) t0 = ts;
       const e = ts - t0;
       ctx.clearRect(0, 0, CW, CH);
 
-      // ── Edges: staggered draw-in ─────────────────────────
+      const fullyDrawn = e > ALL_DONE;
+
+      // ── 1. Draw edges ────────────────────────────────────────────────────
       for (let i = 0; i < H_EDGES.length; i++) {
         const [ai, bi] = H_EDGES[i];
         const prog = Math.min(Math.max((e - i * 55) / 380, 0), 1);
         if (prog <= 0) continue;
         const a = S[ai], b = S[bi];
+
+        // Breathing glow on completed edges
+        const breathe = fullyDrawn ? 0.45 + 0.2 * Math.sin(e * 0.0009 + i * 0.4) : Math.min(prog * 2, 1) * 0.5;
+
         ctx.save();
-        ctx.globalAlpha = Math.min(prog * 2, 1) * 0.55;
+        ctx.globalAlpha = breathe;
         ctx.strokeStyle = '#c9a84c';
-        ctx.lineWidth = 0.9;
-        ctx.shadowColor = 'rgba(201,168,76,0.75)';
-        ctx.shadowBlur = 8;
+        ctx.lineWidth = 1.1;
+        ctx.shadowColor = 'rgba(201,168,76,0.9)';
+        ctx.shadowBlur = fullyDrawn ? 10 : 6;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(a.x + (b.x - a.x) * prog, a.y + (b.y - a.y) * prog);
@@ -108,89 +147,224 @@ export default function HouseCanvas() {
         ctx.restore();
       }
 
-      // ── Nodes: fade-in + gentle pulse ────────────────────
+      // ── 2. Energy pulses racing along edges ──────────────────────────────
+      if (fullyDrawn) {
+        for (const pulse of pulses) {
+          pulse.t += pulse.speed;
+          if (pulse.t > 1) pulse.t -= 1;
+
+          const [ai, bi] = H_EDGES[pulse.edgeIdx];
+          const a = S[ai], b = S[bi];
+          const px = a.x + (b.x - a.x) * pulse.t;
+          const py = a.y + (b.y - a.y) * pulse.t;
+
+          // Comet tail drawn backwards along the edge
+          const tailLen = 0.22;
+          const t0tail = Math.max(0, pulse.t - tailLen);
+          const tx = a.x + (b.x - a.x) * t0tail;
+          const ty = a.y + (b.y - a.y) * t0tail;
+
+          const grad = ctx.createLinearGradient(tx, ty, px, py);
+          grad.addColorStop(0, 'rgba(245,208,111,0)');
+          grad.addColorStop(1, pulse.color === '#ffffff' ? 'rgba(255,255,255,0.85)' : 'rgba(245,208,111,0.9)');
+
+          ctx.save();
+          ctx.globalAlpha = 0.85;
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 2.0;
+          ctx.shadowColor = pulse.color;
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.moveTo(tx, ty);
+          ctx.lineTo(px, py);
+          ctx.stroke();
+          ctx.restore();
+
+          // Leading dot
+          ctx.save();
+          ctx.globalAlpha = 1;
+          ctx.shadowColor = pulse.color;
+          ctx.shadowBlur = 18;
+          ctx.beginPath();
+          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = pulse.color;
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      // ── 3. Structural nodes ──────────────────────────────────────────────
       for (let i = 0; i < S.length; i++) {
         const fadeIn = Math.min(Math.max((e - i * 35) / 220, 0), 1);
         if (fadeIn <= 0) continue;
         const n = S[i];
-        const pulse = 0.65 + 0.35 * Math.sin(e * 0.0019 + i * 0.6);
-        const r = (2.0 + 0.8 * pulse) * sc;
-        // Outer glow halo
+        const pulse = 0.6 + 0.4 * Math.sin(e * 0.002 + i * 0.7);
+        const r = (2.2 + 1.0 * pulse) * sc;
+
+        // Outer soft halo
         ctx.save();
-        ctx.globalAlpha = fadeIn * 0.22;
-        ctx.shadowColor = '#c9a84c';
-        ctx.shadowBlur = 16;
+        ctx.globalAlpha = fadeIn * 0.18;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, r * 2.4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(201,168,76,0.12)';
+        ctx.arc(n.x, n.y, r * 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(201,168,76,0.15)';
+        ctx.shadowColor = '#c9a84c';
+        ctx.shadowBlur = 22;
         ctx.fill();
         ctx.restore();
+
+        // Mid ring
+        ctx.save();
+        ctx.globalAlpha = fadeIn * (0.35 + 0.2 * pulse);
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r * 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(245,208,111,0.22)';
+        ctx.shadowColor = '#f5d06f';
+        ctx.shadowBlur = 14;
+        ctx.fill();
+        ctx.restore();
+
         // Core dot
         ctx.save();
-        ctx.globalAlpha = fadeIn * (0.8 + 0.2 * pulse);
-        ctx.shadowColor = '#f5e4a8';
-        ctx.shadowBlur = 10;
+        ctx.globalAlpha = fadeIn * (0.85 + 0.15 * pulse);
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = 16;
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = '#f5e4a8';
+        const coreGrad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r);
+        coreGrad.addColorStop(0, '#ffffff');
+        coreGrad.addColorStop(0.5, '#f5e4a8');
+        coreGrad.addColorStop(1, '#c9a84c');
+        ctx.fillStyle = coreGrad;
         ctx.fill();
         ctx.restore();
       }
 
-      // ── Plexus particles: fade in after house finishes ───
-      const pFade = Math.min((e - ALL_DONE) / 700, 1);
+      // ── 4. Ripple rings ──────────────────────────────────────────────────
+      if (fullyDrawn && e > nextRippleAt) {
+        const nodeIdx = Math.floor(Math.random() * S.length);
+        ripples.push({ nodeIdx, r: 0, maxR: (14 + Math.random() * 18) * sc, alpha: 0.7 });
+        nextRippleAt = e + rng(600, 1400);
+      }
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i];
+        rp.r += 0.55;
+        rp.alpha *= 0.956;
+        if (rp.alpha < 0.015) { ripples.splice(i, 1); continue; }
+        const n = S[rp.nodeIdx];
+        ctx.save();
+        ctx.globalAlpha = rp.alpha;
+        ctx.strokeStyle = '#f5d06f';
+        ctx.lineWidth = 1.2;
+        ctx.shadowColor = '#c9a84c';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, rp.r, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // ── 5. Orbiting sparks ───────────────────────────────────────────────
+      if (fullyDrawn) {
+        for (const sp of sparks) {
+          sp.angle += sp.speed * (e > 0 ? 1 : 0);
+          const n = S[sp.nodeIdx];
+          const sx = n.x + Math.cos(sp.angle + e * sp.speed) * sp.orbitR;
+          const sy = n.y + Math.sin(sp.angle + e * sp.speed) * sp.orbitR * 0.55;
+          const sparkAlpha = 0.55 + 0.45 * Math.sin(e * 0.003 + sp.angle);
+          ctx.save();
+          ctx.globalAlpha = sparkAlpha;
+          ctx.shadowColor = '#f5d06f';
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.arc(sx, sy, sp.r, 0, Math.PI * 2);
+          ctx.fillStyle = '#fffde7';
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      // ── 6. Plexus particles ──────────────────────────────────────────────
+      const pFade = Math.min((e - ALL_DONE) / 600, 1);
       if (pFade > 0) {
         for (const p of particles) {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 5 || p.x > CW - 5) p.vx *= -1;
-          if (p.y < 5 || p.y > CH - 5) p.vy *= -1;
-        }
-        // Particle → structural node lines
-        for (const p of particles) {
-          for (const n of S) {
-            const dx = p.x - n.x, dy = p.y - n.y;
-            const dSq = dx * dx + dy * dy;
-            if (dSq < CONN_SQ) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 2 || p.x > CW - 2) p.vx *= -1;
+          if (p.y < 2 || p.y > CH - 2) p.vy *= -1;
+
+          // Trail
+          p.trail.push({ x: p.x, y: p.y });
+          if (p.trail.length > TRAIL_LEN) p.trail.shift();
+
+          // Draw comet trail for faster particles
+          if (p.speed > 0.28 && p.trail.length > 2) {
+            for (let ti = 1; ti < p.trail.length; ti++) {
+              const ta = p.trail[ti - 1], tb = p.trail[ti];
+              const frac = ti / p.trail.length;
               ctx.save();
-              ctx.globalAlpha = pFade * (1 - Math.sqrt(dSq) / CONN) * 0.18;
-              ctx.strokeStyle = '#c9a84c';
-              ctx.lineWidth = 0.5;
+              ctx.globalAlpha = pFade * frac * 0.35;
+              ctx.strokeStyle = '#f5d06f';
+              ctx.lineWidth = p.r * frac * 0.8;
               ctx.beginPath();
-              ctx.moveTo(p.x, p.y); ctx.lineTo(n.x, n.y);
+              ctx.moveTo(ta.x, ta.y);
+              ctx.lineTo(tb.x, tb.y);
               ctx.stroke();
               ctx.restore();
             }
           }
         }
+
+        // Particle → node connection lines
+        for (const p of particles) {
+          for (const n of S) {
+            const dx = p.x - n.x, dy = p.y - n.y;
+            const dSq = dx * dx + dy * dy;
+            if (dSq < CONN_SQ) {
+              const frac = 1 - Math.sqrt(dSq) / CONN;
+              ctx.save();
+              ctx.globalAlpha = pFade * frac * 0.22;
+              ctx.strokeStyle = '#c9a84c';
+              ctx.lineWidth = 0.6;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(n.x, n.y);
+              ctx.stroke();
+              ctx.restore();
+            }
+          }
+        }
+
         // Particle → particle lines
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const a = particles[i], b = particles[j];
             const dx = a.x - b.x, dy = a.y - b.y;
             const dSq = dx * dx + dy * dy;
-            const lim = CONN_SQ * 0.6;
+            const lim = CONN_SQ * 0.55;
             if (dSq < lim) {
               ctx.save();
-              ctx.globalAlpha = pFade * (1 - Math.sqrt(dSq) / Math.sqrt(lim)) * 0.13;
+              ctx.globalAlpha = pFade * (1 - Math.sqrt(dSq) / Math.sqrt(lim)) * 0.14;
               ctx.strokeStyle = 'rgba(255,248,220,0.9)';
-              ctx.lineWidth = 0.45;
+              ctx.lineWidth = 0.4;
               ctx.beginPath();
-              ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
               ctx.stroke();
               ctx.restore();
             }
           }
         }
+
         // Particle dots
         for (const p of particles) {
-          const pulse = 0.55 + 0.45 * Math.sin(e * 0.002 + p.ph);
+          const pulse = 0.5 + 0.5 * Math.sin(e * 0.0025 + p.ph);
           ctx.save();
-          ctx.globalAlpha = pFade * pulse * 0.78;
-          ctx.shadowColor = '#fffde7';
-          ctx.shadowBlur = 7;
+          ctx.globalAlpha = pFade * (0.5 + 0.5 * pulse);
+          ctx.shadowColor = p.speed > 0.35 ? '#f5d06f' : '#fffde7';
+          ctx.shadowBlur = p.speed > 0.35 ? 12 : 6;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255,248,220,0.95)';
+          ctx.arc(p.x, p.y, p.r * (0.7 + 0.3 * pulse), 0, Math.PI * 2);
+          ctx.fillStyle = p.speed > 0.35 ? 'rgba(245,208,111,0.95)' : 'rgba(255,248,220,0.9)';
           ctx.fill();
           ctx.restore();
         }
@@ -206,10 +380,10 @@ export default function HouseCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      width={380}
-      height={440}
+      width={420}
+      height={480}
       aria-hidden="true"
-      style={{ opacity: 0.9 }}
+      style={{ opacity: 0.95 }}
     />
   );
 }

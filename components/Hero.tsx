@@ -23,7 +23,7 @@ const slides = [
   },
   {
     id: 3,
-    image: '/kitchen2.jpg',
+    image: '/kitchen2.jpeg',
     imageAlt: 'Modern kitchen remodel with custom cabinetry and stone countertops',
     headline: 'Beautiful Kitchen Renovations Built to Last',
   },
@@ -41,7 +41,7 @@ const slides = [
   },
   {
     id: 6,
-    image: '/modernhome4.jpg',
+    image: '/modernhome4.jpeg',
     imageAlt: 'Modern home renovation with complete interior transformation',
     headline: 'Complete Home Transformations Done Right',
   },
@@ -383,8 +383,8 @@ export default function Hero() {
             className="object-cover object-center"
             priority={i === 0}
             loading={i === 0 ? undefined : 'lazy'}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
-            quality={80}
+            sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
+            quality={100}
           />
         </div>
       ))}

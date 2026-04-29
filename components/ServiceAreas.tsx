@@ -1,4 +1,5 @@
 'use client';
+import SectionAccent from './SectionAccent';
 
 const cities = [
   { name: 'Portland, OR', description: 'Our home base & primary service area' },
@@ -28,10 +29,13 @@ export default function ServiceAreas() {
             <span className="w-1.5 h-1.5 bg-gold-500 rounded-full" />
             <span className="text-gold-700 text-sm font-medium">Service Areas</span>
           </div>
-          <h2 className="section-title mb-4">
-            Proudly Serving the{' '}
-            <span className="text-gold-500">Greater Portland Area</span>
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
+            <SectionAccent />
+            <h2 className="section-title">
+              Proudly Serving the{' '}
+              <span className="text-gold-500">Greater Portland Area</span>
+            </h2>
+          </div>
           <p className="section-subtitle mx-auto">
             Sumer Renovations LLC provides high-quality home renovation and remodeling services across
             the Portland metro area and surrounding cities.

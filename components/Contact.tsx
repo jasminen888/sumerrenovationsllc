@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import SectionAccent from './SectionAccent';
 
 type FormData = {
   fullName: string;
@@ -178,10 +179,13 @@ export default function Contact() {
             <span className="w-1.5 h-1.5 bg-gold-400 rounded-full" />
             <span className="text-gold-300 text-sm font-medium tracking-wide">Get In Touch</span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">
-            Ready to Start Your{' '}
-            <span className="text-gold-400">Renovation?</span>
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
+            <SectionAccent />
+            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-white">
+              Ready to Start Your{' '}
+              <span className="text-gold-400">Renovation?</span>
+            </h2>
+          </div>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Contact us today for a free consultation and estimate. We&apos;d love to bring your vision to life.
           </p>

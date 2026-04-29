@@ -1,5 +1,6 @@
 'use client';
 import HouseCanvas from './HouseCanvas';
+import SectionAccent from './SectionAccent';
 
 const features = [
   {
@@ -140,7 +141,9 @@ export default function WhyChooseUs() {
               <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: '#c9a84c' }}>Why Choose Us</span>
             </div>
 
-            <h2 className="font-black text-white leading-[1.08] mb-8" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)' }}>
+            <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5 mb-8">
+              <SectionAccent />
+              <h2 className="font-black text-white leading-[1.08]" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)' }}>
               The Sumer<br />
               Renovations{' '}
               <span style={{
@@ -151,7 +154,8 @@ export default function WhyChooseUs() {
               }}>
                 Difference
               </span>
-            </h2>
+              </h2>
+            </div>
 
             <p className="text-lg leading-relaxed mb-4" style={{ color: 'rgba(200,214,230,0.75)' }}>
               With years of experience transforming homes across the Portland metro area, we&apos;ve

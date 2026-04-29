@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import SectionAccent from './SectionAccent';
 
 const PROJECT_TYPES = [
   { label: 'Kitchen Remodel', icon: '🍳', min: 20000, max: 80000 },
@@ -50,9 +51,12 @@ export default function EstimateCalculator() {
             <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
             <span className="text-sm font-medium" style={{ color: '#f5d06f' }}>Instant Estimate</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white mb-3">
-            What Will Your Renovation <span style={{ color: '#c9a84c' }}>Cost?</span>
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-3">
+            <SectionAccent />
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+              What Will Your Renovation <span style={{ color: '#c9a84c' }}>Cost?</span>
+            </h2>
+          </div>
           <p className="text-white/60 max-w-xl mx-auto">Select your project type, size, and finish level to get an instant ballpark estimate — no sign-up needed.</p>
         </div>
 

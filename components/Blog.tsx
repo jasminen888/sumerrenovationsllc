@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SectionAccent from './SectionAccent';
 
 const posts = [
   {
@@ -90,12 +91,15 @@ export default function Blog() {
               <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
               <span className="text-gold-300 text-xs font-semibold tracking-[0.2em] uppercase">Renovation Insights</span>
             </div>
-            <h2 className="font-serif font-bold text-4xl sm:text-5xl text-white leading-tight">
-              From Our{' '}
-              <span style={{ background: 'linear-gradient(90deg,#c9a84c,#f5d06f)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Blog
-              </span>
-            </h2>
+            <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+              <SectionAccent />
+              <h2 className="font-serif font-bold text-4xl sm:text-5xl text-white leading-tight">
+                From Our{' '}
+                <span style={{ background: 'linear-gradient(90deg,#c9a84c,#f5d06f)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                  Blog
+                </span>
+              </h2>
+            </div>
           </div>
         </div>
 

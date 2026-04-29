@@ -1,4 +1,5 @@
 import BeforeAfter from './BeforeAfter';
+import SectionAccent from './SectionAccent';
 
 const projects = [
   {
@@ -64,9 +65,10 @@ export default function Projects() {
             <span className="w-1.5 h-1.5 bg-gold-400 rounded-full" />
             <span className="text-gold-300 text-sm font-medium">Our Portfolio</span>
           </div>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Featured Projects
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
+            <SectionAccent />
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white">Featured Projects</h2>
+          </div>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             See the quality and craftsmanship behind our work. Every project tells a story of transformation.
           </p>

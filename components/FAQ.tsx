@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import SectionAccent from './SectionAccent';
 
 const faqs = [
   {
@@ -96,9 +97,10 @@ export default function FAQ() {
           <p className="text-xs font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#c9a84c' }}>
             Got Questions?
           </p>
-          <h2 className="font-serif font-bold text-3xl sm:text-4xl text-white mb-4">
-            Frequently Asked Questions
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
+            <SectionAccent />
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl text-white">Frequently Asked Questions</h2>
+          </div>
           <p className="text-white/50 text-base max-w-xl mx-auto">
             Everything you need to know before starting your renovation project.
           </p>

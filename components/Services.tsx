@@ -1,4 +1,5 @@
 'use client';
+import SectionAccent from './SectionAccent';
 
 const services = [
   {
@@ -108,11 +109,14 @@ export default function Services() {
             <span className="w-1.5 h-1.5 bg-gold-500 rounded-full" />
             <span className="text-gold-700 text-sm font-medium">Our Services</span>
           </div>
-          <h2 className="section-title mb-4">
-            Expert Renovation Services
-            <br />
-            <span className="text-gold-500">Tailored for Your Home</span>
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
+            <SectionAccent />
+            <h2 className="section-title">
+              Expert Renovation Services
+              <br />
+              <span className="text-gold-500">Tailored for Your Home</span>
+            </h2>
+          </div>
           <p className="section-subtitle mx-auto">
             From kitchens to complete home transformations, we deliver exceptional craftsmanship
             and lasting results on every project.

@@ -1,3 +1,5 @@
+import SectionAccent from './SectionAccent';
+
 const testimonials = [
   {
     name: 'Sarah & Michael Thompson',
@@ -82,9 +84,10 @@ export default function Testimonials() {
             <span className="w-1.5 h-1.5 bg-gold-500 rounded-full" />
             <span className="text-gold-700 text-sm font-medium">Client Testimonials</span>
           </div>
-          <h2 className="section-title mb-4">
-            What Our Clients Say
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
+            <SectionAccent />
+            <h2 className="section-title">What Our Clients Say</h2>
+          </div>
           <p className="section-subtitle mx-auto">
             Don&apos;t just take our word for it. Here&apos;s what homeowners across Portland and beyond have experienced.
           </p>

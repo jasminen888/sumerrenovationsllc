@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import SectionAccent from './SectionAccent';
 
 const perks = [
   {
@@ -79,18 +80,19 @@ export default function Schedule() {
             </span>
           </div>
 
-          <h2
-            className="font-serif font-bold text-4xl sm:text-5xl text-white leading-tight mb-5"
-          >
-            Book Your{' '}
-            <span style={{
-              background: 'linear-gradient(90deg, #c9a84c, #f5d06f)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              Free Consultation
-            </span>
-          </h2>
+          <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-5">
+            <SectionAccent />
+            <h2 className="font-serif font-bold text-4xl sm:text-5xl text-white leading-tight">
+              Book Your{' '}
+              <span style={{
+                background: 'linear-gradient(90deg, #c9a84c, #f5d06f)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}>
+                Free Consultation
+              </span>
+            </h2>
+          </div>
 
           <p className="text-lg max-w-xl mx-auto leading-relaxed" style={{ color: 'rgba(180,205,235,0.75)' }}>
             Pick a date and time that works for you. We&apos;ll review your project and map out the next steps — no pressure, no cost.

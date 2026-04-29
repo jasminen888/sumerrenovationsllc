@@ -289,6 +289,36 @@
   background: #b8952f;
 }
 
+/* ── Section accent: animated gold line with traveling dot ───────────── */
+.section-accent {
+  display: inline-flex;
+  position: relative;
+  width: 52px;
+  height: 2px;
+  flex-shrink: 0;
+  align-self: center;
+  border-radius: 9999px;
+  background: linear-gradient(to right, transparent, #c9a84c 22%, #f5d06f 52%, #c9a84c 78%, transparent);
+}
+.section-accent::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffbe6 0%, #f5d06f 45%, #c9a84c 100%);
+  box-shadow: 0 0 8px rgba(245, 208, 111, 0.95), 0 0 18px rgba(201, 168, 76, 0.55);
+  animation: dot-travel 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes dot-travel {
+  0%   { left: -4px; opacity: 0; }
+  8%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { left: calc(100% - 5px); opacity: 0; }
+}
+
 /* Calendly embed overrides */
 .calendly-inline-widget {
   min-height: 900px;

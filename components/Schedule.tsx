@@ -52,37 +52,16 @@ export default function Schedule() {
     <section
       id="schedule"
       className="relative py-28 overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #040d1a 0%, #071220 40%, #0a1628 100%)' }}
+      style={{ background: 'linear-gradient(160deg, #152843 0%, #1a3050 50%, #152843 100%)' }}
     >
-      {/* ── Background glows ── */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div style={{
-          position: 'absolute', top: '-10%', left: '50%', transform: 'translateX(-50%)',
-          width: 900, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(201,168,76,0.09) 0%, transparent 65%)',
-          filter: 'blur(40px)',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-5%', left: '10%',
-          width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }} />
-        <div style={{
-          position: 'absolute', top: '20%', right: '5%',
-          width: 400, height: 400, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(56,189,248,0.04) 0%, transparent 70%)',
-          filter: 'blur(50px)',
-        }} />
-      </div>
-
-      {/* ── Subtle grid ── */}
+      {/* ── Honeycomb hex pattern ── */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.022]"
+        className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: 'linear-gradient(rgba(201,168,76,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104'%3E%3Cpolygon points='30,2 58,17 58,47 30,62 2,47 2,17' fill='none' stroke='%23ffffff' stroke-width='1.2'/%3E%3Cpolygon points='30,62 58,77 58,107 30,122 2,107 2,77' fill='none' stroke='%23ffffff' stroke-width='1.2'/%3E%3C/svg%3E")`,
+          backgroundSize: '60px 104px',
+          opacity: 0.09,
         }}
       />
 
@@ -95,7 +74,7 @@ export default function Schedule() {
             style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.35)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#c9a84c' }} />
-            <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: '#f5d06f' }}>
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: '#c9d8f0' }}>
               Free Consultation
             </span>
           </div>
@@ -113,7 +92,7 @@ export default function Schedule() {
             </span>
           </h2>
 
-          <p className="text-lg max-w-xl mx-auto leading-relaxed" style={{ color: 'rgba(200,214,230,0.65)' }}>
+          <p className="text-lg max-w-xl mx-auto leading-relaxed" style={{ color: 'rgba(180,205,235,0.75)' }}>
             Pick a date and time that works for you. We&apos;ll review your project and map out the next steps — no pressure, no cost.
           </p>
 

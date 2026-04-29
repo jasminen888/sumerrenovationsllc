@@ -511,13 +511,13 @@ export default function Footer() {
 
       {/* Powered by */}
       <div className="relative z-10 border-t border-white/5 py-3 text-center">
-        <p className="text-xs text-white/60">
+        <p className="text-sm text-white/60">
           Powered by{' '}
           <a
             href="https://www.webxdesignstudio.net/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/80 font-semibold hover:text-gold-400 transition-colors duration-300"
+            className="webx-brand"
           >
             WebXDesign Studio
           </a>

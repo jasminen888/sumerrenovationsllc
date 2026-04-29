@@ -501,7 +501,7 @@ export default function Footer() {
           <p className="text-white/70 text-sm font-bold text-center">
             Licensed &bull; Bonded &bull; Insured &bull; Portland, OR
           </p>
-          <div className="flex gap-4 text-xs text-white/70">
+          <div className="flex gap-4 text-sm font-bold text-white/70">
             <Link href="/privacy" className="hover:text-gold-400 transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-gold-400 transition-colors">Terms</Link>
             <Link href="/sitemap" className="hover:text-gold-400 transition-colors">Sitemap</Link>

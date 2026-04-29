@@ -11,21 +11,45 @@ const DESCRIPTION =
 const slides = [
   {
     id: 1,
-    image: '/kitchen1.jpeg',
+    image: '/kitchen1.jpg',
     imageAlt: 'Luxury kitchen renovation with premium finishes and modern design',
     headline: 'Transform Your Home with Expert Renovation',
   },
   {
     id: 2,
+    image: '/kitchen.jpg',
+    imageAlt: 'Stunning kitchen remodel with modern design and quality craftsmanship',
+    headline: 'Stunning Kitchens Designed for Modern Living',
+  },
+  {
+    id: 3,
     image: '/kitchen2.jpg',
     imageAlt: 'Modern kitchen remodel with custom cabinetry and stone countertops',
     headline: 'Beautiful Kitchen Renovations Built to Last',
   },
   {
-    id: 3,
-    image: '/kitchen3.jpeg',
+    id: 4,
+    image: '/kitchen3.jpg',
     imageAlt: 'Custom kitchen renovation showcasing expert craftsmanship',
     headline: 'Elegant Kitchen Designs Crafted to Perfection',
+  },
+  {
+    id: 5,
+    image: '/kitchen4.jpg',
+    imageAlt: 'Luxury custom kitchen with high-end finishes and modern layout',
+    headline: 'Luxury Kitchens Built to Impress',
+  },
+  {
+    id: 6,
+    image: '/modernhome4.jpg',
+    imageAlt: 'Modern home renovation with complete interior transformation',
+    headline: 'Complete Home Transformations Done Right',
+  },
+  {
+    id: 7,
+    image: '/bathroom.jpg',
+    imageAlt: 'Beautiful bathroom renovation with spa-quality finishes',
+    headline: 'Beautiful Bathrooms Crafted with Care',
   },
 ];
 

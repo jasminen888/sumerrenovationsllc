@@ -30,7 +30,7 @@ export default function ServiceAreas() {
             <span className="text-gold-700 text-sm font-medium">Service Areas</span>
           </div>
           <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
-            <SectionAccent />
+            <SectionAccent variant="blue" />
             <h2 className="section-title">
               Proudly Serving the{' '}
               <span className="text-gold-500">Greater Portland Area</span>

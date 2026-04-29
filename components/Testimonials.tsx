@@ -85,7 +85,7 @@ export default function Testimonials() {
             <span className="text-gold-700 text-sm font-medium">Client Testimonials</span>
           </div>
           <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
-            <SectionAccent />
+            <SectionAccent variant="blue" />
             <h2 className="section-title">What Our Clients Say</h2>
           </div>
           <p className="section-subtitle mx-auto">

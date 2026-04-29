@@ -110,7 +110,7 @@ export default function Services() {
             <span className="text-gold-700 text-sm font-medium">Our Services</span>
           </div>
           <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
-            <SectionAccent />
+            <SectionAccent variant="blue" />
             <h2 className="section-title">
               Expert Renovation Services
               <br />

@@ -86,7 +86,7 @@ export default function Blog() {
 
         {/* Section header */}
         <div
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14 transition-all duration-700"
+          className="mb-14 transition-all duration-700"
           style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(24px)' }}
         >
           <div>
@@ -102,16 +102,6 @@ export default function Blog() {
               </span>
             </h2>
           </div>
-          <button
-            onClick={scrollToContact}
-            className="group inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:bg-gold-500/10"
-            style={{ border: '1px solid rgba(201,168,76,0.4)', color: '#c9a84c' }}
-          >
-            Get in Touch
-            <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
         </div>
 
         {/* Uniform 4-card grid */}

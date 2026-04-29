@@ -382,7 +382,7 @@ export default function Hero() {
             fill
             className="object-cover object-center"
             priority={i === 0}
-            loading={i === 0 ? 'eager' : 'lazy'}
+            loading={i === 0 ? undefined : 'lazy'}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
             quality={80}
           />

@@ -360,7 +360,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full aspect-[16/9] min-h-[320px] max-h-screen flex items-center justify-center overflow-hidden"
+      className="relative w-full aspect-[16/9] min-h-[480px] max-h-[100dvh] flex items-center justify-center overflow-hidden"
       aria-label="Hero slideshow"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

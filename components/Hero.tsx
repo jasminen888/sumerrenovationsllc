@@ -456,7 +456,7 @@ export default function Hero() {
           )}
 
           {/* CTA buttons */}
-          <div className="flex flex-wrap items-center gap-4 hero-item" style={{ animationDelay: '360ms' }}>
+          <div className="hidden sm:flex flex-wrap items-center gap-4 hero-item" style={{ animationDelay: '360ms' }}>
             <button
               onClick={() => scrollTo('#contact')}
               className="btn-primary text-base px-8 py-4 shadow-lg shadow-gold-500/30"

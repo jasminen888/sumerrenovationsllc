@@ -62,14 +62,14 @@ export default function Projects() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-400/30 rounded-full px-4 py-1.5 mb-4">
-            <span className="w-1.5 h-1.5 bg-gold-400 rounded-full" />
-            <span className="text-gold-300 text-sm font-medium">Our Portfolio</span>
+            <span className="w-1.5 h-1.5 bg-white rounded-full" />
+            <span className="text-white text-xl font-medium">Our Portfolio</span>
           </div>
           <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
             <SectionAccent />
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white">Featured Projects</h2>
+            <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-white">Featured Projects</h2>
           </div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-white text-3xl max-w-2xl mx-auto">
             See the quality and craftsmanship behind our work. Every project tells a story of transformation.
           </p>
         </div>
@@ -97,14 +97,14 @@ export default function Projects() {
 
               {/* Overlay content */}
               <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="inline-block bg-gold-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit">
+                <span className="inline-block bg-gold-500 text-white text-lg font-semibold px-3 py-1 rounded-full mb-3 w-fit">
                   {project.category}
                 </span>
-                <h3 className="font-serif text-xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-white/70 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-20 overflow-hidden">
+                <h3 className="font-serif text-4xl font-bold text-white mb-2">{project.title}</h3>
+                <p className="text-white text-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
                   {project.description}
                 </p>
-                <button className="mt-3 flex items-center gap-1.5 bg-gold-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                <button className="mt-3 flex items-center gap-1.5 bg-gold-500 text-white text-xl font-semibold px-4 py-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                   View Project
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -117,7 +117,7 @@ export default function Projects() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <p className="text-gray-400 mb-4">Ready to start your own transformation?</p>
+          <p className="text-white text-3xl mb-4">Ready to start your own transformation?</p>
           <a href="#contact" className="btn-primary">
             Start Your Project Today
           </a>

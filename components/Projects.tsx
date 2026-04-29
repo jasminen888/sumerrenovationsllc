@@ -5,19 +5,19 @@ const projects = [
   {
     title: 'Modern Kitchen Transformation',
     category: 'Kitchen Remodeling',
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop',
+    image: '/kitchenremodel.jpg',
     description: 'Complete kitchen gut and remodel with custom white shaker cabinets, quartz countertops, and premium appliances.',
   },
   {
     title: 'Luxury Master Bathroom',
     category: 'Bathroom Remodeling',
-    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=800&auto=format&fit=crop',
+    image: '/bathroom.jpg',
     description: 'Spa-inspired master bathroom with double vanity, walk-in rain shower, and heated tile floors.',
   },
   {
     title: 'Full Home Renovation',
     category: 'Home Renovation',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+    image: '/modernhome1.jpg',
     description: 'Complete interior renovation of a 1960s home into a stunning modern living space.',
   },
   {
@@ -29,13 +29,13 @@ const projects = [
   {
     title: 'Hardwood Floor Installation',
     category: 'Flooring',
-    image: 'https://images.unsplash.com/photo-1594844532765-b74c56e80d5e?q=80&w=800&auto=format&fit=crop',
+    image: '/floor.jpg',
     description: 'Premium white oak hardwood flooring installed throughout a 2,400 sq ft home.',
   },
   {
     title: 'Custom Deck & Outdoor Living',
     category: 'Custom Projects',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=800&auto=format&fit=crop',
+    image: '/deck.jpg',
     description: 'Multi-level composite deck with built-in seating, lighting, and outdoor kitchen area.',
   },
 ];

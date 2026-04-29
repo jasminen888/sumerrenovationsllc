@@ -17,7 +17,7 @@ const services = [
     title: 'Bathroom Remodeling',
     description:
       'Create a luxurious spa-like bathroom retreat. Custom tile work, vanities, walk-in showers, and modern fixtures.',
-    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=800&auto=format&fit=crop',
+    image: '/bathroom.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />

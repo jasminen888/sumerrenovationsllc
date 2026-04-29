@@ -10,7 +10,7 @@ const posts = [
     date: 'May 12, 2025',
     title: '10 Kitchen Renovation Trends Dominating Portland Homes in 2026',
     excerpt: 'From waterfall quartz islands to hidden appliance panels, discover the design choices Portland homeowners are loving right now — and which ones offer the best resale value.',
-    image: '/kitchen1.jpeg',
+    image: '/kitchen1.jpg',
     tags: ['Kitchen', 'Design', 'Trends'],
   },
   {
@@ -30,7 +30,7 @@ const posts = [
     date: 'Apr 5, 2025',
     title: '7 Red Flags to Watch for When Hiring a Home Renovation Contractor',
     excerpt: 'Before you sign anything, read this. We share the honest warning signs that separate legitimate contractors from those who will leave your project unfinished — based on real stories from Portland homeowners.',
-    image: '/kitchen3.jpeg',
+    image: '/kitchen3.jpg',
     tags: ['Hiring', 'Tips', 'Contractor'],
   },
 ];

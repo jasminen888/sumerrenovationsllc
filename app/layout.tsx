@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sumerrenovations.com'),
+  metadataBase: new URL('https://sumerrenovationsllc.vercel.app'),
   title: 'Sumer Renovations LLC | Home Renovation & Remodeling Services in Portland, OR',
   description:
     'Sumer Renovations LLC provides professional home renovation, remodeling, construction, kitchen, bathroom, exterior, flooring, roofing, and custom home improvement services in Portland, Beaverton, Hillsboro, Lake Oswego, Wilsonville, Vancouver WA, Eugene, and Corvallis.',
@@ -66,21 +66,12 @@ export const metadata: Metadata = {
     url: 'https://sumerrenovations.com',
     locale: 'en_US',
     siteName: 'Sumer Renovations LLC',
-    images: [
-      {
-        url: '/sumerrenovations_logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Sumer Renovations LLC — Home Renovation in Portland, OR',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sumer Renovations LLC — Portland Home Renovation',
     description:
       'Expert kitchen, bathroom & full home renovations in Portland OR and surrounding areas. Free quotes.',
-    images: ['/sumerrenovations_logo.png'],
   },
   robots: {
     index: true,

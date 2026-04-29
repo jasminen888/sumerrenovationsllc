@@ -220,12 +220,18 @@ export default function Hero() {
         aria-live="polite"
       >
         <div className="max-w-3xl text-center sm:text-left">
-          {/* Label badge */}
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-400/40 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm hero-badge" style={{ animationDelay: '0ms' }}>
-            <span className="w-2 h-2 bg-gold-400 rounded-full animate-pulse" />
-            <span className="text-gold-300 text-sm font-medium tracking-widest uppercase">
-              {LABEL}
-            </span>
+          {/* Mobile-only: Schedule Appointment CTA */}
+          <div className="sm:hidden mb-6 hero-badge" style={{ animationDelay: '0ms' }}>
+            <button
+              onClick={() => scrollTo('#schedule')}
+              className="inline-flex items-center gap-2 btn-primary text-sm px-6 py-3 shadow-lg shadow-gold-500/30"
+              aria-label="Schedule an appointment"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Schedule Appointment
+            </button>
           </div>
 
           {/* Headline */}

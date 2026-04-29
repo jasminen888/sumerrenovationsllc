@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     canonical: 'https://sumerrenovations.com',
   },
   openGraph: {
-    title: 'Sumer Renovations LLC | Home Renovation & Remodeling in Portland, OR',
+    title: 'Sumer Renovations LLC — Portland Home Renovation',
     description:
       'Professional home renovation, remodeling, and construction services in Portland and surrounding areas. Free quotes available.',
     type: 'website',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sumer Renovations LLC | Home Renovation in Portland, OR',
+    title: 'Sumer Renovations LLC — Portland Home Renovation',
     description:
       'Expert kitchen, bathroom & full home renovations in Portland OR and surrounding areas. Free quotes.',
     images: ['/sumerrenovations_logo.png'],

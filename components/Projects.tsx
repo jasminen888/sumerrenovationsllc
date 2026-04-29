@@ -45,7 +45,7 @@ export default function Projects() {
     <section
       id="projects"
       className="py-24 relative overflow-hidden"
-      style={{ backgroundColor: '#d4a017' }}
+      style={{ backgroundColor: '#e0b535' }}
     >
       {/* Honeycomb SVG pattern overlay */}
       <div

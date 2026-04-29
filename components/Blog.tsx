@@ -5,25 +5,25 @@ import Link from 'next/link';
 
 const posts = [
   {
-    slug: 'kitchen-renovation-trends-2026',
+    slug: 'kitchen-renovation-trends-portland',
     category: 'Kitchen',
     readTime: '5 min read',
     date: 'May 12, 2025',
-    title: '10 Kitchen Renovation Trends Dominating Portland Homes in 2026',
+    title: 'Top Kitchen Renovation Trends Dominating Portland Homes in 2025',
     excerpt: 'From waterfall quartz islands to hidden appliance panels, discover the design choices Portland homeowners are loving right now — and which ones offer the best resale value.',
     image: '/kitchen1.jpg',
   },
   {
-    slug: 'bathroom-remodel-roi',
+    slug: 'bathroom-remodel-roi-portland',
     category: 'Bathroom',
     readTime: '6 min read',
     date: 'Apr 28, 2025',
-    title: "What's the Real ROI of a Bathroom Remodel in the Portland Metro?",
+    title: "What's the Real ROI of a Bathroom Remodel in Portland?",
     excerpt: 'Thinking of remodeling your bathroom before selling? We break down which upgrades consistently return 70–85% of their cost — and which ones buyers in the PNW actually care about.',
     image: '/kitchen2.jpeg',
   },
   {
-    slug: 'how-to-choose-a-contractor',
+    slug: 'hiring-renovation-contractor-red-flags',
     category: 'Guides',
     readTime: '7 min read',
     date: 'Apr 5, 2025',
@@ -32,7 +32,7 @@ const posts = [
     image: '/kitchen3.jpg',
   },
   {
-    slug: 'full-home-renovation-guide',
+    slug: 'full-home-renovation-planning-portland',
     category: 'Renovation',
     readTime: '8 min read',
     date: 'Mar 18, 2025',
@@ -48,11 +48,6 @@ const categoryStyle: Record<string, { bg: string; text: string }> = {
   Guides:     { bg: 'rgba(107,189,142,0.18)', text: '#6ee7b7' },
   Renovation: { bg: 'rgba(192,132,252,0.18)', text: '#d8b4fe' },
 };
-
-function scrollToContact() {
-  const el = document.getElementById('contact');
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
 
 export default function Blog() {
   const ref = useRef<HTMLDivElement>(null);
@@ -156,8 +151,8 @@ export default function Blog() {
                   {post.excerpt}
                 </p>
                 {/* Button always at bottom */}
-                <button
-                  onClick={scrollToContact}
+                <Link
+                  href={`/blog/${post.slug}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase group/link transition-colors duration-200 mt-auto w-fit"
                   style={{ color: '#c9a84c' }}
                 >
@@ -165,7 +160,7 @@ export default function Blog() {
                   <svg className="w-3 h-3 transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </button>
+                </Link>
               </div>
 
               {/* Gold hover border glow */}

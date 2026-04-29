@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import QRCode from 'react-qr-code';
 
 // ─── Wave terrain plexus canvas ───────────────────────────────────────────────
 
@@ -296,6 +297,23 @@ export default function Footer() {
                   <path d="M12.5 2C6.702 2 2 6.702 2 12.5S6.702 23 12.5 23 23 18.298 23 12.5 18.298 2 12.5 2zm1.01 15.05l-3.517 1.288c-.4.147-.84-.06-.988-.46L7.5 13.5c-.148-.4.06-.84.46-.988l3.517-1.288c.4-.147.84.06.988.46l1.504 4.378c.148.4-.06.84-.46.988z" />
                 </svg>
               </SocialIcon>
+            </div>
+
+            {/* QR Code */}
+            <div
+              className="mt-6 inline-flex flex-col items-center gap-2 p-3 rounded-2xl"
+              style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.3)' }}
+            >
+              <div className="p-2 rounded-xl bg-white shadow-[0_0_20px_rgba(201,168,76,0.4)]">
+                <QRCode
+                  value="https://sumerrenovations.com"
+                  size={96}
+                  fgColor="#040d1a"
+                  bgColor="#ffffff"
+                  level="H"
+                />
+              </div>
+              <p className="text-[11px] font-medium tracking-wide text-gold-400 uppercase">Scan to visit our site</p>
             </div>
           </div>
 

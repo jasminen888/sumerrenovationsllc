@@ -104,12 +104,7 @@ export default function Projects() {
                 <p className="text-white text-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
                   {project.description}
                 </p>
-                <button className="mt-3 flex items-center gap-1.5 bg-gold-500 text-white text-xl font-semibold px-4 py-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                  View Project
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+
               </div>
             </article>
           ))}

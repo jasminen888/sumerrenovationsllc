@@ -63,13 +63,13 @@ export default function Projects() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-400/30 rounded-full px-4 py-1.5 mb-4">
             <span className="w-1.5 h-1.5 bg-white rounded-full" />
-            <span className="text-white text-xl font-medium">Our Portfolio</span>
+            <span className="text-white text-sm font-medium">Our Portfolio</span>
           </div>
           <div className="inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 mb-4">
             <SectionAccent />
-            <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-white">Featured Projects</h2>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white">Featured Projects</h2>
           </div>
-          <p className="text-white text-3xl max-w-2xl mx-auto">
+          <p className="text-white text-xl max-w-2xl mx-auto leading-relaxed font-light">
             See the quality and craftsmanship behind our work. Every project tells a story of transformation.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function Projects() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <p className="text-white text-3xl mb-4">Ready to start your own transformation?</p>
+          <p className="text-white text-xl mb-4">Ready to start your own transformation?</p>
           <a href="#contact" className="btn-primary">
             Start Your Project Today
           </a>

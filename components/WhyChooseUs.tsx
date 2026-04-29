@@ -1,3 +1,6 @@
+'use client';
+import HouseCanvas from './HouseCanvas';
+
 const features = [
   {
     icon: (
@@ -208,6 +211,11 @@ export default function WhyChooseUs() {
                   {badge}
                 </span>
               ))}
+            </div>
+
+            {/* Animated house */}
+            <div className="mt-10 flex justify-center lg:justify-start pointer-events-none">
+              <HouseCanvas />
             </div>
           </div>
 

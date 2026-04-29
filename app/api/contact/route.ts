@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+export const dynamic = 'force-dynamic';
+
 const BUSINESS_EMAIL = 'sumerrenovations@gmail.com';
 const FROM_ADDRESS = 'Sumer Renovations LLC <onboarding@resend.dev>';
 

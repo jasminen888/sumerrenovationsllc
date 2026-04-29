@@ -128,12 +128,21 @@ export default function Contact() {
       return;
     }
     setSubmitting(true);
-    // Simulate form submission — replace with Resend / EmailJS / Formspree integration
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitted(true);
-    setSubmitting(false);
-    setForm(initialForm);
-    setErrors({});
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('Failed to send');
+      setSubmitted(true);
+      setForm(initialForm);
+      setErrors({});
+    } catch {
+      alert('Something went wrong. Please try again or call us directly.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass = (field: keyof FormData, withIcon = false) =>

@@ -498,7 +498,7 @@ export default function Footer() {
           <p className="text-white/80 text-sm text-center sm:text-left">
             &copy; 2026 Sumer Home Renovation LLC. All Rights Reserved.
           </p>
-          <p className="text-white/70 text-xs text-center">
+          <p className="text-white/70 text-sm font-bold text-center">
             Licensed &bull; Bonded &bull; Insured &bull; Portland, OR
           </p>
           <div className="flex gap-4 text-xs text-white/70">

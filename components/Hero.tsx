@@ -360,18 +360,18 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-[680px] sm:h-[760px] lg:h-[820px] flex items-center justify-center overflow-hidden"
+      className="relative w-full aspect-[16/9] min-h-[320px] max-h-screen flex items-center justify-center overflow-hidden"
       aria-label="Hero slideshow"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Slide backgrounds */}
+      {/* Slide backgrounds — each wrapped in a consistent 16:9 fill container */}
       {slides.map((s, i) => (
         <div
           key={s.id}
-          className={`absolute inset-0 transition-opacity duration-700 ${
+          className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${
             i === active ? 'opacity-100' : 'opacity-0'
           }`}
           aria-hidden={i !== active}
@@ -380,10 +380,11 @@ export default function Hero() {
             src={s.image}
             alt={s.imageAlt}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority={i === 0}
-            sizes="100vw"
-            quality={85}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+            quality={80}
           />
         </div>
       ))}

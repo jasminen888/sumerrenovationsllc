@@ -108,7 +108,7 @@ export default function Blog() {
           {posts.map((post, i) => (
             <article
               key={post.slug}
-              className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-all duration-700"
+              className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? 'none' : 'translateY(40px)',
@@ -117,6 +117,8 @@ export default function Blog() {
                 border: '1px solid rgba(255,255,255,0.08)',
                 boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
               }}
+              onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.25)')}
+              onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,0,0,0.3)')}
             >
               {/* Image */}
               <div className="relative h-52 overflow-hidden flex-shrink-0">
@@ -169,7 +171,10 @@ export default function Blog() {
 
               {/* Gold hover border glow */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{ boxShadow: 'inset 0 0 0 1px rgba(201,168,76,0.4)' }} />
+                style={{ boxShadow: 'inset 0 0 0 1.5px rgba(201,168,76,0.6)' }} />
+              {/* Shimmer overlay */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 50%, rgba(201,168,76,0.04) 100%)' }} />
             </article>
           ))}
         </div>

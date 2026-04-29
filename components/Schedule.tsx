@@ -53,7 +53,7 @@ export default function Schedule() {
     <section
       id="schedule"
       className="relative py-28 overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #152843 0%, #1a3050 50%, #152843 100%)' }}
+      style={{ background: 'linear-gradient(160deg, #1a2438 0%, #1e2d45 50%, #1a2438 100%)' }}
     >
       {/* ── Honeycomb hex pattern ── */}
       <div
@@ -161,7 +161,7 @@ export default function Schedule() {
           <div className="p-2 sm:p-3">
             <div
               className="calendly-inline-widget rounded-2xl overflow-hidden"
-              data-url="https://calendly.com/sumerrenovations/30min?hide_gdpr_banner=1&background_color=040d1a&text_color=ffffff&primary_color=c9a84c"
+              data-url="https://calendly.com/sumerrenovations/30min?hide_gdpr_banner=1&background_color=1e293b&text_color=ffffff&primary_color=c9a84c"
               style={{ minWidth: '320px', height: '900px' }}
               role="region"
               aria-label="Calendly scheduling widget for Sumer Renovations LLC consultation booking"

@@ -6,7 +6,7 @@ const services = [
     title: 'Kitchen Remodeling',
     description:
       'Transform your kitchen into a stunning culinary masterpiece. From custom cabinetry to countertops, we create dream kitchens.',
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop',
+    image: '/kitchenremodel.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -50,7 +50,7 @@ const services = [
     title: 'Flooring Installation',
     description:
       'Premium hardwood, tile, luxury vinyl, and carpet installation. Expert craftsmanship for floors that last a lifetime.',
-    image: 'https://images.unsplash.com/photo-1594844532765-b74c56e80d5e?q=80&w=800&auto=format&fit=crop',
+    image: '/floor.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
@@ -61,7 +61,7 @@ const services = [
     title: 'Roofing',
     description:
       'Professional roofing installation, repair, and replacement. Protect your home with quality roofing solutions.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+    image: '/roofing.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l9-9 9 9M4 10v10h6V14h4v6h6V10" />

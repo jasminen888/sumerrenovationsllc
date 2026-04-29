@@ -64,6 +64,8 @@ export default function Hero() {
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isSwiping = useRef(false);
 
   const goTo = useCallback(
     (index: number, dir: 'next' | 'prev' = 'next') => {
@@ -114,15 +116,35 @@ export default function Hero() {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isSwiping.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+    const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+    if (dx > dy && dx > 8) {
+      isSwiping.current = true;
+    }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? next() : prev();
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = touchStartX.current - e.changedTouches[0].clientX;
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
+    if (isSwiping.current && Math.abs(dx) > 40 && Math.abs(dx) > dy) {
+      dx > 0 ? next() : prev();
     }
     touchStartX.current = null;
+    touchStartY.current = null;
+    isSwiping.current = false;
+  };
+
+  const handleTouchCancel = () => {
+    touchStartX.current = null;
+    touchStartY.current = null;
+    isSwiping.current = false;
   };
 
   const slide = slides[active];
@@ -151,7 +173,9 @@ export default function Hero() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
     >
       {/* Slide backgrounds — each wrapped in a consistent 16:9 fill container */}
       {slides.map((s, i) => (
@@ -260,10 +284,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Left arrow */}
+      {/* Left arrow — desktop only */}
       <button
         onClick={prev}
-        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-black/30 hover:bg-gold-500 border border-white/20 hover:border-gold-400 text-white transition-all duration-200"
+        className="hidden sm:flex absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full bg-black/30 hover:bg-gold-500 border border-white/20 hover:border-gold-400 text-white transition-all duration-200"
         aria-label="Previous slide"
       >
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -271,16 +295,28 @@ export default function Hero() {
         </svg>
       </button>
 
-      {/* Right arrow */}
+      {/* Right arrow — desktop only */}
       <button
         onClick={next}
-        className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-black/30 hover:bg-gold-500 border border-white/20 hover:border-gold-400 text-white transition-all duration-200"
+        className="hidden sm:flex absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full bg-black/30 hover:bg-gold-500 border border-white/20 hover:border-gold-400 text-white transition-all duration-200"
         aria-label="Next slide"
       >
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
+
+      {/* Mobile swipe indicator */}
+      <div className="sm:hidden absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+        {slides.map((_, i) => (
+          <span
+            key={i}
+            className={`block rounded-full transition-all duration-300 ${
+              i === active ? 'w-5 h-1.5 bg-gold-400' : 'w-1.5 h-1.5 bg-white/40'
+            }`}
+          />
+        ))}
+      </div>
 
       {/* Trust bar overlaid at the bottom of the hero */}
       <div className="hidden md:block absolute bottom-0 left-0 right-0 z-20">

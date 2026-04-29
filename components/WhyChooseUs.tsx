@@ -1,6 +1,8 @@
 'use client';
-import HouseCanvas from './HouseCanvas';
+import dynamic from 'next/dynamic';
 import SectionAccent from './SectionAccent';
+
+const HouseCanvas = dynamic(() => import('./HouseCanvas'), { ssr: false });
 
 const features = [
   {

@@ -22,6 +22,7 @@ const robotoSerif = Roboto_Serif({
   subsets: ['latin'],
   variable: '--font-roboto-serif',
   display: 'swap',
+  preload: true,
 });
 
 export const viewport: Viewport = {
@@ -104,6 +105,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Resource hints for third-party origins */}
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
+        <link rel="dns-prefetch" href="https://calendly.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
         {/* Schema.org structured data for local business */}
         <script
           type="application/ld+json"

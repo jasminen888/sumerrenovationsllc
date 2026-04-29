@@ -40,12 +40,36 @@ const perks = [
 
 export default function Schedule() {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
+    let script: HTMLScriptElement | null = null;
+
+    const load = () => {
+      if (!document.querySelector('script[src*="calendly"]')) {
+        script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    };
+
+    const section = document.getElementById('schedule');
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          load();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    observer.observe(section);
+
     return () => {
-      document.body.removeChild(script);
+      observer.disconnect();
+      if (script && document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 

@@ -2,8 +2,10 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 
-const BEFORE_IMG = '/kitchenremodelbefore.jpg';
-const AFTER_IMG = '/kitchenremodelafter.jpg';
+const BEFORE_IMG = '/kitchenremodelbefore.webp';
+const BEFORE_IMG_FALLBACK = '/kitchenremodelbefore.jpg';
+const AFTER_IMG = '/kitchenremodelafter.webp';
+const AFTER_IMG_FALLBACK = '/kitchenremodelafter.jpg';
 
 export default function BeforeAfter() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -123,25 +125,27 @@ export default function BeforeAfter() {
         aria-label="Before and after kitchen renovation comparison slider"
         role="img"
       >
-        {/* BEFORE image (bottom layer, full width) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${BEFORE_IMG}')` }}
-        />
+        {/* BEFORE image (bottom layer, full width) — uses WebP with JPG fallback */}
+        <picture className="absolute inset-0 w-full h-full">
+          <source srcSet={BEFORE_IMG} type="image/webp" />
+          <img src={BEFORE_IMG_FALLBACK} alt="Kitchen before renovation" className="absolute inset-0 w-full h-full object-cover" />
+        </picture>
         {/* BEFORE label */}
         <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm" style={{ background: 'rgba(0,0,0,0.55)' }}>
           Before
         </div>
 
-        {/* AFTER image (clipped overlay) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-none"
+        {/* AFTER image (clipped overlay) — uses WebP with JPG fallback */}
+        <picture
+          className="absolute inset-0 w-full h-full"
           style={{
-            backgroundImage: `url('${AFTER_IMG}')`,
             clipPath: `inset(0 ${sweepStarted ? (100 - position) : 100}% 0 0)`,
             transition: (sweepStarted && !sweepDone) ? 'clip-path 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
           }}
-        />
+        >
+          <source srcSet={AFTER_IMG} type="image/webp" />
+          <img src={AFTER_IMG_FALLBACK} alt="Kitchen after renovation" className="absolute inset-0 w-full h-full object-cover" />
+        </picture>
         {/* AFTER label */}
         <div
           className="absolute top-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm"

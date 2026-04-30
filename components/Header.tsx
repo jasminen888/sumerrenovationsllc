@@ -121,7 +121,7 @@ export default function Header() {
               <button
                 key={link.name}
                 onClick={() => navigate(link.href)}
-                className="group/nav relative px-5 py-3 rounded-xl text-[18px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap text-gray-800 hover:text-[#c9a84c]"
+                className="group/nav relative px-5 py-3 rounded-xl text-[17px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap text-gray-800 hover:text-[#c9a84c]"
               >
                 <span className="relative z-10">{link.name}</span>
                 {/* animated gold underline */}
@@ -139,7 +139,7 @@ export default function Header() {
                 onClick={() => setServicesOpen((v) => !v)}
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
-                className={`group/svc relative flex items-center gap-1.5 px-5 py-3 rounded-xl text-[18px] font-bold tracking-wide transition-all duration-200 ${
+                className={`group/svc relative flex items-center gap-1.5 px-5 py-3 rounded-xl text-[17px] font-bold tracking-wide transition-all duration-200 ${
                   servicesOpen ? 'text-[#c9a84c]' : 'text-gray-800 hover:text-[#c9a84c]'
                 }`}
               >

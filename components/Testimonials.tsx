@@ -188,22 +188,14 @@ export default function Testimonials() {
             {/* Pointy-top hexagons, circumradius = 20, tile = 34.64 × 60 */}
             <pattern id="tHoneycomb" x="0" y="0" width="34.64" height="60" patternUnits="userSpaceOnUse">
               <polygon points="17.32,0 34.64,10 34.64,30 17.32,40 0,30 0,10"
-                fill="none" stroke="rgba(201,168,76,0.22)" strokeWidth="0.8" />
+                fill="none" stroke="rgba(201,168,76,0.38)" strokeWidth="1" />
               <polygon points="0,30 17.32,40 17.32,60 0,70 -17.32,60 -17.32,40"
-                fill="none" stroke="rgba(201,168,76,0.22)" strokeWidth="0.8" />
+                fill="none" stroke="rgba(201,168,76,0.38)" strokeWidth="1" />
               <polygon points="34.64,30 51.96,40 51.96,60 34.64,70 17.32,60 17.32,40"
-                fill="none" stroke="rgba(201,168,76,0.22)" strokeWidth="0.8" />
+                fill="none" stroke="rgba(201,168,76,0.38)" strokeWidth="1" />
             </pattern>
-            {/* Vertical fade: hide honeycomb at top & bottom edges */}
-            <linearGradient id="tHcFade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="#07111f" stopOpacity="1" />
-              <stop offset="18%"  stopColor="#07111f" stopOpacity="0" />
-              <stop offset="82%"  stopColor="#07111f" stopOpacity="0" />
-              <stop offset="100%" stopColor="#060d1a" stopOpacity="1" />
-            </linearGradient>
           </defs>
           <rect width="100%" height="100%" fill="url(#tHoneycomb)" />
-          <rect width="100%" height="100%" fill="url(#tHcFade)" />
         </svg>
       </div>
 

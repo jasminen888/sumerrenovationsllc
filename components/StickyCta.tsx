@@ -1,6 +1,20 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
 export default function StickyCta() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setVisible(docHeight > 0 && scrolled / docHeight > 0.65);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const scrollToContact = () => {
     const el = document.querySelector('#contact');
     if (el) {
@@ -11,7 +25,9 @@ export default function StickyCta() {
 
   return (
     <div
-      className="w-full hidden md:flex items-center justify-between"
+      className={`fixed bottom-0 left-0 right-0 z-[55] hidden md:flex items-center justify-between transition-transform duration-300 ${
+        visible ? 'translate-y-0' : 'translate-y-full'
+      }`}
       style={{
         background: 'linear-gradient(90deg, #0a1628 0%, #0f2136 50%, #0a1628 100%)',
         borderTop: '1px solid rgba(201,168,76,0.4)',

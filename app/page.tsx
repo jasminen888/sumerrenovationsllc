@@ -35,9 +35,6 @@ export default function HomePage() {
       {/* Sticky header */}
       <Header />
 
-      {/* Static CTA info bar — sits directly below header */}
-      <StickyCta />
-
       {/* Main content */}
       <main>
         {/* 1. Hero + TrustBar overlay */}
@@ -79,6 +76,9 @@ export default function HomePage() {
 
       {/* Floating AI Chatbot */}
       <Chatbot />
+
+      {/* Sticky CTA bar — appears after 65% scroll on desktop */}
+      <StickyCta />
 
       {/* Mobile sticky bottom action bar */}
       <MobileActionBar />

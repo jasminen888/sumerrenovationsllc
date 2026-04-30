@@ -87,11 +87,11 @@ function TiltCard({ project }: { project: Project }) {
       </div>
       {/* Overlay content */}
       <div className="absolute inset-0 flex flex-col justify-end p-6">
-        <span className="inline-block bg-gold-500 text-white text-lg font-semibold px-3 py-1 rounded-full mb-3 w-fit">
+        <span className="inline-block bg-gold-500 text-white text-sm font-semibold px-3 py-1 rounded-full mb-3 w-fit">
           {project.category}
         </span>
-        <h3 className="font-serif text-4xl font-bold text-white mb-2">{project.title}</h3>
-        <p className="text-white text-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
+        <h3 className="font-serif text-2xl font-bold text-white mb-2">{project.title}</h3>
+        <p className="text-white text-base leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
           {project.description}
         </p>
       </div>

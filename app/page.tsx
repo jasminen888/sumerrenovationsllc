@@ -10,7 +10,7 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 const Projects = dynamic(() => import('@/components/Projects'));
 const CtaBanner = dynamic(() => import('@/components/CtaBanner'));
 const EstimateCalculator = dynamic(() => import('@/components/EstimateCalculator'));
-const Testimonials = dynamic(() => import('@/components/Testimonials'));
+const Testimonials = dynamic(() => import('@/components/Testimonials'), { ssr: false });
 const ServiceAreas = dynamic(() => import('@/components/ServiceAreas'));
 const Blog = dynamic(() => import('@/components/Blog'));
 const Schedule = dynamic(() => import('@/components/Schedule'));
@@ -55,10 +55,7 @@ export default function HomePage() {
         {/* 7. Instant Estimate Calculator */}
         <EstimateCalculator />
 
-        {/* 8. Testimonials */}
-        <Testimonials />
-
-        {/* 9. Service Areas + Map */}
+        {/* 8. Service Areas + Map */}
         <ServiceAreas />
 
         {/* 11. Renovation Blog */}
@@ -66,6 +63,9 @@ export default function HomePage() {
 
         {/* 12. Schedule Appointment (Calendly) */}
         <Schedule />
+
+        {/* 12. Testimonials — premium carousel */}
+        <Testimonials />
 
         {/* 13. Contact Form */}
         <Contact />

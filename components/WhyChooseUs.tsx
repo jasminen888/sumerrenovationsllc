@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import SectionAccent from './SectionAccent';
 
@@ -88,13 +89,79 @@ const features = [
   },
 ];
 
+const WCU_STAT_TARGETS = [
+  { num: 500, suffix: '+', label: 'Projects Completed' },
+  { num: 10,  suffix: '+', label: 'Years Experience' },
+  { num: 98,  suffix: '%', label: 'Client Satisfaction' },
+  { num: 5,   suffix: '★', label: 'Average Rating' },
+] as const;
+
 export default function WhyChooseUs() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const statsGridRef = useRef<HTMLDivElement>(null);
+  const wcuAnimated = useRef(false);
+  const [spotlight, setSpotlight] = useState<{ x: number; y: number } | null>(null);
+  const [wcuCounts, setWcuCounts] = useState([0, 0, 0, 0]);
+
+  // Animate counters when stats scroll into view
+  useEffect(() => {
+    const el = statsGridRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !wcuAnimated.current) {
+          wcuAnimated.current = true;
+          WCU_STAT_TARGETS.forEach(({ num }, i) => {
+            const start = performance.now();
+            const duration = 1800;
+            const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+            const frame = (now: number) => {
+              const t = Math.min((now - start) / duration, 1);
+              setWcuCounts((prev) => {
+                const next = [...prev];
+                next[i] = Math.round(ease(t) * num);
+                return next;
+              });
+              if (t < 1) requestAnimationFrame(frame);
+            };
+            requestAnimationFrame(frame);
+          });
+        }
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => setSpotlight(null), []);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
       className="relative py-28 overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #040d1a 0%, #0a1628 50%, #040d1a 100%)' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
+      {/* Cursor spotlight */}
+      {spotlight && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            background: `radial-gradient(700px circle at ${spotlight.x}px ${spotlight.y}px, rgba(201,168,76,0.11) 0%, transparent 60%)`,
+          }}
+        />
+      )}
+
       {/* ── Background ambient glows ── */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         {/* left gold orb */}
@@ -169,15 +236,10 @@ export default function WhyChooseUs() {
             </p>
 
             {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-3 mb-10">
-              {[
-                { num: '500+', label: 'Projects Completed' },
-                { num: '10+',  label: 'Years Experience' },
-                { num: '98%',  label: 'Client Satisfaction' },
-                { num: '5★',   label: 'Average Rating' },
-              ].map((s) => (
+            <div ref={statsGridRef} className="grid grid-cols-2 gap-3 mb-10">
+              {WCU_STAT_TARGETS.map(({ suffix, label }, i) => (
                 <div
-                  key={s.label}
+                  key={label}
                   className="relative overflow-hidden rounded-2xl p-4"
                   style={{
                     background: 'rgba(201,168,76,0.07)',
@@ -192,8 +254,8 @@ export default function WhyChooseUs() {
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
-                  }}>{s.num}</div>
-                  <div className="text-sm font-medium" style={{ color: 'rgba(200,214,230,0.65)' }}>{s.label}</div>
+                  }}>{wcuCounts[i]}{suffix}</div>
+                  <div className="text-sm font-medium" style={{ color: 'rgba(200,214,230,0.65)' }}>{label}</div>
                 </div>
               ))}
             </div>

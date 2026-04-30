@@ -9,15 +9,48 @@ const AFTER_IMG =
 
 export default function BeforeAfter() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState(48);
+  const [position, setPosition] = useState(0);
   const dragging = useRef(false);
-  const [revealed, setRevealed] = useState(false);
+  const [sweepStarted, setSweepStarted] = useState(false);
+  const [sweepDone, setSweepDone] = useState(false);
+  const sweepDoneRef = useRef(false);
+  const sweepTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  // Trigger intro animation on mount
+  // Auto-sweep the slider when it scrolls into view, then hand off to the user
   useEffect(() => {
-    const timer = setTimeout(() => setRevealed(true), 400);
-    return () => clearTimeout(timer);
-  }, []);
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !sweepDoneRef.current) {
+          observer.disconnect();
+          setSweepStarted(true);
+          // Two rAFs ensure the first render (clip=100%, transition active) has landed
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setPosition(88);
+              const t1 = setTimeout(() => {
+                if (sweepDoneRef.current) return;
+                setPosition(50);
+                const t2 = setTimeout(() => {
+                  sweepDoneRef.current = true;
+                  setSweepDone(true);
+                }, 1150);
+                sweepTimers.current.push(t2);
+              }, 1300);
+              sweepTimers.current.push(t1);
+            });
+          });
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      sweepTimers.current.forEach(clearTimeout);
+    };
+  }, [])
 
   const getPosition = useCallback((clientX: number) => {
     const rect = containerRef.current?.getBoundingClientRect();
@@ -28,6 +61,12 @@ export default function BeforeAfter() {
 
   const onMouseDown = useCallback(() => {
     dragging.current = true;
+    if (!sweepDoneRef.current) {
+      sweepDoneRef.current = true;
+      setSweepDone(true);
+      sweepTimers.current.forEach(clearTimeout);
+      sweepTimers.current = [];
+    }
   }, []);
 
   const onMouseUp = useCallback(() => {
@@ -44,6 +83,12 @@ export default function BeforeAfter() {
 
   const onTouchMove = useCallback(
     (e: React.TouchEvent) => {
+      if (!sweepDoneRef.current) {
+        sweepDoneRef.current = true;
+        setSweepDone(true);
+        sweepTimers.current.forEach(clearTimeout);
+        sweepTimers.current = [];
+      }
       setPosition(getPosition(e.touches[0].clientX));
     },
     [getPosition]
@@ -95,8 +140,8 @@ export default function BeforeAfter() {
           className="absolute inset-0 bg-cover bg-center transition-none"
           style={{
             backgroundImage: `url('${AFTER_IMG}')`,
-            clipPath: `inset(0 ${100 - (revealed ? position : 0)}% 0 0)`,
-            transition: revealed ? 'none' : 'clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
+            clipPath: `inset(0 ${sweepStarted ? (100 - position) : 100}% 0 0)`,
+            transition: (sweepStarted && !sweepDone) ? 'clip-path 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
           }}
         />
         {/* AFTER label */}
@@ -104,8 +149,8 @@ export default function BeforeAfter() {
           className="absolute top-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm"
           style={{
             background: 'linear-gradient(135deg, #c9a84c, #a0742a)',
-            left: `calc(${position}% + 20px)`,
-            transition: revealed ? 'none' : 'left 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
+            left: `calc(${sweepStarted ? position : 0}% + 20px)`,
+            transition: (sweepStarted && !sweepDone) ? 'left 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
           }}
         >
           After
@@ -115,9 +160,9 @@ export default function BeforeAfter() {
         <div
           className="absolute inset-y-0 w-0.5 z-20 pointer-events-none"
           style={{
-            left: `${revealed ? position : 0}%`,
+            left: `${sweepStarted ? position : 0}%`,
             background: 'linear-gradient(to bottom, transparent 0%, #c9a84c 20%, white 50%, #c9a84c 80%, transparent 100%)',
-            transition: revealed ? 'none' : 'left 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: (sweepStarted && !sweepDone) ? 'left 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
           }}
         />
 
@@ -125,8 +170,8 @@ export default function BeforeAfter() {
         <div
           className="absolute top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5 pointer-events-none"
           style={{
-            left: `${revealed ? position : 0}%`,
-            transition: revealed ? 'none' : 'left 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
+            left: `${sweepStarted ? position : 0}%`,
+            transition: (sweepStarted && !sweepDone) ? 'left 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
           }}
         >
           {/* Circle with arrows */}

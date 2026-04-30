@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState } from 'react';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const ITEMS = [
@@ -31,9 +31,8 @@ const ITEMS = [
 ];
 
 type CardItem = (typeof ITEMS)[number];
-const N = ITEMS.length;
-// Clone: [last, ...real items, first] — indices 0 and N+1 are the ghost clones
-const EXTENDED: CardItem[] = [ITEMS[N - 1], ...ITEMS, ITEMS[0]];
+// Duplicate for seamless CSS marquee loop
+const DOUBLED: CardItem[] = [...ITEMS, ...ITEMS];
 
 // ─── Shimmer Stars ─────────────────────────────────────────────────────────────
 function ShimmerStars({ active }: { active: boolean }) {
@@ -57,57 +56,18 @@ function ShimmerStars({ active }: { active: boolean }) {
   );
 }
 
-// ─── Nav Arrow Button ──────────────────────────────────────────────────────────
-function NavArrow({ dir, onClick }: { dir: 'prev' | 'next'; onClick: () => void }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      aria-label={dir === 'prev' ? 'Previous testimonial' : 'Next testimonial'}
-      style={{
-        width: 52, height: 52, borderRadius: '50%',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        cursor: 'pointer', border: 'none', padding: 0, flexShrink: 0,
-        background: hov ? 'rgba(201,168,76,0.15)' : 'rgba(255,255,255,0.05)',
-        outline: `1px solid ${hov ? 'rgba(201,168,76,0.5)' : 'rgba(255,255,255,0.1)'}`,
-        boxShadow: hov ? '0 0 26px rgba(201,168,76,0.22), inset 0 0 14px rgba(201,168,76,0.05)' : 'none',
-        backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
-        transition: 'all 0.25s ease',
-      }}
-    >
-      <svg
-        width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke={hov ? '#c9a84c' : 'rgba(255,255,255,0.55)'}
-        strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"
-        style={{ transition: 'stroke 0.25s ease', transform: dir === 'prev' ? 'translateX(-1px)' : 'translateX(1px)' }}
-      >
-        {dir === 'prev' ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
-      </svg>
-    </button>
-  );
-}
-
 // ─── Individual Testimonial Card ───────────────────────────────────────────────
-function TestiCard({
-  item, isActive, isAdj, cardW,
-}: {
-  item: CardItem; isActive: boolean; isAdj: boolean; cardW: number;
-}) {
+function TestiCard({ item }: { item: CardItem }) {
   const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hov, setHov] = useState(false);
 
-  const scale = isActive ? (hov ? 1.025 : 1) : isAdj ? 0.9 : 0.8;
-  const opacity = isActive ? 1 : isAdj ? 0.5 : 0.22;
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isActive || !ref.current) return;
+    if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: y * -8, y: x * 12 });
+    setTilt({ x: y * -7, y: x * 10 });
   };
 
   return (
@@ -116,46 +76,42 @@ function TestiCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => { setHov(false); setTilt({ x: 0, y: 0 }); }}
-      aria-hidden={!isActive}
       style={{
-        width: cardW, flexShrink: 0, borderRadius: 24,
-        padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 2.25rem)',
-        display: 'flex', flexDirection: 'column', gap: '1.4rem',
+        width: 'clamp(280px, 34vw, 400px)',
+        flexShrink: 0, borderRadius: 22,
+        padding: '2rem 1.75rem',
+        display: 'flex', flexDirection: 'column', gap: '1.25rem',
         userSelect: 'none', position: 'relative', overflow: 'hidden',
-        transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${scale})`,
-        opacity,
-        transition: 'transform 0.38s cubic-bezier(0.23,1,0.32,1), opacity 0.42s ease, box-shadow 0.38s ease',
+        cursor: 'default',
+        transform: `perspective(1100px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${hov ? 1.04 : 1})`,
+        transition: 'transform 0.35s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s ease',
         willChange: 'transform',
-        background: isActive
-          ? 'linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)'
-          : 'rgba(255,255,255,0.02)',
-        border: `1px solid ${isActive ? 'rgba(201,168,76,0.35)' : 'rgba(255,255,255,0.06)'}`,
-        boxShadow: isActive
-          ? '0 20px 70px rgba(0,0,0,0.65), 0 0 80px rgba(201,168,76,0.07), inset 0 1px 0 rgba(201,168,76,0.12)'
-          : '0 4px 20px rgba(0,0,0,0.3)',
-        backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
-        cursor: isActive ? 'grab' : 'pointer',
+        background: hov
+          ? 'linear-gradient(145deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)'
+          : 'linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)',
+        border: `1px solid ${hov ? 'rgba(201,168,76,0.45)' : 'rgba(201,168,76,0.22)'}`,
+        boxShadow: hov
+          ? '0 24px 60px rgba(0,0,0,0.7), 0 0 60px rgba(201,168,76,0.1), inset 0 1px 0 rgba(201,168,76,0.15)'
+          : '0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05)',
+        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
       }}
     >
-      {/* Top-right shimmer highlight */}
-      {isActive && (
-        <div aria-hidden style={{
-          position: 'absolute', top: -60, right: -60,
-          width: 180, height: 180, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-      )}
+      <div aria-hidden style={{
+        position: 'absolute', top: -50, right: -50,
+        width: 160, height: 160, borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
 
       {/* Stars */}
-      <ShimmerStars active={isActive} />
+      <ShimmerStars active={true} />
 
       {/* Quote */}
       <p style={{
         margin: 0, flexGrow: 1,
-        color: isActive ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.55)',
-        fontSize: '1rem', lineHeight: 1.78, fontStyle: 'italic',
-        letterSpacing: '0.01em', transition: 'color 0.3s ease',
+        color: 'rgba(255,255,255,0.88)',
+        fontSize: '0.97rem', lineHeight: 1.75, fontStyle: 'italic',
+        letterSpacing: '0.01em',
       }}>
         &ldquo;{item.quote}&rdquo;
       </p>
@@ -163,39 +119,33 @@ function TestiCard({
       {/* Divider */}
       <div style={{
         height: 1,
-        background: isActive
-          ? 'linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.35) 50%, transparent 100%)'
-          : 'rgba(255,255,255,0.06)',
-        transition: 'background 0.4s ease',
+        background: 'linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.3) 50%, transparent 100%)',
       }} />
 
       {/* Author row */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
         {/* Avatar */}
         <div style={{
-          width: 48, height: 48, borderRadius: '50%', flexShrink: 0,
+          width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
           background: 'linear-gradient(135deg, #c9a84c, #a0742a)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: 'white', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.06em',
-          border: '2px solid rgba(201,168,76,0.35)',
-          boxShadow: isActive ? '0 0 22px rgba(201,168,76,0.45)' : 'none',
-          transition: 'box-shadow 0.35s ease',
+          color: 'white', fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.06em',
+          border: '2px solid rgba(201,168,76,0.4)',
+          boxShadow: '0 0 18px rgba(201,168,76,0.4)',
         }}>
           {item.initials}
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
-            color: isActive ? 'white' : 'rgba(255,255,255,0.5)',
-            fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.02em',
-            transition: 'color 0.3s ease', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            color: 'white',
+            fontWeight: 700, fontSize: '0.92rem', letterSpacing: '0.02em',
           }}>
             {item.name}
           </div>
           <div style={{
-            color: isActive ? 'rgba(201,168,76,0.75)' : 'rgba(201,168,76,0.3)',
-            fontSize: '0.78rem', marginTop: 3, letterSpacing: '0.04em',
-            transition: 'color 0.3s ease',
+            color: 'rgba(201,168,76,0.7)',
+            fontSize: '0.76rem', marginTop: 2, letterSpacing: '0.04em',
           }}>
             {item.role}
           </div>
@@ -212,99 +162,22 @@ function TestiCard({
 
 // ─── Main Section ──────────────────────────────────────────────────────────────
 export default function Testimonials() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerW, setContainerW] = useState(900);
-  const [idx, setIdx] = useState(1);       // 1..N are real; 0 and N+1 are clones
-  const [transOn, setTransOn] = useState(true);
   const [paused, setPaused] = useState(false);
-  const idxRef = useRef(1);
-
-  useEffect(() => { idxRef.current = idx; }, [idx]);
-
-  // Track container width for responsive card sizing
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([e]) => setContainerW(e.contentRect.width));
-    ro.observe(el);
-    setContainerW(el.getBoundingClientRect().width);
-    return () => ro.disconnect();
-  }, []);
-
-  // Responsive card width
-  const cardW =
-    containerW < 480 ? containerW * 0.83 :
-    containerW < 640 ? containerW * 0.75 :
-    containerW < 850 ? containerW * 0.62 :
-    containerW < 1100 ? containerW * 0.52 :
-    Math.min(containerW * 0.46, 660);
-  const gap = 28;
-
-  // Center active card inside the container
-  const trackTranslate = (i: number) => containerW / 2 - cardW / 2 - i * (cardW + gap);
-
-  // Navigation
-  const goTo = useCallback((i: number) => { setTransOn(true); setIdx(i); }, []);
-  const goNext = useCallback(() => goTo(idxRef.current + 1), [goTo]);
-  const goPrev = useCallback(() => goTo(idxRef.current - 1), [goTo]);
-
-  // After CSS transition: silently snap from ghost clones back to real positions
-  const onTxEnd = useCallback(() => {
-    const cur = idxRef.current;
-    if (cur >= N + 1) { setTransOn(false); setIdx(1); }
-    else if (cur <= 0) { setTransOn(false); setIdx(N); }
-  }, []);
-
-  // Re-enable transition in next paint after a silent snap
-  useEffect(() => {
-    if (!transOn) {
-      const raf = requestAnimationFrame(() => requestAnimationFrame(() => setTransOn(true)));
-      return () => cancelAnimationFrame(raf);
-    }
-  }, [transOn]);
-
-  // Autoplay — pause on hover
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(goNext, 7000);
-    return () => clearInterval(id);
-  }, [paused, goNext]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const h = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') goNext();
-      if (e.key === 'ArrowLeft') goPrev();
-    };
-    window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
-  }, [goNext, goPrev]);
-
-  // Drag / swipe
-  const dragX = useRef<number | null>(null);
-  const onDragStart = useCallback((x: number) => { dragX.current = x; }, []);
-  const onDragEnd = useCallback((x: number) => {
-    if (dragX.current === null) return;
-    const delta = x - dragX.current;
-    if (Math.abs(delta) > 55) { delta < 0 ? goNext() : goPrev(); }
-    dragX.current = null;
-  }, [goNext, goPrev]);
-
-  // Real 0-based index for dot indicators
-  const realIdx = ((idx - 1) + N) % N;
 
   return (
     <section
       id="testimonials"
       className="relative overflow-hidden"
       style={{ background: 'linear-gradient(170deg, #07111f 0%, #060d1a 55%, #09141f 100%)', padding: '7rem 0 6rem' }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <style>{`
         @keyframes tStarPulse {
           0%, 100% { opacity: 1; }
-          50% { opacity: 0.6; filter: drop-shadow(0 0 7px rgba(240,208,80,0.95)); }
+          50% { opacity: 0.55; filter: drop-shadow(0 0 8px rgba(240,208,80,1)); }
+        }
+        @keyframes tMarquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
 
@@ -358,70 +231,40 @@ export default function Testimonials() {
         </p>
       </div>
 
-      {/* Carousel track */}
+      {/* Continuous marquee track */}
       <div
-        ref={containerRef}
         className="relative z-10"
-        style={{ overflow: 'hidden', padding: '16px 0 24px' }}
+        style={{ overflow: 'hidden', padding: '12px 0 28px' }}
         role="region"
-        aria-roledescription="carousel"
         aria-label="Client testimonials"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
       >
+        {/* Left fade */}
+        <div aria-hidden style={{
+          position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, zIndex: 2, pointerEvents: 'none',
+          background: 'linear-gradient(90deg, #060d1a 0%, transparent 100%)',
+        }} />
+        {/* Right fade */}
+        <div aria-hidden style={{
+          position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, zIndex: 2, pointerEvents: 'none',
+          background: 'linear-gradient(270deg, #060d1a 0%, transparent 100%)',
+        }} />
+
         <div
           style={{
-            display: 'flex', gap: `${gap}px`,
-            transform: `translateX(${trackTranslate(idx)}px)`,
-            transition: transOn ? 'transform 0.68s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
-            willChange: 'transform', cursor: 'grab',
+            display: 'flex',
+            gap: 28,
+            width: 'max-content',
+            animation: 'tMarquee 30s linear infinite',
+            animationPlayState: paused ? 'paused' : 'running',
+            paddingLeft: 28,
           }}
-          onTransitionEnd={onTxEnd}
-          onMouseDown={e => { e.preventDefault(); onDragStart(e.clientX); }}
-          onMouseUp={e => onDragEnd(e.clientX)}
-          onMouseLeave={e => onDragEnd(e.clientX)}
-          onTouchStart={e => onDragStart(e.touches[0].clientX)}
-          onTouchEnd={e => onDragEnd(e.changedTouches[0].clientX)}
         >
-          {EXTENDED.map((item, i) => (
-            <TestiCard
-              key={i}
-              item={item}
-              isActive={i === idx}
-              isAdj={Math.abs(i - idx) === 1}
-              cardW={cardW}
-            />
+          {DOUBLED.map((item, i) => (
+            <TestiCard key={i} item={item} />
           ))}
         </div>
-      </div>
-
-      {/* Controls: arrows + dot indicators */}
-      <div
-        className="relative z-10"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 28, padding: '1.5rem 1rem 0' }}
-      >
-        <NavArrow dir="prev" onClick={goPrev} />
-
-        <div role="tablist" aria-label="Testimonial slides" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          {Array.from({ length: N }).map((_, i) => (
-            <button
-              key={i}
-              role="tab"
-              aria-selected={i === realIdx}
-              aria-label={`Go to slide ${i + 1} of ${N}`}
-              onClick={() => goTo(i + 1)}
-              style={{
-                padding: 0, border: 'none', cursor: 'pointer',
-                width: i === realIdx ? 32 : 8, height: 8, borderRadius: 99,
-                background: i === realIdx
-                  ? 'linear-gradient(90deg, #c9a84c, #f0d080)'
-                  : 'rgba(255,255,255,0.18)',
-                boxShadow: i === realIdx ? '0 0 16px rgba(201,168,76,0.65)' : 'none',
-                transition: 'all 0.42s cubic-bezier(0.23,1,0.32,1)',
-              }}
-            />
-          ))}
-        </div>
-
-        <NavArrow dir="next" onClick={goNext} />
       </div>
     </section>
   );

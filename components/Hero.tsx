@@ -96,6 +96,25 @@ export default function Hero() {
     };
   }, [paused, next]);
 
+  // Parallax: shift background images down slightly as user scrolls
+  useEffect(() => {
+    let raf: number;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const offset = Math.min(window.scrollY * 0.28, 90);
+        document.querySelectorAll<HTMLDivElement>('.hero-slide-bg').forEach((el) => {
+          el.style.transform = `translateY(${offset}px)`;
+        });
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   const scrollTo = (id: string) => {
     const attempt = () => {
       const el = document.querySelector(id);
@@ -151,7 +170,7 @@ export default function Hero() {
 
   const highlightedHeadline = slide.headline.split(' ').map((word: string, i: number) => {
     const clean = word.replace(/[^A-Za-z]/g, '');
-    const delay = `${80 + i * 80}ms`;
+    const delay = `${50 + i * 90}ms`;
     const isGold = GOLD_WORDS.has(clean);
     return (
       <span key={i} className="headline-word-outer">
@@ -186,16 +205,19 @@ export default function Hero() {
           }`}
           aria-hidden={i !== active}
         >
-          <Image
-            src={s.image}
-            alt={s.imageAlt}
-            fill
-            className="object-cover object-center"
-            priority={i === 0}
-            loading={i === 0 ? undefined : 'lazy'}
-            sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
-            quality={100}
-          />
+          {/* hero-slide-bg extends beyond bounds to provide parallax buffer */}
+          <div className="hero-slide-bg">
+            <Image
+              src={s.image}
+              alt={s.imageAlt}
+              fill
+              className="object-cover object-center"
+              priority={i === 0}
+              loading={i === 0 ? undefined : 'lazy'}
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
+              quality={100}
+            />
+          </div>
         </div>
       ))}
 

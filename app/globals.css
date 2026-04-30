@@ -171,15 +171,20 @@
 
 /* Hero slide text animation */
 
-/* Word wipe-up reveal — outer clips, inner slides */
+/* Word wipe-up reveal — outer clips, inner slides up + sharpens from blur */
 @keyframes textSlideUp {
-  from {
-    transform: translateY(110%);
+  0% {
+    transform: translateY(120%);
     opacity: 0;
+    filter: blur(10px);
   }
-  to {
+  55% {
+    filter: blur(0px);
+  }
+  100% {
     transform: translateY(0);
     opacity: 1;
+    filter: blur(0px);
   }
 }
 
@@ -222,17 +227,17 @@
   line-height: 1.15;
 }
 
-/* Inner word slides up inside the clip */
+/* Inner word slides up + blur-to-sharp inside the clip */
 .headline-word {
   display: inline-block;
-  animation: textSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: textSlideUp 0.78s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Gold words: slide-up + continuous shimmer */
+/* Gold words: slide-up + blur-to-sharp + continuous shimmer */
 .headline-word-gold {
   display: inline-block;
-  animation: textSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both,
-             goldShimmer 3.5s linear 0.8s infinite;
+  animation: textSlideUp 0.78s cubic-bezier(0.16, 1, 0.3, 1) both,
+             goldShimmer 3.5s linear 0.9s infinite;
   background: linear-gradient(90deg, #c9a84c 0%, #f5d898 35%, #e8c060 55%, #c9a84c 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -272,6 +277,14 @@
     0 6px 20px rgba(201, 168, 76, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Parallax hero background — extends beyond the section bounds
+   so the image has room to shift down without showing blank space ── */
+.hero-slide-bg {
+  position: absolute;
+  inset: -90px 0;
+  will-change: transform;
 }
 
 /* Smooth scrollbar */

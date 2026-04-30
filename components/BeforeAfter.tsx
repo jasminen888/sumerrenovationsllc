@@ -2,10 +2,8 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 
-const BEFORE_IMG =
-  'https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1400&auto=format&fit=crop';
-const AFTER_IMG =
-  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=1400&auto=format&fit=crop';
+const BEFORE_IMG = '/kitchenremodelbefore.jpg';
+const AFTER_IMG = '/kitchenremodelafter.jpg';
 
 export default function BeforeAfter() {
   const containerRef = useRef<HTMLDivElement>(null);

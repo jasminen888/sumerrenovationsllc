@@ -125,37 +125,37 @@ export default function BeforeAfter() {
         aria-label="Before and after kitchen renovation comparison slider"
         role="img"
       >
-        {/* BEFORE image (bottom layer, full width) — uses WebP with JPG fallback */}
+        {/* AFTER image (bottom layer, full width) — revealed on the left as divider moves right */}
         <picture className="absolute inset-0 w-full h-full">
-          <source srcSet={BEFORE_IMG} type="image/webp" />
-          <img src={BEFORE_IMG_FALLBACK} alt="Kitchen before renovation" className="absolute inset-0 w-full h-full object-cover" />
-        </picture>
-        {/* BEFORE label */}
-        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm" style={{ background: 'rgba(0,0,0,0.55)' }}>
-          Before
-        </div>
-
-        {/* AFTER image (clipped overlay) — uses WebP with JPG fallback */}
-        <picture
-          className="absolute inset-0 w-full h-full"
-          style={{
-            clipPath: `inset(0 ${sweepStarted ? (100 - position) : 100}% 0 0)`,
-            transition: (sweepStarted && !sweepDone) ? 'clip-path 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
-          }}
-        >
           <source srcSet={AFTER_IMG} type="image/webp" />
           <img src={AFTER_IMG_FALLBACK} alt="Kitchen after renovation" className="absolute inset-0 w-full h-full object-cover" />
         </picture>
         {/* AFTER label */}
+        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm" style={{ background: 'linear-gradient(135deg, #c9a84c, #a0742a)' }}>
+          After
+        </div>
+
+        {/* BEFORE image (clipped overlay from right) — clips away left-to-right as divider moves */}
+        <picture
+          className="absolute inset-0 w-full h-full"
+          style={{
+            clipPath: `inset(0 0 0 ${sweepStarted ? position : 0}%)`,
+            transition: (sweepStarted && !sweepDone) ? 'clip-path 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
+          }}
+        >
+          <source srcSet={BEFORE_IMG} type="image/webp" />
+          <img src={BEFORE_IMG_FALLBACK} alt="Kitchen before renovation" className="absolute inset-0 w-full h-full object-cover" />
+        </picture>
+        {/* BEFORE label */}
         <div
           className="absolute top-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm"
           style={{
-            background: 'linear-gradient(135deg, #c9a84c, #a0742a)',
+            background: 'rgba(0,0,0,0.55)',
             left: `calc(${sweepStarted ? position : 0}% + 20px)`,
             transition: (sweepStarted && !sweepDone) ? 'left 1.1s cubic-bezier(0.20, 1, 0.20, 1)' : 'none',
           }}
         >
-          After
+          Before
         </div>
 
         {/* Divider line */}

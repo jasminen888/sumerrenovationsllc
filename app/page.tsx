@@ -35,6 +35,9 @@ export default function HomePage() {
       {/* Sticky header */}
       <Header />
 
+      {/* Static CTA info bar — sits directly below header */}
+      <StickyCta />
+
       {/* Main content */}
       <main>
         {/* 1. Hero + TrustBar overlay */}
@@ -79,9 +82,6 @@ export default function HomePage() {
 
       {/* Mobile sticky bottom action bar */}
       <MobileActionBar />
-
-      {/* Sticky desktop CTA bar (appears after scrolling past hero) */}
-      <StickyCta />
 
       {/* Global scroll-reveal IntersectionObserver */}
       <ScrollRevealProvider />

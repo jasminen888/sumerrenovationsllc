@@ -7,25 +7,25 @@ const ITEMS = [
   {
     quote: "Professional, modern, and exactly what we needed. Our new website brought in more clients immediately.",
     name: "Sarah L.",
-    role: "Small Business Owner",
+    role: "Client",
     initials: "SL",
   },
   {
     quote: "Fast, responsive, and easy to work with. Highly recommend for any business looking to grow online.",
     name: "Michael T.",
-    role: "Contractor",
+    role: "Client",
     initials: "MT",
   },
   {
     quote: "The design is clean and high-converting. We've seen a clear increase in leads.",
     name: "David R.",
-    role: "Startup Founder",
+    role: "Client",
     initials: "DR",
   },
   {
     quote: "Great communication and attention to detail. The final product exceeded expectations.",
     name: "Emily K.",
-    role: "Local Business Owner",
+    role: "Client",
     initials: "EK",
   },
 ];

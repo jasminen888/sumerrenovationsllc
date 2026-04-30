@@ -21,10 +21,14 @@ const MobileActionBar = dynamic(() => import('@/components/MobileActionBar'), { 
 const StickyCta = dynamic(() => import('@/components/StickyCta'), { ssr: false });
 const CountdownBanner = dynamic(() => import('@/components/CountdownBanner'));
 const ScrollRevealProvider = dynamic(() => import('@/components/ScrollRevealProvider'));
+const ScrollProgressBar = dynamic(() => import('@/components/ScrollProgressBar'), { ssr: false });
 
 export default function HomePage() {
   return (
     <>
+      {/* Gold scroll progress bar — fixed to top of viewport */}
+      <ScrollProgressBar />
+
       {/* Limited-time offer banner — top of page */}
       <CountdownBanner />
 

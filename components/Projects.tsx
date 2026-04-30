@@ -1,3 +1,5 @@
+'use client';
+import { useRef, useCallback } from 'react';
 import BeforeAfter from './BeforeAfter';
 import SectionAccent from './SectionAccent';
 
@@ -40,6 +42,63 @@ const projects = [
   },
 ];
 
+type Project = (typeof projects)[0];
+
+function TiltCard({ project }: { project: Project }) {
+  const cardRef = useRef<HTMLElement>(null);
+
+  const onMouseMove = useCallback((e: React.MouseEvent) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 → 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(900px) rotateY(${x * 16}deg) rotateX(${-y * 10}deg) translateY(-10px) scale(1.02)`;
+    el.style.boxShadow = `${-x * 24}px ${y * 16}px 48px rgba(0,0,0,0.45), 0 0 36px rgba(201,168,76,0.28)`;
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transform = '';
+    el.style.boxShadow = '';
+  }, []);
+
+  return (
+    <article
+      ref={cardRef}
+      className="group relative overflow-hidden rounded-2xl cursor-pointer"
+      style={{
+        transition: 'transform 0.45s cubic-bezier(0.23,1,0.32,1), box-shadow 0.45s ease',
+        willChange: 'transform',
+      }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      {/* Image */}
+      <div className="relative h-72">
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+          style={{ backgroundImage: `url('${project.image}')` }}
+          role="img"
+          aria-label={project.title}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      </div>
+      {/* Overlay content */}
+      <div className="absolute inset-0 flex flex-col justify-end p-6">
+        <span className="inline-block bg-gold-500 text-white text-lg font-semibold px-3 py-1 rounded-full mb-3 w-fit">
+          {project.category}
+        </span>
+        <h3 className="font-serif text-4xl font-bold text-white mb-2">{project.title}</h3>
+        <p className="text-white text-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
+          {project.description}
+        </p>
+      </div>
+    </article>
+  );
+}
+
 export default function Projects() {
   return (
     <section
@@ -80,33 +139,7 @@ export default function Projects() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <article
-              key={project.title}
-              className="group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-            >
-              {/* Image */}
-              <div className="relative h-72">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${project.image}')` }}
-                  role="img"
-                  aria-label={project.title}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              </div>
-
-              {/* Overlay content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="inline-block bg-gold-500 text-white text-lg font-semibold px-3 py-1 rounded-full mb-3 w-fit">
-                  {project.category}
-                </span>
-                <h3 className="font-serif text-4xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-white text-xl leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
-                  {project.description}
-                </p>
-
-              </div>
-            </article>
+            <TiltCard key={project.title} project={project} />
           ))}
         </div>
 

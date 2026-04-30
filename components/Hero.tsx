@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import TrustBar from './TrustBar';
+import MagneticButton from './MagneticButton';
 
 const LABEL = 'REQUEST A FREE CONSULTATION';
 const DESCRIPTION =
@@ -288,26 +289,30 @@ export default function Hero() {
 
           {/* CTA buttons */}
           <div className="hidden sm:flex flex-wrap items-center gap-4 hero-item" style={{ animationDelay: '360ms' }}>
-            <button
-              onClick={() => scrollTo('#contact')}
-              className="btn-primary text-base px-8 py-4 shadow-lg shadow-gold-500/30"
-              aria-label="Get a free renovation quote"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Get a Free Quote
-            </button>
-            <button
-              onClick={() => scrollTo('#schedule')}
-              className="btn-outline border-white/60 text-white hover:bg-white hover:text-charcoal text-base px-8 py-4"
-              aria-label="Schedule an appointment"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Schedule Appointment
-            </button>
+            <MagneticButton>
+              <button
+                onClick={() => scrollTo('#contact')}
+                className="btn-primary text-base px-8 py-4 shadow-lg shadow-gold-500/30"
+                aria-label="Get a free renovation quote"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Get a Free Quote
+              </button>
+            </MagneticButton>
+            <MagneticButton>
+              <button
+                onClick={() => scrollTo('#schedule')}
+                className="btn-outline border-white/60 text-white hover:bg-white hover:text-charcoal text-base px-8 py-4"
+                aria-label="Schedule an appointment"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Schedule Appointment
+              </button>
+            </MagneticButton>
           </div>
         </div>
       </div>

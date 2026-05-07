@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SectionAccent from './SectionAccent';
 
 type FormData = {
@@ -11,6 +11,7 @@ type FormData = {
   budget: string;
   contactMethod: string;
   message: string;
+  website: string; // honeypot – must stay empty
 };
 
 const initialForm: FormData = {
@@ -21,6 +22,7 @@ const initialForm: FormData = {
   budget: '',
   contactMethod: '',
   message: '',
+  website: '', // honeypot
 };
 
 const services = [
@@ -96,6 +98,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const loadedAt = useRef<number>(Date.now());
 
   const validate = () => {
     const newErrors: Partial<FormData> = {};
@@ -133,7 +136,7 @@ export default function Contact() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, _loadedAt: loadedAt.current }),
       });
       if (!res.ok) throw new Error('Failed to send');
       setSubmitted(true);
@@ -266,6 +269,17 @@ export default function Contact() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate>
+                    {/* Honeypot – hidden from real users, bots fill it in */}
+                    <input
+                      type="text"
+                      name="website"
+                      value={form.website}
+                      onChange={handleChange}
+                      autoComplete="off"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                    />
                     <div className="mb-6">
                       <h3 className="font-serif text-xl font-bold text-charcoal">Send Us a Message</h3>
                       <p className="text-gray-400 text-base mt-1">Fill out the form below and we&apos;ll be in touch shortly.</p>

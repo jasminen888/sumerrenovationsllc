@@ -10,8 +10,8 @@ const posts = [
     category: 'Kitchen',
     readTime: '5 min read',
     date: 'May 12, 2025',
-    title: 'Top Kitchen Renovation Trends Dominating Portland Homes in 2025',
-    excerpt: 'From waterfall quartz islands to hidden appliance panels, discover the design choices Portland homeowners are loving right now — and which ones offer the best resale value.',
+    title: 'Top Kitchen Remodeling Trends in Portland for 2025',
+    excerpt: 'From waterfall quartz islands to hidden appliance panels, discover the kitchen remodeling trends Portland homeowners are choosing — and which upgrades offer the best resale value.',
     image: '/kitchen1.jpg',
   },
   {
@@ -19,8 +19,8 @@ const posts = [
     category: 'Bathroom',
     readTime: '6 min read',
     date: 'Apr 28, 2025',
-    title: "What's the Real ROI of a Bathroom Remodel in Portland?",
-    excerpt: 'Thinking of remodeling your bathroom before selling? We break down which upgrades consistently return 70–85% of their cost — and which ones buyers in the PNW actually care about.',
+    title: 'Luxury Bathroom Renovation Ideas That Add Real Value',
+    excerpt: 'Thinking of remodeling your bathroom before selling? We break down which upgrades return 70–85% of their cost — and which ones Oregon buyers actually care about.',
     image: '/kitchen2.jpeg',
   },
   {
@@ -28,8 +28,8 @@ const posts = [
     category: 'Guides',
     readTime: '7 min read',
     date: 'Apr 5, 2025',
-    title: '7 Red Flags to Watch for When Hiring a Home Renovation Contractor',
-    excerpt: 'Before you sign anything, read this. We share the honest warning signs that separate legitimate contractors from those who will leave your project unfinished.',
+    title: '7 Red Flags to Watch When Hiring a Renovation Contractor',
+    excerpt: 'Before signing any contract, read this. We share the honest warning signs that separate trustworthy remodeling contractors from those who leave projects unfinished.',
     image: '/kitchen3.jpg',
   },
   {
@@ -37,8 +37,8 @@ const posts = [
     category: 'Renovation',
     readTime: '8 min read',
     date: 'Mar 18, 2025',
-    title: 'The Complete Guide to Planning a Full Home Renovation in Portland',
-    excerpt: 'Thinking about a whole-home transformation? This step-by-step guide covers budgeting, permits, timelines, and how to choose the right contractor from day one.',
+    title: 'Best Home Renovation Ideas for Oregon Homes in 2025',
+    excerpt: 'Thinking about a whole-home transformation? This guide covers budgeting, permits, timelines, and how to choose the right general contractor in the Portland area.',
     image: '/kitchen4.jpg',
   },
 ];
@@ -65,6 +65,20 @@ export default function Blog() {
     return () => obs.disconnect();
   }, []);
 
+  const blogListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Sumer Renovations LLC — Renovation Blog',
+    description: 'Home renovation tips, remodeling guides, and industry insights from Sumer Renovations LLC in Portland, OR.',
+    url: 'https://sumerrenovations.com/#blog',
+    itemListElement: posts.map((post, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://sumerrenovations.com/blog/${post.slug}`,
+      name: post.title,
+    })),
+  };
+
   return (
     <section
       id="blog"
@@ -72,6 +86,10 @@ export default function Blog() {
       className="relative py-24 overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #060c1c 0%, #0a1628 50%, #0d1f3c 100%)' }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListSchema) }}
+      />
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)', transform: 'translate(-50%,-40%)' }} />
@@ -124,11 +142,12 @@ export default function Blog() {
               <div className="relative h-52 overflow-hidden flex-shrink-0">
                 <Image
                   src={post.image}
-                  alt={post.title}
+                  alt={`${post.title} — Sumer Renovations LLC`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   quality={85}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(4,13,26,0.65) 100%)' }} />
                 <span

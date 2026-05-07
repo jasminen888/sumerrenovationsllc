@@ -13,6 +13,7 @@ const EstimateCalculator = dynamic(() => import('@/components/EstimateCalculator
 const Testimonials = dynamic(() => import('@/components/Testimonials'), { ssr: false });
 const ServiceAreas = dynamic(() => import('@/components/ServiceAreas'));
 const Blog = dynamic(() => import('@/components/Blog'));
+const FAQ = dynamic(() => import('@/components/FAQ'));
 const Schedule = dynamic(() => import('@/components/Schedule'));
 const Contact = dynamic(() => import('@/components/Contact'));
 const Footer = dynamic(() => import('@/components/Footer'));
@@ -61,7 +62,10 @@ export default function HomePage() {
         {/* 11. Renovation Blog */}
         <Blog />
 
-        {/* 12. Schedule Appointment (Calendly) */}
+        {/* 12. FAQ with Schema Markup */}
+        <FAQ />
+
+        {/* 13. Schedule Appointment (Calendly) */}
         <Schedule />
 
         {/* 12. Testimonials — premium carousel */}

@@ -5,7 +5,7 @@ const services = [
   {
     title: 'Kitchen Remodeling',
     description:
-      'Transform your kitchen into a stunning culinary masterpiece. From custom cabinetry to countertops, we create dream kitchens.',
+      'Transform your kitchen into a stunning culinary space with custom cabinetry, quartz countertops, and modern fixtures. Our Portland kitchen remodeling team brings decades of craftsmanship to every project — from minor updates to full kitchen renovations.',
     image: '/kitchenremodel.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -16,7 +16,7 @@ const services = [
   {
     title: 'Bathroom Remodeling',
     description:
-      'Create a luxurious spa-like bathroom retreat. Custom tile work, vanities, walk-in showers, and modern fixtures.',
+      'Create a luxurious spa-like bathroom retreat with custom tile work, walk-in showers, and designer vanities. Whether you\'re in Beaverton or Lake Oswego, our bathroom renovation specialists deliver beautiful, lasting results.',
     image: '/bathroom.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,7 +27,7 @@ const services = [
   {
     title: 'Full Home Renovation',
     description:
-      'Complete home transformations from top to bottom. We manage every phase of your renovation with expert precision.',
+      'Complete home transformations from top to bottom. We manage every phase of your renovation — design, permits, construction, and finishing — with expert precision. Trusted by homeowners across Portland, Hillsboro, and Eugene.',
     image: '/modernhome1.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,9 +36,42 @@ const services = [
     ),
   },
   {
+    title: 'Roofing Installation',
+    description:
+      'Protect your Oregon home with professional roofing installation, repair, and replacement. From Wilsonville to Corvallis, our roofing contractors deliver durable solutions built to handle the Pacific Northwest climate.',
+    image: '/roofing.jpg',
+    icon: (
+      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l9-9 9 9M4 10v10h6V14h4v6h6V10" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Deck Installation',
+    description:
+      'Expand your living space outdoors with a custom deck designed for Oregon\'s lifestyle. From composite decking to natural wood, we build beautiful, weather-resistant decks for homes in Portland, Vancouver WA, and beyond.',
+    image: '/deck.jpg',
+    icon: (
+      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Landscaping Design',
+    description:
+      'Elevate your home\'s curb appeal with professional landscaping and exterior design. Our landscaping services in Portland and Beaverton include garden design, hardscaping, drainage solutions, and seasonal planting tailored to the Pacific Northwest.',
+    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=800&auto=format&fit=crop',
+    icon: (
+      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+  },
+  {
     title: 'Exterior Renovation',
     description:
-      'Boost curb appeal with stunning exterior upgrades — siding, windows, doors, and architectural enhancements.',
+      'Boost your home\'s curb appeal with stunning exterior upgrades — new siding, energy-efficient windows, stylish doors, and architectural enhancements. We serve homeowners throughout the Portland metro and Southwest Washington.',
     image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=800&auto=format&fit=crop',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +82,7 @@ const services = [
   {
     title: 'Flooring Installation',
     description:
-      'Premium hardwood, tile, luxury vinyl, and carpet installation. Expert craftsmanship for floors that last a lifetime.',
+      'Premium hardwood, tile, luxury vinyl, and carpet installation throughout Oregon and SW Washington. Our flooring experts deliver flawless results — from kitchen repairs in Hillsboro to whole-home flooring in Lake Oswego.',
     image: '/floor.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,35 +91,13 @@ const services = [
     ),
   },
   {
-    title: 'Roofing',
-    description:
-      'Professional roofing installation, repair, and replacement. Protect your home with quality roofing solutions.',
-    image: '/roofing.jpg',
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l9-9 9 9M4 10v10h6V14h4v6h6V10" />
-      </svg>
-    ),
-  },
-  {
     title: 'Painting',
     description:
-      'Interior and exterior painting services. Premium paints, flawless finishes, and expert color consultation.',
+      'Interior and exterior painting services with premium paints and flawless finishes. Our painting crews serve all of Greater Portland — Beaverton, Hillsboro, Vancouver WA, and surrounding areas — with expert color consultation included.',
     image: '/painting.jpg',
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Custom Projects',
-    description:
-      'Unique custom builds, decks, outdoor living spaces, and specialty projects tailored to your vision.',
-    image: '/deck.jpg',
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
       </svg>
     ),
   },
@@ -118,8 +129,7 @@ export default function Services() {
             </h2>
           </div>
           <p className="section-subtitle mx-auto">
-            From kitchens to complete home transformations, we deliver exceptional craftsmanship
-            and lasting results on every project.
+            Kitchen remodeling, bathroom renovation, roofing installation, deck building, landscaping design, and full home renovation — all under one roof. Serving Portland, Beaverton, Hillsboro, Lake Oswego, Vancouver WA, Eugene, Corvallis, and Wilsonville.
           </p>
         </div>
 
@@ -141,7 +151,7 @@ export default function Services() {
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                   style={{ backgroundImage: `url('${service.image}')` }}
                   role="img"
-                  aria-label={`${service.title} renovation example`}
+                  aria-label={`${service.title} by Sumer Renovations LLC in Portland, OR`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 {/* Hover overlay */}

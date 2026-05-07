@@ -2,14 +2,46 @@
 import SectionAccent from './SectionAccent';
 
 const cities = [
-  { name: 'Portland, OR', description: 'Our home base & primary service area' },
-  { name: 'Beaverton, OR', description: 'Full renovation services available' },
-  { name: 'Hillsboro, OR', description: 'Kitchen, bath & full home remodels' },
-  { name: 'Lake Oswego, OR', description: 'Luxury renovation specialists' },
-  { name: 'Wilsonville, OR', description: 'Custom renovation & remodeling' },
-  { name: 'Vancouver, WA', description: 'Cross-border service, all projects' },
-  { name: 'Eugene, OR', description: 'Home renovation & improvement' },
-  { name: 'Corvallis, OR', description: 'Remodeling & custom builds' },
+  {
+    name: 'Portland, OR',
+    description: 'Our home base — kitchen remodeling, bathroom renovation & full home renovation',
+    keywords: 'Portland home renovation, Portland remodeling contractor',
+  },
+  {
+    name: 'Beaverton, OR',
+    description: 'Kitchen remodeling, bathroom renovation & roofing installation in Beaverton',
+    keywords: 'Beaverton kitchen remodeling, Beaverton remodeling contractor',
+  },
+  {
+    name: 'Hillsboro, OR',
+    description: 'Full home renovation, bathroom renovation & deck installation in Hillsboro',
+    keywords: 'Hillsboro bathroom renovation, Hillsboro home renovation',
+  },
+  {
+    name: 'Lake Oswego, OR',
+    description: 'Luxury home remodeling specialists — high-end finishes & custom builds',
+    keywords: 'Lake Oswego luxury remodeling, Lake Oswego renovation',
+  },
+  {
+    name: 'Wilsonville, OR',
+    description: 'Roofing installation, custom renovation & remodeling services',
+    keywords: 'Wilsonville roofing installation, Wilsonville remodeling',
+  },
+  {
+    name: 'Vancouver, WA',
+    description: 'Cross-border remodeling contractor serving SW Washington homeowners',
+    keywords: 'Vancouver WA remodeling contractor, Vancouver WA home renovation',
+  },
+  {
+    name: 'Eugene, OR',
+    description: 'Home renovation, kitchen remodeling & landscaping in Eugene',
+    keywords: 'Eugene home renovation, Eugene remodeling contractor',
+  },
+  {
+    name: 'Corvallis, OR',
+    description: 'Remodeling, custom builds & home improvement services in Corvallis',
+    keywords: 'Corvallis remodeling services, Corvallis home renovation',
+  },
 ];
 
 export default function ServiceAreas() {
@@ -37,8 +69,7 @@ export default function ServiceAreas() {
             </h2>
           </div>
           <p className="section-subtitle mx-auto">
-            Sumer Renovations LLC provides high-quality home renovation and remodeling services across
-            the Portland metro area and surrounding cities.
+            Sumer Renovations LLC provides licensed home renovation and remodeling services throughout the Portland metro area and beyond. Whether you need kitchen remodeling in Beaverton, bathroom renovation in Hillsboro, luxury home remodeling in Lake Oswego, or roofing installation in Wilsonville — our team is ready to help.
           </p>
         </div>
 
@@ -58,6 +89,7 @@ export default function ServiceAreas() {
                 <div
                   key={city.name}
                   className="group flex items-start gap-3 p-4 rounded-2xl border border-gray-100 hover:border-gold-200 hover:bg-gold-50 transition-all duration-200 cursor-default"
+                  title={city.keywords}
                 >
                   <div className="mt-0.5 w-8 h-8 bg-gold-100 text-gold-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-gold-500 group-hover:text-white transition-all duration-200">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,10 +98,10 @@ export default function ServiceAreas() {
                     </svg>
                   </div>
                   <div>
-                    <div className="font-semibold text-charcoal text-sm group-hover:text-gold-700 transition-colors">
+                    <h3 className="font-semibold text-charcoal text-sm group-hover:text-gold-700 transition-colors">
                       {city.name}
-                    </div>
-                    <div className="text-xs text-gray-400 mt-0.5">{city.description}</div>
+                    </h3>
+                    <p className="text-xs text-gray-400 mt-0.5">{city.description}</p>
                   </div>
                 </div>
               ))}

@@ -7,49 +7,49 @@ import MagneticButton from './MagneticButton';
 
 const LABEL = 'REQUEST A FREE CONSULTATION';
 const DESCRIPTION =
-  'We deliver high-quality kitchen, bathroom, and full home renovations with modern design and expert craftsmanship.';
+  'Portland\'s trusted general contractor for kitchen remodeling, bathroom renovation, roofing installation, deck building, and luxury home renovation. Serving Beaverton, Hillsboro, Lake Oswego, Vancouver WA, Eugene, and Corvallis.';
 
 const slides = [
   {
     id: 1,
     image: '/kitchen1.jpg',
-    imageAlt: 'Luxury kitchen renovation with premium finishes and modern design',
+    imageAlt: 'Luxury kitchen remodeling by Sumer Renovations LLC in Portland, OR — custom cabinetry and quartz countertops',
     headline: 'Transform Your Home with Expert Renovation',
   },
   {
     id: 2,
     image: '/kitchen.jpg',
-    imageAlt: 'Stunning kitchen remodel with modern design and quality craftsmanship',
+    imageAlt: 'Stunning kitchen renovation in Beaverton, OR — modern design and quality craftsmanship by Sumer Renovations',
     headline: 'Stunning Kitchens Designed for Modern Living',
   },
   {
     id: 3,
     image: '/kitchen2.jpeg',
-    imageAlt: 'Modern kitchen remodel with custom cabinetry and stone countertops',
+    imageAlt: 'Modern kitchen remodel in Hillsboro, OR — custom cabinetry and stone countertops by Sumer Renovations LLC',
     headline: 'Beautiful Kitchen Renovations Built to Last',
   },
   {
     id: 4,
     image: '/kitchen3.jpg',
-    imageAlt: 'Custom kitchen renovation showcasing expert craftsmanship',
+    imageAlt: 'Custom kitchen renovation in Lake Oswego, OR — expert craftsmanship by Sumer Renovations LLC',
     headline: 'Elegant Kitchen Designs Crafted to Perfection',
   },
   {
     id: 5,
     image: '/kitchen4.jpg',
-    imageAlt: 'Luxury custom kitchen with high-end finishes and modern layout',
+    imageAlt: 'Luxury kitchen remodeling in Portland, OR — high-end finishes and modern layout by Sumer Renovations',
     headline: 'Luxury Kitchens Built to Impress',
   },
   {
     id: 6,
     image: '/modernhome4.jpeg',
-    imageAlt: 'Modern home renovation with complete interior transformation',
+    imageAlt: 'Full home renovation in Portland, OR — complete interior transformation by Sumer Renovations LLC',
     headline: 'Complete Home Transformations Done Right',
   },
   {
     id: 7,
     image: '/bathroom.jpg',
-    imageAlt: 'Beautiful bathroom renovation with spa-quality finishes',
+    imageAlt: 'Bathroom renovation in Beaverton and Portland, OR — spa-quality finishes by Sumer Renovations LLC',
     headline: 'Beautiful Bathrooms Crafted with Care',
   },
 ];

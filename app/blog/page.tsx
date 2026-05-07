@@ -6,11 +6,25 @@ import { blogPosts } from './data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Renovation Blog | Sumer Renovations LLC',
+  title: 'Home Renovation Blog | Tips & Guides | Sumer Renovations LLC',
   description:
-    'Expert tips, trends, and guides on kitchen remodeling, bathroom renovations, and home improvement projects in Portland, OR.',
+    'Expert tips, trends, and guides on kitchen remodeling, bathroom renovation, roofing installation, and home improvement projects in Portland, Beaverton, Hillsboro, Lake Oswego, and the greater Oregon area.',
+  keywords: [
+    'home renovation tips Portland OR',
+    'kitchen remodeling ideas Oregon',
+    'bathroom renovation guide Portland',
+    'home remodeling blog Oregon',
+    'Sumer Renovations LLC blog',
+    'renovation contractor tips Portland',
+  ],
   alternates: {
     canonical: 'https://sumerrenovations.com/blog',
+  },
+  openGraph: {
+    title: 'Home Renovation Blog — Sumer Renovations LLC',
+    description: 'Kitchen remodeling tips, bathroom renovation ideas, and home improvement guides from Portland\'s trusted renovation contractor.',
+    type: 'website',
+    url: 'https://sumerrenovations.com/blog',
   },
 };
 

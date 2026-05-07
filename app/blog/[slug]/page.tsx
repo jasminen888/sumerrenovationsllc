@@ -19,15 +19,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | Sumer Renovations LLC`,
     description: post.excerpt,
+    keywords: [
+      post.category === 'Kitchen' ? 'kitchen remodeling Portland OR' : '',
+      post.category === 'Bathroom' ? 'bathroom renovation Portland OR' : '',
+      'home renovation Portland',
+      'Sumer Renovations LLC',
+      'remodeling contractor Oregon',
+    ].filter(Boolean),
     alternates: {
       canonical: `https://sumerrenovations.com/blog/${post.slug}`,
     },
     openGraph: {
-      title: post.title,
+      title: `${post.title} | Sumer Renovations LLC`,
       description: post.excerpt,
-      images: [{ url: post.image }],
+      images: [{ url: post.image, alt: `${post.title} — Sumer Renovations LLC Portland OR` }],
       type: 'article',
       publishedTime: post.date,
+      authors: ['Sumer Renovations LLC'],
     },
   };
 }
@@ -44,8 +52,40 @@ export default async function BlogArticlePage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: `https://sumerrenovations.com${post.image}`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Organization',
+      name: 'Sumer Renovations LLC',
+      url: 'https://sumerrenovations.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Sumer Renovations LLC',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://sumerrenovations.com/logo.png',
+      },
+    },
+    url: `https://sumerrenovations.com/blog/${post.slug}`,
+    mainEntityOfPage: `https://sumerrenovations.com/blog/${post.slug}`,
+    articleSection: post.category,
+    wordCount: post.paragraphs.join(' ').split(' ').length,
+    keywords: `home renovation Portland, ${post.category.toLowerCase()} remodeling Oregon, Sumer Renovations LLC`,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <Header />
 
       <main
@@ -56,7 +96,7 @@ export default async function BlogArticlePage({ params }: Props) {
         <div className="relative w-full" style={{ height: 'clamp(260px, 45vw, 520px)' }}>
           <Image
             src={post.image}
-            alt={post.title}
+            alt={`${post.title} — Sumer Renovations LLC Portland, OR`}
             fill
             priority
             className="object-cover"

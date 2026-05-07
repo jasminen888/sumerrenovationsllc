@@ -227,12 +227,10 @@ export default function WhyChooseUs() {
             </div>
 
             <p className="text-lg leading-relaxed mb-4" style={{ color: 'rgba(200,214,230,0.75)' }}>
-              With years of experience transforming homes across the Portland metro area, we&apos;ve
-              built our reputation on trust, quality, and unwavering commitment.
+              With years of experience transforming homes across Portland, Beaverton, Hillsboro, Lake Oswego, and the greater Oregon area, we&apos;ve built our reputation on trust, quality, and unwavering commitment to every homeowner we serve.
             </p>
             <p className="leading-relaxed mb-10" style={{ color: 'rgba(180,200,220,0.55)' }}>
-              Every project is handled with the same professionalism — whether a quick bathroom
-              refresh or a full home renovation.
+              Every project is handled with the same professionalism — whether a kitchen repair in Beaverton, a bathroom renovation in Hillsboro, or a full luxury home remodel in Lake Oswego.
             </p>
 
             {/* Stats grid */}

@@ -173,7 +173,9 @@ const quickLinks = [
   { name: 'Services', href: '#services' },
   { name: 'Projects', href: '#projects' },
   { name: 'Testimonials', href: '#testimonials' },
+  { name: 'FAQ', href: '#faq' },
   { name: 'Service Areas', href: '#service-areas' },
+  { name: 'Blog', href: '#blog' },
   { name: 'Schedule Appointment', href: '#schedule' },
   { name: 'Contact Us', href: '#contact' },
 ];
@@ -182,12 +184,13 @@ const serviceLinks = [
   'Kitchen Remodeling',
   'Bathroom Remodeling',
   'Full Home Renovation',
+  'Roofing Installation',
+  'Deck Installation',
+  'Landscaping Design',
   'Exterior Renovation',
   'Flooring Installation',
-  'Roofing',
   'Painting',
   'Custom Builds',
-  'Decks & Outdoor Living',
 ];
 
 const serviceAreas = [
@@ -269,8 +272,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Portland&apos;s premier home renovation and remodeling company. We transform houses into
-              beautiful, functional dream homes with quality craftsmanship and exceptional service.
+              Portland&apos;s trusted home renovation and remodeling contractor. Kitchen remodeling, bathroom renovation, roofing installation, deck building, and luxury home renovations across Portland, Beaverton, Hillsboro, Lake Oswego, Vancouver WA, Eugene, and Corvallis.
             </p>
 
             {/* Social icons */}
@@ -490,6 +492,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Local SEO paragraph — visible to crawlers, minimal visual footprint */}
+      <div className="relative z-10 border-t border-white/5 py-4 px-4 text-center">
+        <p className="text-xs text-white/30 leading-relaxed max-w-4xl mx-auto">
+          Sumer Renovations LLC is a licensed general contractor offering kitchen remodeling, bathroom renovation, roofing installation, deck installation, landscaping design, and full home renovation near me in Portland, Beaverton, Hillsboro, Lake Oswego, Wilsonville, Vancouver WA, Eugene, and Corvallis, Oregon.
+        </p>
       </div>
 
       {/* Bottom bar */}

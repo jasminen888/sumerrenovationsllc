@@ -14,7 +14,7 @@ const features = [
     ),
     title: 'Licensed & Insured',
     description: 'Fully licensed, bonded, and insured in Oregon and Washington. Every project is backed by proper permits and full liability coverage for your complete peace of mind.',
-    proof: '✓ OR & WA Licensed',
+    proof: '✓ OR Licensed',
   },
   {
     icon: (

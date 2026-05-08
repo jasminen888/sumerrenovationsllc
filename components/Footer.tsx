@@ -276,7 +276,7 @@ export default function Footer() {
             </p>
 
             {/* Social icons */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex gap-3">
               <SocialIcon href="https://www.facebook.com/sumerrenovations" label="Follow Sumer Renovations on Facebook">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
@@ -287,27 +287,6 @@ export default function Footer() {
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" strokeWidth={1.5} />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" strokeWidth={1.5} />
-                </svg>
-              </SocialIcon>
-              <SocialIcon href="https://www.linkedin.com/company/sumer-renovations" label="Connect with Sumer Renovations on LinkedIn">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </SocialIcon>
-              <SocialIcon href="https://x.com/sumerrenovations" label="Follow Sumer Renovations on X">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </SocialIcon>
-              <SocialIcon href="https://www.houzz.com/professionals/sumer-renovations" label="View Sumer Renovations on Houzz">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.236L20 8v8l-8 4-8-4V8l8-3.764z" />
-                </svg>
-              </SocialIcon>
-              <SocialIcon href="https://www.yelp.com/biz/sumer-renovations-portland" label="Review Sumer Renovations on Yelp">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.5 2C6.702 2 2 6.702 2 12.5S6.702 23 12.5 23 23 18.298 23 12.5 18.298 2 12.5 2zm1.01 15.05l-3.517 1.288c-.4.147-.84-.06-.988-.46L7.5 13.5c-.148-.4.06-.84.46-.988l3.517-1.288c.4-.147.84.06.988.46l1.504 4.378c.148.4-.06.84-.46.988z" />
                 </svg>
               </SocialIcon>
             </div>

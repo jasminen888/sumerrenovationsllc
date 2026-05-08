@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ShareButtons from '@/components/ShareButtons';
 import { blogPosts, getPostBySlug } from '../data';
 import type { Metadata } from 'next';
 
@@ -146,24 +147,33 @@ export default async function BlogArticlePage({ params }: Props) {
 
         {/* Article body */}
         <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-          {/* Meta row */}
+          {/* Meta row — date/readtime + social share */}
           <div
-            className="flex items-center gap-4 text-sm mb-10 pb-8"
+            className="flex flex-wrap items-center justify-between gap-y-4 gap-x-4 text-sm mb-10 pb-8"
             style={{ color: 'rgba(255,255,255,0.45)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
           >
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              {post.date}
-            </span>
-            <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.2)' }} />
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {post.readTime}
-            </span>
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {post.date}
+              </span>
+              <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.2)' }} />
+              <span className="flex items-center gap-1.5">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {post.readTime}
+              </span>
+            </div>
+            <ShareButtons
+              url={`/blog/${post.slug}`}
+              title={post.title}
+              description={post.excerpt}
+              imageUrl={`https://sumerrenovations.com${post.image}`}
+              context="blog"
+            />
           </div>
 
           {/* Article paragraphs */}
@@ -179,9 +189,29 @@ export default async function BlogArticlePage({ params }: Props) {
             ))}
           </div>
 
+          {/* Share this article */}
+          <div
+            className="mt-12 pt-8"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+          >
+            <p
+              className="text-xs font-semibold tracking-widest uppercase mb-3"
+              style={{ color: 'rgba(255,255,255,0.3)' }}
+            >
+              Share this article
+            </p>
+            <ShareButtons
+              url={`/blog/${post.slug}`}
+              title={post.title}
+              description={post.excerpt}
+              imageUrl={`https://sumerrenovations.com${post.image}`}
+              context="blog"
+            />
+          </div>
+
           {/* CTA block */}
           <div
-            className="mt-16 rounded-2xl p-8 text-center"
+            className="mt-12 rounded-2xl p-8 text-center"
             style={{
               background: 'linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.06) 100%)',
               border: '1px solid rgba(201,168,76,0.25)',

@@ -2,6 +2,7 @@
 import { useRef, useCallback } from 'react';
 import BeforeAfter from './BeforeAfter';
 import SectionAccent from './SectionAccent';
+import ShareButtons from './ShareButtons';
 
 const projects = [
   {
@@ -94,6 +95,15 @@ function TiltCard({ project }: { project: Project }) {
         <p className="text-white text-base leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-h-0 group-hover:max-h-28 overflow-hidden">
           {project.description}
         </p>
+        {/* Share this project */}
+        <div className="mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-75">
+          <ShareButtons
+            url="/#projects"
+            title={`${project.title} — Sumer Renovations LLC Portland, OR`}
+            description={project.description}
+            context="project"
+          />
+        </div>
       </div>
     </article>
   );

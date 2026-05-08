@@ -208,7 +208,11 @@ export default function RootLayout({
                   sameAs: [
                     'https://www.facebook.com/sumerrenovations',
                     'https://www.instagram.com/sumerrenovations',
+                    'https://www.linkedin.com/company/sumer-renovations',
+                    'https://x.com/sumerrenovations',
+                    'https://www.houzz.com/professionals/sumer-renovations',
                     'https://www.yelp.com/biz/sumer-renovations-portland',
+                    'https://www.google.com/maps/search/Sumer+Renovations+LLC+Portland+OR',
                   ],
                   aggregateRating: {
                     '@type': 'AggregateRating',

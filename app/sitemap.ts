@@ -1,53 +1,53 @@
 import type { MetadataRoute } from 'next';
+import { blogPosts } from './blog/data';
 
-const blogSlugs = [
-  'kitchen-renovation-trends-portland',
-  'bathroom-remodel-roi-portland',
-  'hiring-renovation-contractor-red-flags',
-  'full-home-renovation-planning-portland',
-];
+const BASE_URL = 'https://sumerrenovations.com';
+
+// Static page last-modified dates (update when page content changes)
+const STATIC_DATES = {
+  home:    new Date('2026-05-07'),
+  blog:    new Date(blogPosts[0]?.date ?? '2025-05-12'),
+  privacy: new Date('2025-01-01'),
+  terms:   new Date('2025-01-01'),
+} as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://sumerrenovations.com';
-
-  const blogEntries: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
 
   return [
+    // Homepage — highest priority
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      url: BASE_URL,
+      lastModified: STATIC_DATES.home,
+      changeFrequency: 'weekly' as const,
       priority: 1.0,
     },
+    // Blog index — updated whenever new posts are published
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      url: `${BASE_URL}/blog`,
+      lastModified: STATIC_DATES.blog,
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
+    // Individual blog posts — sorted newest first from data.ts
     ...blogEntries,
+    // Legal pages — rarely change
     {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
+      url: `${BASE_URL}/privacy`,
+      lastModified: STATIC_DATES.privacy,
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
+      url: `${BASE_URL}/terms`,
+      lastModified: STATIC_DATES.terms,
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/sitemap`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.4,
     },
   ];
 }

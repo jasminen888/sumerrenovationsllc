@@ -1,3 +1,7 @@
 node_modules
 .next
 .env*.local
+
+# Local/generated artifacts
+.DS_Store
+*.tsbuildinfo

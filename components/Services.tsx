@@ -1,5 +1,6 @@
 'use client';
 import SectionAccent from './SectionAccent';
+import { useRouter } from 'next/navigation';
 
 const services = [
   {
@@ -12,6 +13,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
       </svg>
     ),
+    href: '/kitchen-remodeling-portland',
   },
   {
     title: 'Bathroom Remodeling',
@@ -23,6 +25,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
       </svg>
     ),
+    href: '/bathroom-remodeling-portland',
   },
   {
     title: 'Full Home Renovation',
@@ -45,6 +48,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l9-9 9 9M4 10v10h6V14h4v6h6V10" />
       </svg>
     ),
+    href: '/roof-installation-portland',
   },
   {
     title: 'Deck Installation',
@@ -93,11 +97,21 @@ const services = [
 ];
 
 export default function Services() {
+  const router = useRouter();
+
   const scrollTo = (id: string) => {
     const el = document.querySelector(id);
     if (el) {
       window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
     }
+  };
+
+  const handleServiceAction = (href?: string) => {
+    if (href) {
+      router.push(href);
+      return;
+    }
+    scrollTo('#contact');
   };
 
   return (
@@ -128,10 +142,10 @@ export default function Services() {
             <article
               key={service.title}
               className="card group cursor-pointer overflow-hidden"
-              onClick={() => scrollTo('#contact')}
+              onClick={() => handleServiceAction(service.href)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && scrollTo('#contact')}
+              onKeyDown={(e) => e.key === 'Enter' && handleServiceAction(service.href)}
               aria-label={`Learn more about ${service.title}`}
             >
               {/* Image */}

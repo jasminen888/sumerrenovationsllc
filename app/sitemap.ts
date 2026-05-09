@@ -7,6 +7,9 @@ const BASE_URL = 'https://sumerrenovations.com';
 const STATIC_DATES = {
   home:    new Date('2026-05-07'),
   blog:    new Date(blogPosts[0]?.date ?? '2025-05-12'),
+  kitchen: new Date('2026-05-09'),
+  bath:    new Date('2026-05-09'),
+  roof:    new Date('2026-05-09'),
   privacy: new Date('2025-01-01'),
   terms:   new Date('2025-01-01'),
 } as const;
@@ -33,6 +36,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: STATIC_DATES.blog,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+    },
+    // Core service-location pages
+    {
+      url: `${BASE_URL}/kitchen-remodeling-portland`,
+      lastModified: STATIC_DATES.kitchen,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/bathroom-remodeling-portland`,
+      lastModified: STATIC_DATES.bath,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/roof-installation-portland`,
+      lastModified: STATIC_DATES.roof,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
     },
     // Individual blog posts — sorted newest first from data.ts
     ...blogEntries,

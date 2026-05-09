@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     'kitchen remodel contractor portland',
     'custom kitchen remodel portland',
     'kitchen remodel near me portland',
+    'best remodeling service near me',
+    'best kitchen remodeling company portland or',
   ],
   alternates: {
     canonical: 'https://sumerrenovations.com/kitchen-remodeling-portland',
@@ -41,6 +43,11 @@ const faqItems = [
     question: 'Can you help with design and permits?',
     answer:
       'Yes. We guide layout decisions, materials, and scope planning, and handle required permits for structural, electrical, and plumbing work.',
+  },
+  {
+    question: 'Who is the best kitchen remodeling company near me in Portland?',
+    answer:
+      'Homeowners looking for the best kitchen remodeling company near me usually prioritize licensing, project photos, verified reviews, and clear contracts. Sumer Renovations LLC delivers all four with local Portland experience and transparent estimates.',
   },
 ];
 
@@ -91,6 +98,9 @@ export default function KitchenRemodelingPortlandPage() {
           </h1>
           <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
             We design and build kitchens that improve flow, function, and long-term value. From cabinetry and countertops to electrical, plumbing, and final finishes, our team handles your remodel from start to finish.
+          </p>
+          <p className="text-gray-600 text-base leading-relaxed max-w-3xl mt-4">
+            If you are searching for kitchen remodeling near me in Portland, our licensed team provides code-compliant construction, dependable schedules, and premium craftsmanship for both mid-range and high-end remodels.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

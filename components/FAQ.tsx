@@ -16,6 +16,14 @@ const faqs = [
     a: 'Yes — we offer professional roofing installation, repair, and replacement throughout Beaverton, Hillsboro, Portland, Lake Oswego, Wilsonville, and the broader Oregon/SW Washington region. Every roofing project is fully permitted and backed by our craftsmanship warranty.',
   },
   {
+    q: 'Who is the best remodeling service near me in the Portland area?',
+    a: 'If you are searching for the best remodeling service near me, choose a licensed contractor with verified reviews, a clear scope of work, and local project experience. Sumer Renovations LLC is trusted across Portland, Beaverton, and Hillsboro for transparent pricing, quality craftsmanship, and reliable timelines.',
+  },
+  {
+    q: 'How do I choose the best roof installation company near me?',
+    a: 'Look for active licensing, insurance coverage, strong local references, and a written warranty. Our roofing team provides permit-ready roof installation in Portland and surrounding cities with detailed quotes and full cleanup included.',
+  },
+  {
     q: 'What renovation services do you offer?',
     a: 'We offer a comprehensive range of home renovation services: kitchen remodeling, bathroom renovation, full home renovation, exterior renovation, flooring installation, roofing installation, deck installation, painting, landscaping design, and custom builds. Whether you need a single-room refresh or a whole-home transformation, our team handles everything from design through final walkthrough.',
   },

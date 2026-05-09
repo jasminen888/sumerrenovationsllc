@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     'new roof installation portland',
     'roof replacement portland',
     'licensed roofer portland',
+    'best roof installation company near me',
+    'best roof installation portland or',
   ],
   alternates: {
     canonical: 'https://sumerrenovations.com/roof-installation-portland',
@@ -41,6 +43,11 @@ const faqItems = [
     question: 'Do you handle permits and cleanup?',
     answer:
       'Yes. We handle permit requirements, on-site protection, debris removal, and final cleanup so your property is left clean and secure.',
+  },
+  {
+    question: 'Who is the best roof installation company near me in Portland?',
+    answer:
+      'If you are searching for the best roof installation company near me, choose a contractor with local references, permit experience, and warranty-backed workmanship. Sumer Renovations LLC provides roof installation throughout Portland and nearby cities with clear scope and pricing.',
   },
 ];
 
@@ -96,6 +103,9 @@ export default function RoofInstallationPortlandPage() {
           </h1>
           <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
             Sumer Renovations LLC provides professional roof installation for homeowners across Portland. We install durable roofing systems designed for heavy rain, seasonal wind, and long-term performance in the Pacific Northwest.
+          </p>
+          <p className="text-gray-600 text-base leading-relaxed max-w-3xl mt-4">
+            Homeowners looking for roof installation near me in Portland choose our team for licensed work, detailed estimates, and weather-ready systems that protect your home year-round.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

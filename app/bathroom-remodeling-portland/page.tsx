@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     'bathroom remodel contractor portland',
     'shower remodel portland',
     'bathroom remodel near me portland',
+    'best remodeling service near me',
+    'best bathroom remodeling company portland or',
   ],
   alternates: {
     canonical: 'https://sumerrenovations.com/bathroom-remodeling-portland',
@@ -41,6 +43,11 @@ const faqItems = [
     question: 'Do you do custom tile and walk-in showers?',
     answer:
       'Yes. We build custom tile showers, glass enclosures, waterproof systems, heated floors, and premium vanity installations.',
+  },
+  {
+    question: 'Who is the best bathroom remodeling contractor near me in Portland?',
+    answer:
+      'The best bathroom remodeling contractor near me should provide licensing, references, waterproofing expertise, and transparent pricing. Sumer Renovations LLC serves Portland homeowners with full-scope bathroom upgrades and reliable timelines.',
   },
 ];
 
@@ -91,6 +98,9 @@ export default function BathroomRemodelingPortlandPage() {
           </h1>
           <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
             From practical guest bath updates to luxury primary suite upgrades, Sumer Renovations LLC delivers bathroom remodels that improve comfort, style, and resale value for Portland homeowners.
+          </p>
+          <p className="text-gray-600 text-base leading-relaxed max-w-3xl mt-4">
+            For homeowners searching bathroom remodeling near me, we offer permit-ready planning, tile and shower expertise, and durable finish selections designed for long-term use.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

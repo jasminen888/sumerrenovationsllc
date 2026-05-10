@@ -448,40 +448,7 @@ export default function Footer() {
                   Mon–Sun: 8:00 AM – 8:00 PM
                 </span>
               </div>
-              {/* Google Business */}
-              <div
-                className="flex items-start gap-3 text-sm group"
-                style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateX(-16px)', transition: 'opacity 0.5s ease, transform 0.5s ease', transitionDelay: '720ms' }}
-              >
-                <svg className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0 group-hover:text-gold-300 group-hover:scale-110 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                </svg>
-                <a
-                  href="https://www.google.com/maps/search/Sumer+Renovations+LLC+Portland+OR"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gold-300 transition-colors font-medium"
-                >
-                  Find us on Google Maps
-                </a>
-              </div>
-              {/* Google Review */}
-              <div
-                className="flex items-start gap-3 text-sm group"
-                style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateX(-16px)', transition: 'opacity 0.5s ease, transform 0.5s ease', transitionDelay: '800ms' }}
-              >
-                <svg className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0 group-hover:text-gold-300 group-hover:scale-110 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <a
-                  href="https://www.google.com/search?q=Sumer+Renovations+LLC+Portland+OR"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gold-300 transition-colors font-medium"
-                >
-                  Leave us a Google Review
-                </a>
-              </div>
+
             </div>
 
             <h3 className="font-semibold text-white mb-3 flex items-center gap-2 overflow-hidden">

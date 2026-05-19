@@ -12,7 +12,7 @@ export default function FloatingCallButton() {
 
   return (
     <a
-      href="tel:+19717076604"
+      href="tel:+15035453636"
       aria-label="Call us now"
       className={`md:hidden fixed bottom-6 left-5 z-[150] flex items-center gap-2 px-4 py-3 rounded-full shadow-2xl font-bold text-sm transition-all duration-500 ${
         visible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'

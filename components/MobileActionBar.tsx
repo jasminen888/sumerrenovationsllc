@@ -22,7 +22,7 @@ export default function MobileActionBar() {
 
         {/* Call Us */}
         <a
-          href="tel:+19717076604"
+          href="tel:+15035453636"
           className="flex flex-col items-center gap-1.5 flex-1 group"
           aria-label="Call Sumer Renovations LLC"
         >
@@ -56,7 +56,7 @@ export default function MobileActionBar() {
 
         {/* Write Us — SMS */}
         <a
-          href="sms:+19717076604"
+          href="sms:+15035453636"
           className="flex flex-col items-center gap-1.5 flex-1 group"
           aria-label="Send a text message to Sumer Renovations LLC"
         >

@@ -57,8 +57,8 @@ const contactInfo = [
       </svg>
     ),
     label: 'Phone',
-    value: '(971) 707-6604',
-    href: 'tel:+19717076604',
+    value: '(503) 545-3636',
+    href: 'tel:+15035453636',
   },
   {
     icon: (

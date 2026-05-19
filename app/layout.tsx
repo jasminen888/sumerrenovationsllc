@@ -154,7 +154,7 @@ export default function RootLayout({
                     height: 100,
                   },
                   image: 'https://sumerrenovations.com/og-image.jpg',
-                  telephone: '+19717076604',
+                  telephone: '+15035453636',
                   email: 'sumerrenovations@gmail.com',
                   address: {
                     '@type': 'PostalAddress',

@@ -204,20 +204,6 @@ const serviceAreas = [
   'Corvallis, OR',
 ];
 
-function SocialIcon({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className="w-10 h-10 border border-white/20 hover:border-gold-400 hover:bg-gold-500 text-white/60 hover:text-white rounded-full flex items-center justify-center transition-all duration-200"
-    >
-      {children}
-    </a>
-  );
-}
-
 export default function Footer() {
   const [inView, setInView] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -274,22 +260,6 @@ export default function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Portland&apos;s trusted home renovation and remodeling contractor. Kitchen remodeling, bathroom renovation, roofing installation, deck building, and luxury home renovations across Portland, Beaverton, Hillsboro, Lake Oswego, Vancouver WA, Eugene, and Corvallis.
             </p>
-
-            {/* Social icons */}
-            <div className="flex gap-3">
-              <SocialIcon href="https://www.facebook.com/sumerrenovations" label="Follow Sumer Renovations on Facebook">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                </svg>
-              </SocialIcon>
-              <SocialIcon href="https://www.instagram.com/sumerrenovations" label="Follow Sumer Renovations on Instagram">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" strokeWidth={1.5} />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" strokeWidth={1.5} />
-                </svg>
-              </SocialIcon>
-            </div>
 
             {/* QR Code */}
             <div
@@ -422,8 +392,8 @@ export default function Footer() {
                 <svg className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0 group-hover:text-gold-300 group-hover:scale-110 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <a href="tel:+19717076604" className="text-gray-400 hover:text-gold-300 transition-colors font-medium">
-                  (971) 707-6604
+                <a href="tel:+15035453636" className="text-gray-400 hover:text-gold-300 transition-colors font-medium">
+                  (503) 545-3636
                 </a>
               </div>
               <div

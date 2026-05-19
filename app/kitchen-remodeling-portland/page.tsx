@@ -74,7 +74,7 @@ export default function KitchenRemodelingPortlandPage() {
       '@type': 'LocalBusiness',
       name: 'Sumer Renovations LLC',
       url: 'https://sumerrenovations.com',
-      telephone: '+19717076604',
+      telephone: '+15035453636',
     },
     areaServed: {
       '@type': 'City',
@@ -107,8 +107,8 @@ export default function KitchenRemodelingPortlandPage() {
             <Link href="/#contact" className="btn-primary">
               Get a Kitchen Remodel Quote
             </Link>
-            <a href="tel:+19717076604" className="btn-secondary">
-              Call (971) 707-6604
+            <a href="tel:+15035453636" className="btn-secondary">
+              Call (503) 545-3636
             </a>
           </div>
         </section>

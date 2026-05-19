@@ -23,7 +23,7 @@ type Message = BotMsg | UserMsg;
 const CTA_CONFIG: Record<CtaAction, { label: string; emoji: string }> = {
   quote:    { label: 'Get a Free Quote',     emoji: '💰' },
   schedule: { label: 'Schedule Appointment', emoji: '📅' },
-  call:     { label: 'Call (971) 707-6604',  emoji: '📞' },
+  call:     { label: 'Call (503) 545-3636',  emoji: '📞' },
 };
 
 // ─── Conversation flow nodes ──────────────────────────────────────────────────
@@ -45,7 +45,7 @@ const FLOW: Record<string, FlowNode> = {
     replies: ['💰 Get a Free Quote Instead', '🔨 Our Services', '🏠 Back to Menu'],
   },
   call_info: {
-    text: "You can reach us directly at:\n\n📞 (971) 707-6604\n📧 sumerrenovations@gmail.com\n🕐 Mon–Sun: 8:00 AM – 8:00 PM\n\nOr use the buttons below to get a quote or book online — takes under 2 minutes!",
+    text: "You can reach us directly at:\n\n📞 (503) 545-3636\n📧 sumerrenovations@gmail.com\n🕐 Mon–Sun: 8:00 AM – 8:00 PM\n\nOr use the buttons below to get a quote or book online — takes under 2 minutes!",
     ctas: ['quote', 'schedule'],
     replies: ['🏠 Back to Menu'],
   },
@@ -162,7 +162,7 @@ export default function Chatbot() {
   const handleCtaClick = (action: CtaAction) => {
     if (action === 'quote') scrollToSection('#contact');
     else if (action === 'schedule') scrollToSection('#schedule');
-    else if (action === 'call') window.location.href = 'tel:+19717076604';
+    else if (action === 'call') window.location.href = 'tel:+15035453636';
   };
 
   const processReply = useCallback((rawText: string) => {

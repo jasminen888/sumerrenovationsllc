@@ -418,35 +418,39 @@ export async function POST(req: NextRequest) {
     const FROM_ADDRESS = `Sumer Renovations LLC <${process.env.EMAIL_FROM}>`;
     const EMAIL_TO = process.env.EMAIL_TO ?? '';
 
-    // ── Admin notification (critical path) ─────────────────────────────────
-    try {
-      await transporter.sendMail({
+    // ── Admin notification + customer auto-reply ────────────────────────────
+    // Both are awaited before responding so Vercel doesn't kill the function
+    // early. Admin failure is logged but never surfaces an error to the customer.
+    const [, autoReplyResult] = await Promise.allSettled([
+      transporter.sendMail({
         from: FROM_ADDRESS,
         to: EMAIL_TO,
         replyTo: email,
         subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
         html: notificationHtml,
-      });
-    } catch (emailErr: unknown) {
-      console.error('Admin notification failed:', emailErr);
-      console.log('CONTACT SUBMISSION (email failed):', JSON.stringify({
-        fullName: safe.fullName,
-        email: safe.email,
-        phone: safe.phone,
-        service: safe.service,
-        budget: safe.budget,
-        contactMethod: safe.contactMethod,
-        message: safe.message,
-      }));
-    }
+      }).catch((err: unknown) => {
+        console.error('Admin notification failed:', err);
+        console.log('CONTACT SUBMISSION (email failed):', JSON.stringify({
+          fullName: safe.fullName,
+          email: safe.email,
+          phone: safe.phone,
+          service: safe.service,
+          budget: safe.budget,
+          contactMethod: safe.contactMethod,
+          message: safe.message,
+        }));
+      }),
+      transporter.sendMail({
+        from: FROM_ADDRESS,
+        to: email,
+        subject: 'Thank You for Contacting Sumer Renovations LLC',
+        html: autoReplyHtml,
+      }),
+    ]);
 
-    // ── Customer auto-reply (best-effort) ───────────────────────────────────
-    transporter.sendMail({
-      from: FROM_ADDRESS,
-      to: email,
-      subject: 'Thank You for Contacting Sumer Renovations LLC',
-      html: autoReplyHtml,
-    }).catch((err: unknown) => console.error('Auto-reply failed:', err));
+    if (autoReplyResult.status === 'rejected') {
+      console.error('Auto-reply failed:', autoReplyResult.reason);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

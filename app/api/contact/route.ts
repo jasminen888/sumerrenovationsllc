@@ -408,18 +408,33 @@ export async function POST(req: NextRequest) {
 </html>
     `;
 
-    // Send admin notification (critical path)
-    const notificationResult = await resend.emails.send({
-      from: FROM_ADDRESS,
-      to: BUSINESS_EMAIL,
-      subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
-      html: notificationHtml,
-      replyTo: email,
-    });
+    // Send admin notification — best-effort, errors are logged not surfaced
+    let notificationResult: { error?: unknown } = {};
+    try {
+      notificationResult = await resend.emails.send({
+        from: FROM_ADDRESS,
+        to: BUSINESS_EMAIL,
+        subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
+        html: notificationHtml,
+        replyTo: email,
+      });
+    } catch (emailErr: unknown) {
+      console.error('Resend send threw:', emailErr);
+      notificationResult = { error: emailErr };
+    }
 
     if (notificationResult.error) {
       console.error('Resend notification error:', notificationResult.error);
-      return NextResponse.json({ error: 'Failed to send email.' }, { status: 500 });
+      // Log the submission so it is visible in Vercel function logs even if email fails
+      console.log('CONTACT SUBMISSION (email failed):', JSON.stringify({
+        fullName: safe.fullName,
+        email: safe.email,
+        phone: safe.phone,
+        service: safe.service,
+        budget: safe.budget,
+        contactMethod: safe.contactMethod,
+        message: safe.message,
+      }));
     }
 
     // Auto-reply is best-effort — onboarding@resend.dev can only send to
@@ -434,6 +449,8 @@ export async function POST(req: NextRequest) {
       if (error) console.error('Auto-reply error (non-blocking):', error);
     }).catch((err: unknown) => console.error('Auto-reply send error:', err));
 
+    // Always return success so the form never shows an error to the customer.
+    // Check Vercel function logs if emails are not arriving.
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Contact route error:', err);

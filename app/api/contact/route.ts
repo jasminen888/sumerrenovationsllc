@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 export const dynamic = 'force-dynamic';
-
-const BUSINESS_EMAIL = 'sumerrenovations@gmail.com';
-const FROM_ADDRESS = 'Sumer Renovations LLC <onboarding@resend.dev>';
 
 // ── Rate limiting (in-memory, per IP) ────────────────────────────────────────
 // Max 3 submissions per IP per 15 minutes
@@ -56,7 +53,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const { fullName, email, phone, service, budget, contactMethod, message, website, _loadedAt } = body;
 
@@ -408,24 +404,31 @@ export async function POST(req: NextRequest) {
 </html>
     `;
 
-    // Send admin notification — best-effort, errors are logged not surfaced
-    let notificationResult: { error?: unknown } = {};
+    // ── Nodemailer transporter ──────────────────────────────────────────────
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT ?? 587),
+      secure: Number(process.env.SMTP_PORT) === 465,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
+    const FROM_ADDRESS = `Sumer Renovations LLC <${process.env.EMAIL_FROM}>`;
+    const EMAIL_TO = process.env.EMAIL_TO ?? '';
+
+    // ── Admin notification (critical path) ─────────────────────────────────
     try {
-      notificationResult = await resend.emails.send({
+      await transporter.sendMail({
         from: FROM_ADDRESS,
-        to: BUSINESS_EMAIL,
+        to: EMAIL_TO,
+        replyTo: email,
         subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
         html: notificationHtml,
-        replyTo: email,
       });
     } catch (emailErr: unknown) {
-      console.error('Resend send threw:', emailErr);
-      notificationResult = { error: emailErr };
-    }
-
-    if (notificationResult.error) {
-      console.error('Resend notification error:', notificationResult.error);
-      // Log the submission so it is visible in Vercel function logs even if email fails
+      console.error('Admin notification failed:', emailErr);
       console.log('CONTACT SUBMISSION (email failed):', JSON.stringify({
         fullName: safe.fullName,
         email: safe.email,
@@ -437,20 +440,14 @@ export async function POST(req: NextRequest) {
       }));
     }
 
-    // Auto-reply is best-effort — onboarding@resend.dev can only send to
-    // the verified account email, so this may fail for arbitrary customer
-    // addresses until a custom domain is verified in Resend.
-    resend.emails.send({
+    // ── Customer auto-reply (best-effort) ───────────────────────────────────
+    transporter.sendMail({
       from: FROM_ADDRESS,
       to: email,
       subject: 'Thank You for Contacting Sumer Renovations LLC',
       html: autoReplyHtml,
-    }).then(({ error }) => {
-      if (error) console.error('Auto-reply error (non-blocking):', error);
-    }).catch((err: unknown) => console.error('Auto-reply send error:', err));
+    }).catch((err: unknown) => console.error('Auto-reply failed:', err));
 
-    // Always return success so the form never shows an error to the customer.
-    // Check Vercel function logs if emails are not arriving.
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Contact route error:', err);

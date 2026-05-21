@@ -408,28 +408,31 @@ export async function POST(req: NextRequest) {
 </html>
     `;
 
-    // Send both emails in parallel
-    const [notificationResult, autoReplyResult] = await Promise.all([
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: BUSINESS_EMAIL,
-        subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
-        html: notificationHtml,
-        replyTo: email,
-      }),
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: email,
-        subject: 'Thank You for Contacting Sumer Renovations LLC',
-        html: autoReplyHtml,
-      }),
-    ]);
+    // Send admin notification (critical path)
+    const notificationResult = await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: BUSINESS_EMAIL,
+      subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
+      html: notificationHtml,
+      replyTo: email,
+    });
 
-    if (notificationResult.error || autoReplyResult.error) {
-      const err = notificationResult.error ?? autoReplyResult.error;
-      console.error('Resend error:', err);
+    if (notificationResult.error) {
+      console.error('Resend notification error:', notificationResult.error);
       return NextResponse.json({ error: 'Failed to send email.' }, { status: 500 });
     }
+
+    // Auto-reply is best-effort — onboarding@resend.dev can only send to
+    // the verified account email, so this may fail for arbitrary customer
+    // addresses until a custom domain is verified in Resend.
+    resend.emails.send({
+      from: FROM_ADDRESS,
+      to: email,
+      subject: 'Thank You for Contacting Sumer Renovations LLC',
+      html: autoReplyHtml,
+    }).then(({ error }) => {
+      if (error) console.error('Auto-reply error (non-blocking):', error);
+    }).catch((err: unknown) => console.error('Auto-reply send error:', err));
 
     return NextResponse.json({ success: true });
   } catch (err) {

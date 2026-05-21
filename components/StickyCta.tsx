@@ -1,8 +1,8 @@
 'use client';
 
 export default function StickyCta() {
-  const scrollToContact = () => {
-    const el = document.querySelector('#contact');
+  const scrollToSchedule = () => {
+    const el = document.querySelector('#schedule');
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: 'smooth' });
@@ -64,18 +64,18 @@ export default function StickyCta() {
 
       {/* Right: CTA button */}
       <button
-        onClick={scrollToContact}
-        className="flex items-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200"
+        onClick={scrollToSchedule}
+        className="flex items-center gap-2 text-charcoal text-sm font-bold px-5 py-2.5 rounded-xl transition-all duration-150 active:translate-y-[3px] active:shadow-none select-none"
         style={{
-          background: 'linear-gradient(135deg, #c9a84c, #a0742a)',
-          boxShadow: '0 4px 0 #7a5c18',
+          background: 'linear-gradient(135deg, #e4bb5a 0%, #c9a84c 60%, #a0742a 100%)',
+          boxShadow: '0 5px 0 #7a5c18, 0 6px 10px rgba(0,0,0,0.35)',
         }}
-        aria-label="Get a free quote"
+        aria-label="Book a free appointment"
       >
-        Get a Free Quote
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
+        Book Appointment
       </button>
     </div>
   );

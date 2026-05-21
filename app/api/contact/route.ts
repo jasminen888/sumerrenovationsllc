@@ -416,7 +416,7 @@ export async function POST(req: NextRequest) {
         to: BUSINESS_EMAIL,
         subject: `New Client Inquiry — ${safe.fullName} | Sumer Renovations LLC`,
         html: notificationHtml,
-        reply_to: email,
+        replyTo: email,
       });
     } catch (emailErr: unknown) {
       console.error('Resend send threw:', emailErr);
